@@ -3,12 +3,16 @@ import Joi from "joi";
 const playerId = Joi.number().integer().min(1);
 const playerName = Joi.string().min(1);
 const stat = Joi.number().integer().min(1).max(100);
-const level = Joi.number().integer().min(1).max(10);
+const level = Joi.number().integer().min(1).max(10); // max?
 const gradeRegex = /^[DCBAS]$/; // D, C, B, A, S ?
 const grade = Joi.string().regex(gradeRegex);
 
 const playerIdSchema = Joi.object({
   playerId: playerId.required(),
+}).unknown(true);
+
+const playerNameSchema = Joi.object({
+  playerName: playerName.required(),
 }).unknown(true);
 
 const playerStatSchema = Joi.object({
@@ -17,6 +21,14 @@ const playerStatSchema = Joi.object({
   power: stat.required(),
   defense: stat.required(),
   stamina: stat.required(),
+}).unknown(true);
+
+const playerLevelSchema = Joi.object({
+  level: level.required(),
+}).unknown(true);
+
+const playerGradeSchema = Joi.object({
+  grade: grade.required(),
 }).unknown(true);
 
 const playerValidationErrorHandler = async (err, res, msg, code) => {
@@ -42,9 +54,33 @@ export default playerValidatorJoi = {
       return playerValidationErrorHandler(err, res);
     }
   },
+  playerNameValidation: async function (req, res, next) {
+    try {
+      await playerNameSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return playerValidationErrorHandler(err, res);
+    }
+  },
   playerStatValidation: async function (req, res, next) {
     try {
       await playerStatSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return playerValidationErrorHandler(err, res);
+    }
+  },
+  playerLevelValidation: async function (req, res, next) {
+    try {
+      await playerLevelSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return playerValidationErrorHandler(err, res);
+    }
+  },
+  playerGradeValidation: async function (req, res, next) {
+    try {
+      await playerGradeSchema.validateAsync(req.body);
       next();
     } catch (err) {
       return playerValidationErrorHandler(err, res);
