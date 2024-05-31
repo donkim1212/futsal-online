@@ -12,6 +12,7 @@ const queryBuilder = (where, select) => {
 };
 
 export default errorChecker = {
+<<<<<<< HEAD
   /**
    *
    * @param {Number} userId target user's userId
@@ -19,12 +20,15 @@ export default errorChecker = {
    * @returns selected field values of user data w. matching userId
    * @throws UserNotFoundError if no such user exists.
    */
+=======
+>>>>>>> c92bbd1bc056018ab2109f20ec1d104953e76103
   userChecker: async function (userId, select) {
     const query = queryBuilder({ userId: userId }, select);
     const user = await userPrisma.user.findUnique(query);
     if (!user) throw new UserNotFoundError();
     return user;
   },
+<<<<<<< HEAD
 
   /**
    *
@@ -33,12 +37,15 @@ export default errorChecker = {
    * @returns player's data
    * @throws PlayerNotFoundError if no such player exists.
    */
+=======
+>>>>>>> c92bbd1bc056018ab2109f20ec1d104953e76103
   playerChecker: async function (playerId, select) {
     const query = queryBuilder({ playerId: playerId }, select);
     const player = await playerPrisma.player.findUnique(query);
     if (!player) throw new PlayerNotFoundError();
     return player;
   },
+<<<<<<< HEAD
 
   /**
    *
@@ -48,6 +55,8 @@ export default errorChecker = {
    * @returns a row of an inventory
    * @throws PlayerNotFoundError if no such inventory data exists.
    */
+=======
+>>>>>>> c92bbd1bc056018ab2109f20ec1d104953e76103
   inventoryChecker: async function (userId, playerId, select) {
     // TODO: change query method, maybe checker function parameters as well
     // -> inventoryId as parameter?
@@ -59,6 +68,7 @@ export default errorChecker = {
       throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
     return inventory;
   },
+<<<<<<< HEAD
 
   /**
    *
@@ -68,6 +78,8 @@ export default errorChecker = {
    * @returns the user w. money field selected
    * @throws NotEnoughMoneyError if user has not enough money
    */
+=======
+>>>>>>> c92bbd1bc056018ab2109f20ec1d104953e76103
   moneyChecker: async function (userId, requiredMoney, select) {
     if (!select) select = { money: true };
     else if (!select.money) select.money = true;
