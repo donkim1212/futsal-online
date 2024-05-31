@@ -43,7 +43,4 @@ export default errorChecker = {
     if (requiredMoney > user.money) throw new NotEnoughMoneyError();
     return user;
   },
-  pageChecker: async function (pageNumber, loadCount) {
-    return [];
-  },
 };
