@@ -12,18 +12,42 @@ const queryBuilder = (where, select) => {
 };
 
 export default errorChecker = {
+  /**
+   *
+   * @param {Number} userId target user's userId
+   * @param {Object} select object literal containing fields to select, e.g., { id: true, password: false }
+   * @returns selected field values of user data w. matching userId
+   * @throws UserNotFoundError if no such user exists.
+   */
   userChecker: async function (userId, select) {
     const query = queryBuilder({ userId: userId }, select);
     const user = await userPrisma.user.findUnique(query);
     if (!user) throw new UserNotFoundError();
     return user;
   },
+
+  /**
+   *
+   * @param {Number} playerId target player's playerId
+   * @param {Object} select object literal containing fields to select, e.g., { id: true, password: false }
+   * @returns player's data
+   * @throws PlayerNotFoundError if no such player exists.
+   */
   playerChecker: async function (playerId, select) {
     const query = queryBuilder({ playerId: playerId }, select);
     const player = await playerPrisma.player.findUnique(query);
     if (!player) throw new PlayerNotFoundError();
     return player;
   },
+
+  /**
+   *
+   * @param {*} userId target user's userId
+   * @param {*} playerId target player's playerId
+   * @param {*} select object literal containing fields to select, e.g., { id: true, password: false }
+   * @returns a row of an inventory
+   * @throws PlayerNotFoundError if no such inventory data exists.
+   */
   inventoryChecker: async function (userId, playerId, select) {
     // TODO: change query method, maybe checker function parameters as well
     // -> inventoryId as parameter?
@@ -35,6 +59,15 @@ export default errorChecker = {
       throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
     return inventory;
   },
+
+  /**
+   *
+   * @param {*} userId target user's userId
+   * @param {*} requiredMoney money required for the job
+   * @param {*} select object literal containing fields to select, e.g., { id: true, password: false }
+   * @returns the user w. money field selected
+   * @throws NotEnoughMoneyError if user has not enough money
+   */
   moneyChecker: async function (userId, requiredMoney, select) {
     if (!select) select = { money: true };
     else if (!select.money) select.money = true;
