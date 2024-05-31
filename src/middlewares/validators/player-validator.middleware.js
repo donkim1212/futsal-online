@@ -42,4 +42,12 @@ export default playerValidatorJoi = {
       return playerValidationErrorHandler(err, res);
     }
   },
+  playerStatValidation: async function (req, res, next) {
+    try {
+      await playerStatSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return playerValidationErrorHandler(err, res);
+    }
+  },
 };
