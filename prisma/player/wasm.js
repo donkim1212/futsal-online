@@ -120,10 +120,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.PlayerScalarFieldEnum = {
-  player_id: 'player_id',
-  player_name: 'player_name',
+  playerId: 'playerId',
+  playerName: 'playerName',
   speed: 'speed',
-  goal_rate: 'goal_rate',
+  goalRate: 'goalRate',
   power: 'power',
   defense: 'defense',
   stamina: 'stamina',

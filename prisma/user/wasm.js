@@ -120,7 +120,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.UserScalarFieldEnum = {
-  user_id: 'user_id',
+  userId: 'userId',
   username: 'username',
   password: 'password',
   money: 'money',
@@ -130,16 +130,16 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.TeamScalarFieldEnum = {
-  team_id: 'team_id',
-  User_id: 'User_id',
-  player_id: 'player_id'
+  teamId: 'teamId',
+  UserId: 'UserId',
+  PlayerId: 'PlayerId'
 };
 
 exports.Prisma.InventoryScalarFieldEnum = {
-  Inventory_id: 'Inventory_id',
-  User_id: 'User_id',
-  player_id: 'player_id',
-  count: 'count'
+  inventoryId: 'inventoryId',
+  count: 'count',
+  UserId: 'UserId',
+  PlayerId: 'PlayerId'
 };
 
 exports.Prisma.SortOrder = {

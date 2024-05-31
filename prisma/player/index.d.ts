@@ -887,9 +887,9 @@ export namespace Prisma {
   }
 
   export type PlayerAvgAggregateOutputType = {
-    player_id: number | null
+    playerId: number | null
     speed: number | null
-    goal_rate: number | null
+    goalRate: number | null
     power: number | null
     defense: number | null
     stamina: number | null
@@ -898,9 +898,9 @@ export namespace Prisma {
   }
 
   export type PlayerSumAggregateOutputType = {
-    player_id: number | null
+    playerId: number | null
     speed: number | null
-    goal_rate: number | null
+    goalRate: number | null
     power: number | null
     defense: number | null
     stamina: number | null
@@ -909,10 +909,10 @@ export namespace Prisma {
   }
 
   export type PlayerMinAggregateOutputType = {
-    player_id: number | null
-    player_name: string | null
+    playerId: number | null
+    playerName: string | null
     speed: number | null
-    goal_rate: number | null
+    goalRate: number | null
     power: number | null
     defense: number | null
     stamina: number | null
@@ -921,10 +921,10 @@ export namespace Prisma {
   }
 
   export type PlayerMaxAggregateOutputType = {
-    player_id: number | null
-    player_name: string | null
+    playerId: number | null
+    playerName: string | null
     speed: number | null
-    goal_rate: number | null
+    goalRate: number | null
     power: number | null
     defense: number | null
     stamina: number | null
@@ -933,10 +933,10 @@ export namespace Prisma {
   }
 
   export type PlayerCountAggregateOutputType = {
-    player_id: number
-    player_name: number
+    playerId: number
+    playerName: number
     speed: number
-    goal_rate: number
+    goalRate: number
     power: number
     defense: number
     stamina: number
@@ -947,9 +947,9 @@ export namespace Prisma {
 
 
   export type PlayerAvgAggregateInputType = {
-    player_id?: true
+    playerId?: true
     speed?: true
-    goal_rate?: true
+    goalRate?: true
     power?: true
     defense?: true
     stamina?: true
@@ -958,9 +958,9 @@ export namespace Prisma {
   }
 
   export type PlayerSumAggregateInputType = {
-    player_id?: true
+    playerId?: true
     speed?: true
-    goal_rate?: true
+    goalRate?: true
     power?: true
     defense?: true
     stamina?: true
@@ -969,10 +969,10 @@ export namespace Prisma {
   }
 
   export type PlayerMinAggregateInputType = {
-    player_id?: true
-    player_name?: true
+    playerId?: true
+    playerName?: true
     speed?: true
-    goal_rate?: true
+    goalRate?: true
     power?: true
     defense?: true
     stamina?: true
@@ -981,10 +981,10 @@ export namespace Prisma {
   }
 
   export type PlayerMaxAggregateInputType = {
-    player_id?: true
-    player_name?: true
+    playerId?: true
+    playerName?: true
     speed?: true
-    goal_rate?: true
+    goalRate?: true
     power?: true
     defense?: true
     stamina?: true
@@ -993,10 +993,10 @@ export namespace Prisma {
   }
 
   export type PlayerCountAggregateInputType = {
-    player_id?: true
-    player_name?: true
+    playerId?: true
+    playerName?: true
     speed?: true
-    goal_rate?: true
+    goalRate?: true
     power?: true
     defense?: true
     stamina?: true
@@ -1092,10 +1092,10 @@ export namespace Prisma {
   }
 
   export type PlayerGroupByOutputType = {
-    player_id: number
-    player_name: string
+    playerId: number
+    playerName: string
     speed: number
-    goal_rate: number
+    goalRate: number
     power: number
     defense: number
     stamina: number
@@ -1123,10 +1123,10 @@ export namespace Prisma {
 
 
   export type PlayerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    player_id?: boolean
-    player_name?: boolean
+    playerId?: boolean
+    playerName?: boolean
     speed?: boolean
-    goal_rate?: boolean
+    goalRate?: boolean
     power?: boolean
     defense?: boolean
     stamina?: boolean
@@ -1135,10 +1135,10 @@ export namespace Prisma {
   }, ExtArgs["result"]["player"]>
 
   export type PlayerSelectScalar = {
-    player_id?: boolean
-    player_name?: boolean
+    playerId?: boolean
+    playerName?: boolean
     speed?: boolean
-    goal_rate?: boolean
+    goalRate?: boolean
     power?: boolean
     defense?: boolean
     stamina?: boolean
@@ -1152,10 +1152,10 @@ export namespace Prisma {
     name: "Player"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      player_id: number
-      player_name: string
+      playerId: number
+      playerName: string
       speed: number
-      goal_rate: number
+      goalRate: number
       power: number
       defense: number
       stamina: number
@@ -1253,8 +1253,8 @@ export namespace Prisma {
      * // Get first 10 Players
      * const players = await prisma.player.findMany({ take: 10 })
      * 
-     * // Only select the `player_id`
-     * const playerWithPlayer_idOnly = await prisma.player.findMany({ select: { player_id: true } })
+     * // Only select the `playerId`
+     * const playerWithPlayerIdOnly = await prisma.player.findMany({ select: { playerId: true } })
      * 
     **/
     findMany<T extends PlayerFindManyArgs<ExtArgs>>(
@@ -1555,10 +1555,10 @@ export namespace Prisma {
    * Fields of the Player model
    */ 
   interface PlayerFieldRefs {
-    readonly player_id: FieldRef<"Player", 'Int'>
-    readonly player_name: FieldRef<"Player", 'String'>
+    readonly playerId: FieldRef<"Player", 'Int'>
+    readonly playerName: FieldRef<"Player", 'String'>
     readonly speed: FieldRef<"Player", 'Int'>
-    readonly goal_rate: FieldRef<"Player", 'Int'>
+    readonly goalRate: FieldRef<"Player", 'Int'>
     readonly power: FieldRef<"Player", 'Int'>
     readonly defense: FieldRef<"Player", 'Int'>
     readonly stamina: FieldRef<"Player", 'Int'>
@@ -1852,10 +1852,10 @@ export namespace Prisma {
 
 
   export const PlayerScalarFieldEnum: {
-    player_id: 'player_id',
-    player_name: 'player_name',
+    playerId: 'playerId',
+    playerName: 'playerName',
     speed: 'speed',
-    goal_rate: 'goal_rate',
+    goalRate: 'goalRate',
     power: 'power',
     defense: 'defense',
     stamina: 'stamina',
@@ -1915,10 +1915,10 @@ export namespace Prisma {
     AND?: PlayerWhereInput | PlayerWhereInput[]
     OR?: PlayerWhereInput[]
     NOT?: PlayerWhereInput | PlayerWhereInput[]
-    player_id?: IntFilter<"Player"> | number
-    player_name?: StringFilter<"Player"> | string
+    playerId?: IntFilter<"Player"> | number
+    playerName?: StringFilter<"Player"> | string
     speed?: IntFilter<"Player"> | number
-    goal_rate?: IntFilter<"Player"> | number
+    goalRate?: IntFilter<"Player"> | number
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
@@ -1927,10 +1927,10 @@ export namespace Prisma {
   }
 
   export type PlayerOrderByWithRelationInput = {
-    player_id?: SortOrder
-    player_name?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
@@ -1939,25 +1939,25 @@ export namespace Prisma {
   }
 
   export type PlayerWhereUniqueInput = Prisma.AtLeast<{
-    player_id?: number
-    player_name?: string
+    playerId?: number
+    playerName?: string
     AND?: PlayerWhereInput | PlayerWhereInput[]
     OR?: PlayerWhereInput[]
     NOT?: PlayerWhereInput | PlayerWhereInput[]
     speed?: IntFilter<"Player"> | number
-    goal_rate?: IntFilter<"Player"> | number
+    goalRate?: IntFilter<"Player"> | number
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
     level?: IntNullableFilter<"Player"> | number | null
     grade?: IntFilter<"Player"> | number
-  }, "player_id" | "player_name">
+  }, "playerId" | "playerName">
 
   export type PlayerOrderByWithAggregationInput = {
-    player_id?: SortOrder
-    player_name?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
@@ -1974,10 +1974,10 @@ export namespace Prisma {
     AND?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
     OR?: PlayerScalarWhereWithAggregatesInput[]
     NOT?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
-    player_id?: IntWithAggregatesFilter<"Player"> | number
-    player_name?: StringWithAggregatesFilter<"Player"> | string
+    playerId?: IntWithAggregatesFilter<"Player"> | number
+    playerName?: StringWithAggregatesFilter<"Player"> | string
     speed?: IntWithAggregatesFilter<"Player"> | number
-    goal_rate?: IntWithAggregatesFilter<"Player"> | number
+    goalRate?: IntWithAggregatesFilter<"Player"> | number
     power?: IntWithAggregatesFilter<"Player"> | number
     defense?: IntWithAggregatesFilter<"Player"> | number
     stamina?: IntWithAggregatesFilter<"Player"> | number
@@ -1986,9 +1986,9 @@ export namespace Prisma {
   }
 
   export type PlayerCreateInput = {
-    player_name: string
+    playerName: string
     speed: number
-    goal_rate: number
+    goalRate: number
     power: number
     defense: number
     stamina: number
@@ -1997,10 +1997,10 @@ export namespace Prisma {
   }
 
   export type PlayerUncheckedCreateInput = {
-    player_id?: number
-    player_name: string
+    playerId?: number
+    playerName: string
     speed: number
-    goal_rate: number
+    goalRate: number
     power: number
     defense: number
     stamina: number
@@ -2009,9 +2009,9 @@ export namespace Prisma {
   }
 
   export type PlayerUpdateInput = {
-    player_name?: StringFieldUpdateOperationsInput | string
+    playerName?: StringFieldUpdateOperationsInput | string
     speed?: IntFieldUpdateOperationsInput | number
-    goal_rate?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
@@ -2020,10 +2020,10 @@ export namespace Prisma {
   }
 
   export type PlayerUncheckedUpdateInput = {
-    player_id?: IntFieldUpdateOperationsInput | number
-    player_name?: StringFieldUpdateOperationsInput | string
+    playerId?: IntFieldUpdateOperationsInput | number
+    playerName?: StringFieldUpdateOperationsInput | string
     speed?: IntFieldUpdateOperationsInput | number
-    goal_rate?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
@@ -2032,10 +2032,10 @@ export namespace Prisma {
   }
 
   export type PlayerCreateManyInput = {
-    player_id?: number
-    player_name: string
+    playerId?: number
+    playerName: string
     speed: number
-    goal_rate: number
+    goalRate: number
     power: number
     defense: number
     stamina: number
@@ -2044,9 +2044,9 @@ export namespace Prisma {
   }
 
   export type PlayerUpdateManyMutationInput = {
-    player_name?: StringFieldUpdateOperationsInput | string
+    playerName?: StringFieldUpdateOperationsInput | string
     speed?: IntFieldUpdateOperationsInput | number
-    goal_rate?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
@@ -2055,10 +2055,10 @@ export namespace Prisma {
   }
 
   export type PlayerUncheckedUpdateManyInput = {
-    player_id?: IntFieldUpdateOperationsInput | number
-    player_name?: StringFieldUpdateOperationsInput | string
+    playerId?: IntFieldUpdateOperationsInput | number
+    playerName?: StringFieldUpdateOperationsInput | string
     speed?: IntFieldUpdateOperationsInput | number
-    goal_rate?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
@@ -2108,10 +2108,10 @@ export namespace Prisma {
   }
 
   export type PlayerCountOrderByAggregateInput = {
-    player_id?: SortOrder
-    player_name?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
@@ -2120,9 +2120,9 @@ export namespace Prisma {
   }
 
   export type PlayerAvgOrderByAggregateInput = {
-    player_id?: SortOrder
+    playerId?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
@@ -2131,10 +2131,10 @@ export namespace Prisma {
   }
 
   export type PlayerMaxOrderByAggregateInput = {
-    player_id?: SortOrder
-    player_name?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
@@ -2143,10 +2143,10 @@ export namespace Prisma {
   }
 
   export type PlayerMinOrderByAggregateInput = {
-    player_id?: SortOrder
-    player_name?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
@@ -2155,9 +2155,9 @@ export namespace Prisma {
   }
 
   export type PlayerSumOrderByAggregateInput = {
-    player_id?: SortOrder
+    playerId?: SortOrder
     speed?: SortOrder
-    goal_rate?: SortOrder
+    goalRate?: SortOrder
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder

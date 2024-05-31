@@ -10,15 +10,15 @@ datasource db {
 }
 
 model Player {
-  player_id   Int    @id @default(autoincrement()) @map("player_id")
-  player_name String @unique @map("player_name")
-  speed       Int    @map("speed")
-  goal_rate   Int    @map("goal_rate")
-  power       Int    @map("power")
-  defense     Int    @map("defense")
-  stamina     Int    @map("stamina")
-  level       Int?   @map("level")
-  grade       Int    @map("grade")
+  playerId   Int    @id @default(autoincrement()) @map("player_id")
+  playerName String @unique @map("player_name")
+  speed      Int    @map("speed")
+  goalRate   Int    @map("goal_rate")
+  power      Int    @map("power")
+  defense    Int    @map("defense")
+  stamina    Int    @map("stamina")
+  level      Int?   @map("level")
+  grade      Int    @map("grade")
 
   @@map("Player")
 }
