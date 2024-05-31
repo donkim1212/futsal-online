@@ -10,7 +10,7 @@ datasource db {
 }
 
 model User {
-  user_id     Int          @id @default(autoincrement()) @map("user_id")
+  userId     Int          @id @default(autoincrement()) @map("user_id")
   username     String       @unique @map("username")
   password   String       @map("password")
   money       String       @map("name")
@@ -25,22 +25,24 @@ model User {
 }
 
 model Team {
-    team_id     Int @id @default(autoincrement()) @map("team_id")
-    User_id     Int @map("User_id")
-    player_id   Int @map("player_id")
+    teamId     Int @id @default(autoincrement()) @map("team_id")
 
-    User    User    @relation(fields: [User_id], references: [user_id], onDelete: Cascade)
-
+    User    User    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+    UserId     Int @map("user_id")
+    
+    PlayerId   Int @map("player_id")
+    
     @@map("Team")
 }
 
 model Inventory {
-    Inventory_id     Int @id @default(autoincrement()) @map("team_id")
-    User_id     Int @map("User_id")
-    player_id   Int @map("player_id")
+    inventoryId     Int @id @default(autoincrement()) @map("inventory_id")
     count   Int @map("count")
 
-    User    User    @relation(fields: [User_id], references: [user_id], onDelete: Cascade)
+    User    User    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+    UserId     Int @map("user_id")
+    
+    PlayerId   Int @map("player_id")
 
     @@map("Inventory")
 }
