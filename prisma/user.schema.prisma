@@ -19,7 +19,7 @@ model User {
   updatedAt  DateTime     @updatedAt @map("updatedAt")
   
   Team Team[]
-  Inventory
+  Inventory Inventory[]
 
   @@map("User")
 }

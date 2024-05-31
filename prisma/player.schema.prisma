@@ -18,7 +18,7 @@ model Player {
   defense   Int @map("defense")
   stamina   Int @map("stamina")
   level Int?    @map("level")
-  grade Int @map("grade)
+  grade Int @map("grade")
 
   @@map("Player")
 }
