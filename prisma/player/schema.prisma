@@ -1,0 +1,24 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./player"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("PLAYER_DB_URL")
+}
+
+model Player {
+  player_id   Int    @id @default(autoincrement()) @map("player_id")
+  player_name String @unique @map("player_name")
+  speed       Int    @map("speed")
+  goal_rate   Int    @map("goal_rate")
+  power       Int    @map("power")
+  defense     Int    @map("defense")
+  stamina     Int    @map("stamina")
+  level       Int?   @map("level")
+  grade       Int    @map("grade")
+
+  @@map("Player")
+}

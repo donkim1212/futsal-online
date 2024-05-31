@@ -1,0 +1,46 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./user"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+model User {
+  user_id   Int      @id @default(autoincrement()) @map("user_id")
+  username  String   @unique @map("username")
+  password  String   @map("password")
+  money     String   @map("name")
+  rating    Int      @map("rating")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  Team      Team[]
+  Inventory Inventory[]
+
+  @@map("User")
+}
+
+model Team {
+  team_id   Int @id @default(autoincrement()) @map("team_id")
+  User_id   Int @map("User_id")
+  player_id Int @map("player_id")
+
+  User User @relation(fields: [User_id], references: [user_id], onDelete: Cascade)
+
+  @@map("Team")
+}
+
+model Inventory {
+  Inventory_id Int @id @default(autoincrement()) @map("team_id")
+  User_id      Int @map("User_id")
+  player_id    Int @map("player_id")
+  count        Int @map("count")
+
+  User User @relation(fields: [User_id], references: [user_id], onDelete: Cascade)
+
+  @@map("Inventory")
+}
