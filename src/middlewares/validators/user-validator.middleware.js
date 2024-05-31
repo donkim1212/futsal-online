@@ -14,13 +14,28 @@ const signUpSchema = Joi.object({
   passwordConfirmation: Joi.string().valid(Joi.ref("password")).required(),
 });
 
+const userValidationErrorHandler = async (err, res, msg, code) => {
+  return res
+    .status(code ? code : 400)
+    .json({ message: msg ? msg : err.message });
+};
+
 export default userValidatorJoi = {
   signInValidation: async function (req, res, next) {
     try {
       await signInSchema.validateAsync(req.body);
       next();
     } catch (err) {
-      return res.status(400).json({ message: "" });
+      return userValidationErrorHandler(err, res);
+    }
+  },
+
+  signUpValidation: async function (req, res, next) {
+    try {
+      await signUpSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return userValidationErrorHandler(err, res);
     }
   },
 };
