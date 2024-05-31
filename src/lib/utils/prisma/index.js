@@ -1,9 +1,9 @@
 // src/utils/prisma/index.js
 
 import { PrismaClient as UserPrismaClient } from "../../../../prisma/user/index.js";
-import { PrismaClient as playerPrismaPrismaClient } from "../../../../prisma/player/index.js";
+import { PrismaClient as PlayerPrismaClient } from "../../../../prisma/player/index.js";
 
-export const playerPrisma = new playerPrismaPrismaClient({
+export const playerPrisma = new PlayerPrismaClient({
   log: ["query", "info", "warn", "error"],
 
   errorFormat: "pretty",
