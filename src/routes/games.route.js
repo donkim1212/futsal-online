@@ -21,14 +21,16 @@ const calcTeamPower = async (team) => {
     });
     const player = await ec.playerChecker(inventory.PlayerId);
     const tier = await playerPrisma.tier.findUnique({
-      // player.tier
+      where: { tierName: player.tierName },
     });
+
     acc +=
-      member.speed * MODIFIERS.speed +
-      member.goalRate * MODIFIERS.goalRate +
-      member.power * MODIFIERS.power +
-      member.defense * MODIFIERS.defense +
-      member.stamina * MODIFIERS;
+      (player.speed + tier.bonus[`${inventory.level}`]) * MODIFIERS.speed +
+      (player.goalRate + tier.bonus[`${inventory.level}`]) *
+        MODIFIERS.goalRate +
+      (player.power + tier.bonus[`${inventory.level}`]) * MODIFIERS.power +
+      (player.defense + tier.bonus[`${inventory.level}`]) * MODIFIERS.defense +
+      (player.stamina + tier.bonus[`${inventory.level}`]) * MODIFIERS;
   }, 0);
 };
 
