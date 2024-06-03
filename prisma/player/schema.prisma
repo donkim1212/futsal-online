@@ -17,7 +17,9 @@ model Player {
   power      Int    @map("power")
   defense    Int    @map("defense")
   stamina    Int    @map("stamina")
-  tier       Int    @map("tier")
+
+  Tier     Tier   @relation(fields: [tierName], references: [tierName])
+  tierName String @map("tier_name")
 
   @@map("Player")
 }
@@ -27,6 +29,8 @@ model Tier {
   tierName    String @unique @map("tier_name")
   bonus       Json   @map("bonus")
   successRate Json   @map("success_rate")
+
+  Player Player[]
 
   @@map("Tier")
 }

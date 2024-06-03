@@ -951,6 +951,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type TierCountOutputType
+   */
+
+  export type TierCountOutputType = {
+    Player: number
+  }
+
+  export type TierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Player?: boolean | TierCountOutputTypeCountPlayerArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TierCountOutputType without action
+   */
+  export type TierCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TierCountOutputType
+     */
+    select?: TierCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TierCountOutputType without action
+   */
+  export type TierCountOutputTypeCountPlayerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerWhereInput
+  }
+
 
   /**
    * Models
@@ -975,7 +1005,6 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    tier: number | null
   }
 
   export type PlayerSumAggregateOutputType = {
@@ -985,7 +1014,6 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    tier: number | null
   }
 
   export type PlayerMinAggregateOutputType = {
@@ -996,7 +1024,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    tier: number | null
+    tierName: string | null
   }
 
   export type PlayerMaxAggregateOutputType = {
@@ -1007,7 +1035,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    tier: number | null
+    tierName: string | null
   }
 
   export type PlayerCountAggregateOutputType = {
@@ -1018,7 +1046,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tier: number
+    tierName: number
     _all: number
   }
 
@@ -1030,7 +1058,6 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tier?: true
   }
 
   export type PlayerSumAggregateInputType = {
@@ -1040,7 +1067,6 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tier?: true
   }
 
   export type PlayerMinAggregateInputType = {
@@ -1051,7 +1077,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tier?: true
+    tierName?: true
   }
 
   export type PlayerMaxAggregateInputType = {
@@ -1062,7 +1088,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tier?: true
+    tierName?: true
   }
 
   export type PlayerCountAggregateInputType = {
@@ -1073,7 +1099,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tier?: true
+    tierName?: true
     _all?: true
   }
 
@@ -1171,7 +1197,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tier: number
+    tierName: string
     _count: PlayerCountAggregateOutputType | null
     _avg: PlayerAvgAggregateOutputType | null
     _sum: PlayerSumAggregateOutputType | null
@@ -1201,7 +1227,8 @@ export namespace Prisma {
     power?: boolean
     defense?: boolean
     stamina?: boolean
-    tier?: boolean
+    tierName?: boolean
+    Tier?: boolean | TierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["player"]>
 
   export type PlayerSelectScalar = {
@@ -1212,14 +1239,20 @@ export namespace Prisma {
     power?: boolean
     defense?: boolean
     stamina?: boolean
-    tier?: boolean
+    tierName?: boolean
   }
 
+
+  export type PlayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Tier?: boolean | TierDefaultArgs<ExtArgs>
+  }
 
 
   export type $PlayerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Player"
-    objects: {}
+    objects: {
+      Tier: Prisma.$TierPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       playerId: number
       playerName: string
@@ -1228,7 +1261,7 @@ export namespace Prisma {
       power: number
       defense: number
       stamina: number
-      tier: number
+      tierName: string
     }, ExtArgs["result"]["player"]>
     composites: {}
   }
@@ -1594,6 +1627,7 @@ export namespace Prisma {
   export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    Tier<T extends TierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TierDefaultArgs<ExtArgs>>): Prisma__TierClient<$Result.GetResult<Prisma.$TierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1630,7 +1664,7 @@ export namespace Prisma {
     readonly power: FieldRef<"Player", 'Int'>
     readonly defense: FieldRef<"Player", 'Int'>
     readonly stamina: FieldRef<"Player", 'Int'>
-    readonly tier: FieldRef<"Player", 'Int'>
+    readonly tierName: FieldRef<"Player", 'String'>
   }
     
 
@@ -1643,6 +1677,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Player
      */
     select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
     /**
      * Filter, which Player to fetch.
      */
@@ -1658,6 +1696,10 @@ export namespace Prisma {
      */
     select?: PlayerSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
      * Filter, which Player to fetch.
      */
     where: PlayerWhereUniqueInput
@@ -1671,6 +1713,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Player
      */
     select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
     /**
      * Filter, which Player to fetch.
      */
@@ -1716,6 +1762,10 @@ export namespace Prisma {
      */
     select?: PlayerSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
      * Filter, which Player to fetch.
      */
     where?: PlayerWhereInput
@@ -1760,6 +1810,10 @@ export namespace Prisma {
      */
     select?: PlayerSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
      * Filter, which Players to fetch.
      */
     where?: PlayerWhereInput
@@ -1799,6 +1853,10 @@ export namespace Prisma {
      */
     select?: PlayerSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
      * The data needed to create a Player.
      */
     data: XOR<PlayerCreateInput, PlayerUncheckedCreateInput>
@@ -1823,6 +1881,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Player
      */
     select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
     /**
      * The data needed to update a Player.
      */
@@ -1856,6 +1918,10 @@ export namespace Prisma {
      */
     select?: PlayerSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
      * The filter to search for the Player to update in case it exists.
      */
     where: PlayerWhereUniqueInput
@@ -1877,6 +1943,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Player
      */
     select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
     /**
      * Filter which Player to delete.
      */
@@ -1901,6 +1971,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Player
      */
     select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
   }
 
 
@@ -2086,6 +2160,8 @@ export namespace Prisma {
     tierName?: boolean
     bonus?: boolean
     successRate?: boolean
+    Player?: boolean | Tier$PlayerArgs<ExtArgs>
+    _count?: boolean | TierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tier"]>
 
   export type TierSelectScalar = {
@@ -2096,10 +2172,17 @@ export namespace Prisma {
   }
 
 
+  export type TierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Player?: boolean | Tier$PlayerArgs<ExtArgs>
+    _count?: boolean | TierCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
 
   export type $TierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tier"
-    objects: {}
+    objects: {
+      Player: Prisma.$PlayerPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       tierId: number
       tierName: string
@@ -2470,6 +2553,7 @@ export namespace Prisma {
   export interface Prisma__TierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    Player<T extends Tier$PlayerArgs<ExtArgs> = {}>(args?: Subset<T, Tier$PlayerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2516,6 +2600,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * Filter, which Tier to fetch.
      */
     where: TierWhereUniqueInput
@@ -2530,6 +2618,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * Filter, which Tier to fetch.
      */
     where: TierWhereUniqueInput
@@ -2543,6 +2635,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Tier
      */
     select?: TierSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
     /**
      * Filter, which Tier to fetch.
      */
@@ -2588,6 +2684,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * Filter, which Tier to fetch.
      */
     where?: TierWhereInput
@@ -2632,6 +2732,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * Filter, which Tiers to fetch.
      */
     where?: TierWhereInput
@@ -2671,6 +2775,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * The data needed to create a Tier.
      */
     data: XOR<TierCreateInput, TierUncheckedCreateInput>
@@ -2695,6 +2803,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Tier
      */
     select?: TierSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
     /**
      * The data needed to update a Tier.
      */
@@ -2728,6 +2840,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * The filter to search for the Tier to update in case it exists.
      */
     where: TierWhereUniqueInput
@@ -2750,6 +2866,10 @@ export namespace Prisma {
      */
     select?: TierSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
+    /**
      * Filter which Tier to delete.
      */
     where: TierWhereUniqueInput
@@ -2766,6 +2886,26 @@ export namespace Prisma {
   }
 
   /**
+   * Tier.Player
+   */
+  export type Tier$PlayerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    where?: PlayerWhereInput
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    cursor?: PlayerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
    * Tier without action
    */
   export type TierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2773,6 +2913,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Tier
      */
     select?: TierSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TierInclude<ExtArgs> | null
   }
 
 
@@ -2798,7 +2942,7 @@ export namespace Prisma {
     power: 'power',
     defense: 'defense',
     stamina: 'stamina',
-    tier: 'tier'
+    tierName: 'tierName'
   };
 
   export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
@@ -2885,7 +3029,8 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    tier?: IntFilter<"Player"> | number
+    tierName?: StringFilter<"Player"> | string
+    Tier?: XOR<TierRelationFilter, TierWhereInput>
   }
 
   export type PlayerOrderByWithRelationInput = {
@@ -2896,7 +3041,8 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
+    tierName?: SortOrder
+    Tier?: TierOrderByWithRelationInput
   }
 
   export type PlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -2910,7 +3056,8 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    tier?: IntFilter<"Player"> | number
+    tierName?: StringFilter<"Player"> | string
+    Tier?: XOR<TierRelationFilter, TierWhereInput>
   }, "playerId" | "playerName">
 
   export type PlayerOrderByWithAggregationInput = {
@@ -2921,7 +3068,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
+    tierName?: SortOrder
     _count?: PlayerCountOrderByAggregateInput
     _avg?: PlayerAvgOrderByAggregateInput
     _max?: PlayerMaxOrderByAggregateInput
@@ -2940,7 +3087,7 @@ export namespace Prisma {
     power?: IntWithAggregatesFilter<"Player"> | number
     defense?: IntWithAggregatesFilter<"Player"> | number
     stamina?: IntWithAggregatesFilter<"Player"> | number
-    tier?: IntWithAggregatesFilter<"Player"> | number
+    tierName?: StringWithAggregatesFilter<"Player"> | string
   }
 
   export type TierWhereInput = {
@@ -2951,6 +3098,7 @@ export namespace Prisma {
     tierName?: StringFilter<"Tier"> | string
     bonus?: JsonFilter<"Tier">
     successRate?: JsonFilter<"Tier">
+    Player?: PlayerListRelationFilter
   }
 
   export type TierOrderByWithRelationInput = {
@@ -2958,6 +3106,7 @@ export namespace Prisma {
     tierName?: SortOrder
     bonus?: SortOrder
     successRate?: SortOrder
+    Player?: PlayerOrderByRelationAggregateInput
   }
 
   export type TierWhereUniqueInput = Prisma.AtLeast<{
@@ -2968,6 +3117,7 @@ export namespace Prisma {
     NOT?: TierWhereInput | TierWhereInput[]
     bonus?: JsonFilter<"Tier">
     successRate?: JsonFilter<"Tier">
+    Player?: PlayerListRelationFilter
   }, "tierId" | "tierName">
 
   export type TierOrderByWithAggregationInput = {
@@ -2999,7 +3149,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tier: number
+    Tier: TierCreateNestedOneWithoutPlayerInput
   }
 
   export type PlayerUncheckedCreateInput = {
@@ -3010,7 +3160,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tier: number
+    tierName: string
   }
 
   export type PlayerUpdateInput = {
@@ -3020,7 +3170,7 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    tier?: IntFieldUpdateOperationsInput | number
+    Tier?: TierUpdateOneRequiredWithoutPlayerNestedInput
   }
 
   export type PlayerUncheckedUpdateInput = {
@@ -3031,7 +3181,7 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    tier?: IntFieldUpdateOperationsInput | number
+    tierName?: StringFieldUpdateOperationsInput | string
   }
 
   export type PlayerCreateManyInput = {
@@ -3042,7 +3192,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tier: number
+    tierName: string
   }
 
   export type PlayerUpdateManyMutationInput = {
@@ -3052,7 +3202,6 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    tier?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerUncheckedUpdateManyInput = {
@@ -3063,13 +3212,14 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    tier?: IntFieldUpdateOperationsInput | number
+    tierName?: StringFieldUpdateOperationsInput | string
   }
 
   export type TierCreateInput = {
     tierName: string
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
+    Player?: PlayerCreateNestedManyWithoutTierInput
   }
 
   export type TierUncheckedCreateInput = {
@@ -3077,12 +3227,14 @@ export namespace Prisma {
     tierName: string
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
+    Player?: PlayerUncheckedCreateNestedManyWithoutTierInput
   }
 
   export type TierUpdateInput = {
     tierName?: StringFieldUpdateOperationsInput | string
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
+    Player?: PlayerUpdateManyWithoutTierNestedInput
   }
 
   export type TierUncheckedUpdateInput = {
@@ -3090,6 +3242,7 @@ export namespace Prisma {
     tierName?: StringFieldUpdateOperationsInput | string
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
+    Player?: PlayerUncheckedUpdateManyWithoutTierNestedInput
   }
 
   export type TierCreateManyInput = {
@@ -3137,6 +3290,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type TierRelationFilter = {
+    is?: TierWhereInput
+    isNot?: TierWhereInput
+  }
+
   export type PlayerCountOrderByAggregateInput = {
     playerId?: SortOrder
     playerName?: SortOrder
@@ -3145,7 +3303,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
+    tierName?: SortOrder
   }
 
   export type PlayerAvgOrderByAggregateInput = {
@@ -3155,7 +3313,6 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
   }
 
   export type PlayerMaxOrderByAggregateInput = {
@@ -3166,7 +3323,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
+    tierName?: SortOrder
   }
 
   export type PlayerMinOrderByAggregateInput = {
@@ -3177,7 +3334,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
+    tierName?: SortOrder
   }
 
   export type PlayerSumOrderByAggregateInput = {
@@ -3187,7 +3344,6 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tier?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3245,6 +3401,16 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type PlayerListRelationFilter = {
+    every?: PlayerWhereInput
+    some?: PlayerWhereInput
+    none?: PlayerWhereInput
+  }
+
+  export type PlayerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TierCountOrderByAggregateInput = {
     tierId?: SortOrder
     tierName?: SortOrder
@@ -3295,6 +3461,12 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type TierCreateNestedOneWithoutPlayerInput = {
+    create?: XOR<TierCreateWithoutPlayerInput, TierUncheckedCreateWithoutPlayerInput>
+    connectOrCreate?: TierCreateOrConnectWithoutPlayerInput
+    connect?: TierWhereUniqueInput
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -3305,6 +3477,56 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type TierUpdateOneRequiredWithoutPlayerNestedInput = {
+    create?: XOR<TierCreateWithoutPlayerInput, TierUncheckedCreateWithoutPlayerInput>
+    connectOrCreate?: TierCreateOrConnectWithoutPlayerInput
+    upsert?: TierUpsertWithoutPlayerInput
+    connect?: TierWhereUniqueInput
+    update?: XOR<XOR<TierUpdateToOneWithWhereWithoutPlayerInput, TierUpdateWithoutPlayerInput>, TierUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type PlayerCreateNestedManyWithoutTierInput = {
+    create?: XOR<PlayerCreateWithoutTierInput, PlayerUncheckedCreateWithoutTierInput> | PlayerCreateWithoutTierInput[] | PlayerUncheckedCreateWithoutTierInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTierInput | PlayerCreateOrConnectWithoutTierInput[]
+    createMany?: PlayerCreateManyTierInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+  }
+
+  export type PlayerUncheckedCreateNestedManyWithoutTierInput = {
+    create?: XOR<PlayerCreateWithoutTierInput, PlayerUncheckedCreateWithoutTierInput> | PlayerCreateWithoutTierInput[] | PlayerUncheckedCreateWithoutTierInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTierInput | PlayerCreateOrConnectWithoutTierInput[]
+    createMany?: PlayerCreateManyTierInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+  }
+
+  export type PlayerUpdateManyWithoutTierNestedInput = {
+    create?: XOR<PlayerCreateWithoutTierInput, PlayerUncheckedCreateWithoutTierInput> | PlayerCreateWithoutTierInput[] | PlayerUncheckedCreateWithoutTierInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTierInput | PlayerCreateOrConnectWithoutTierInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutTierInput | PlayerUpsertWithWhereUniqueWithoutTierInput[]
+    createMany?: PlayerCreateManyTierInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutTierInput | PlayerUpdateWithWhereUniqueWithoutTierInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutTierInput | PlayerUpdateManyWithWhereWithoutTierInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+  }
+
+  export type PlayerUncheckedUpdateManyWithoutTierNestedInput = {
+    create?: XOR<PlayerCreateWithoutTierInput, PlayerUncheckedCreateWithoutTierInput> | PlayerCreateWithoutTierInput[] | PlayerUncheckedCreateWithoutTierInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTierInput | PlayerCreateOrConnectWithoutTierInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutTierInput | PlayerUpsertWithWhereUniqueWithoutTierInput[]
+    createMany?: PlayerCreateManyTierInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutTierInput | PlayerUpdateWithWhereUniqueWithoutTierInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutTierInput | PlayerUpdateManyWithWhereWithoutTierInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3398,11 +3620,155 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type TierCreateWithoutPlayerInput = {
+    tierName: string
+    bonus: JsonNullValueInput | InputJsonValue
+    successRate: JsonNullValueInput | InputJsonValue
+  }
+
+  export type TierUncheckedCreateWithoutPlayerInput = {
+    tierId?: number
+    tierName: string
+    bonus: JsonNullValueInput | InputJsonValue
+    successRate: JsonNullValueInput | InputJsonValue
+  }
+
+  export type TierCreateOrConnectWithoutPlayerInput = {
+    where: TierWhereUniqueInput
+    create: XOR<TierCreateWithoutPlayerInput, TierUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type TierUpsertWithoutPlayerInput = {
+    update: XOR<TierUpdateWithoutPlayerInput, TierUncheckedUpdateWithoutPlayerInput>
+    create: XOR<TierCreateWithoutPlayerInput, TierUncheckedCreateWithoutPlayerInput>
+    where?: TierWhereInput
+  }
+
+  export type TierUpdateToOneWithWhereWithoutPlayerInput = {
+    where?: TierWhereInput
+    data: XOR<TierUpdateWithoutPlayerInput, TierUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type TierUpdateWithoutPlayerInput = {
+    tierName?: StringFieldUpdateOperationsInput | string
+    bonus?: JsonNullValueInput | InputJsonValue
+    successRate?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type TierUncheckedUpdateWithoutPlayerInput = {
+    tierId?: IntFieldUpdateOperationsInput | number
+    tierName?: StringFieldUpdateOperationsInput | string
+    bonus?: JsonNullValueInput | InputJsonValue
+    successRate?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type PlayerCreateWithoutTierInput = {
+    playerName: string
+    speed: number
+    goalRate: number
+    power: number
+    defense: number
+    stamina: number
+  }
+
+  export type PlayerUncheckedCreateWithoutTierInput = {
+    playerId?: number
+    playerName: string
+    speed: number
+    goalRate: number
+    power: number
+    defense: number
+    stamina: number
+  }
+
+  export type PlayerCreateOrConnectWithoutTierInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutTierInput, PlayerUncheckedCreateWithoutTierInput>
+  }
+
+  export type PlayerCreateManyTierInputEnvelope = {
+    data: PlayerCreateManyTierInput | PlayerCreateManyTierInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlayerUpsertWithWhereUniqueWithoutTierInput = {
+    where: PlayerWhereUniqueInput
+    update: XOR<PlayerUpdateWithoutTierInput, PlayerUncheckedUpdateWithoutTierInput>
+    create: XOR<PlayerCreateWithoutTierInput, PlayerUncheckedCreateWithoutTierInput>
+  }
+
+  export type PlayerUpdateWithWhereUniqueWithoutTierInput = {
+    where: PlayerWhereUniqueInput
+    data: XOR<PlayerUpdateWithoutTierInput, PlayerUncheckedUpdateWithoutTierInput>
+  }
+
+  export type PlayerUpdateManyWithWhereWithoutTierInput = {
+    where: PlayerScalarWhereInput
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyWithoutTierInput>
+  }
+
+  export type PlayerScalarWhereInput = {
+    AND?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+    OR?: PlayerScalarWhereInput[]
+    NOT?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+    playerId?: IntFilter<"Player"> | number
+    playerName?: StringFilter<"Player"> | string
+    speed?: IntFilter<"Player"> | number
+    goalRate?: IntFilter<"Player"> | number
+    power?: IntFilter<"Player"> | number
+    defense?: IntFilter<"Player"> | number
+    stamina?: IntFilter<"Player"> | number
+    tierName?: StringFilter<"Player"> | string
+  }
+
+  export type PlayerCreateManyTierInput = {
+    playerId?: number
+    playerName: string
+    speed: number
+    goalRate: number
+    power: number
+    defense: number
+    stamina: number
+  }
+
+  export type PlayerUpdateWithoutTierInput = {
+    playerName?: StringFieldUpdateOperationsInput | string
+    speed?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
+    power?: IntFieldUpdateOperationsInput | number
+    defense?: IntFieldUpdateOperationsInput | number
+    stamina?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PlayerUncheckedUpdateWithoutTierInput = {
+    playerId?: IntFieldUpdateOperationsInput | number
+    playerName?: StringFieldUpdateOperationsInput | string
+    speed?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
+    power?: IntFieldUpdateOperationsInput | number
+    defense?: IntFieldUpdateOperationsInput | number
+    stamina?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PlayerUncheckedUpdateManyWithoutTierInput = {
+    playerId?: IntFieldUpdateOperationsInput | number
+    playerName?: StringFieldUpdateOperationsInput | string
+    speed?: IntFieldUpdateOperationsInput | number
+    goalRate?: IntFieldUpdateOperationsInput | number
+    power?: IntFieldUpdateOperationsInput | number
+    defense?: IntFieldUpdateOperationsInput | number
+    stamina?: IntFieldUpdateOperationsInput | number
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
+    /**
+     * @deprecated Use TierCountOutputTypeDefaultArgs instead
+     */
+    export type TierCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TierCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use PlayerDefaultArgs instead
      */

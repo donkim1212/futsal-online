@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./user"
+  provider      = "prisma-client-js"
+  output        = "./user"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -10,43 +10,44 @@ datasource db {
 }
 
 model User {
-  userId     Int          @id @default(autoincrement()) @map("user_id")
-  username     String       @unique @map("username")
-  password   String       @map("password")
-  money       String       @map("name")
-  rating    Int     @map("rating")
-  createdAt  DateTime     @default(now()) @map("createdAt")
-  updatedAt  DateTime     @updatedAt @map("updatedAt")
-  
-  Team Team[]
+  userId    Int      @id @default(autoincrement()) @map("user_id")
+  username  String   @unique @map("username")
+  password  String   @map("password")
+  money     String   @map("name")
+  rating    Int      @map("rating")
+  createdAt DateTime @default(now()) @map("createdAt")
+  updatedAt DateTime @updatedAt @map("updatedAt")
+
+  Team      Team[]
   Inventory Inventory[]
 
   @@map("User")
 }
 
 model Team {
-    teamId     Int @id @default(autoincrement()) @map("team_id")
-    // teamPower Int @default(0)
+  teamId Int @id @default(autoincrement()) @map("team_id")
+  // teamPower Int @default(0)
 
-    User    User    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
-    UserId     Int @map("user_id")
-    
-    Inventory Inventory @relation(fields:[InventoryId], references:[inventoryId], onDelete: Cascade)
-    InventoryId   Int @map("inventory_id")
-    
-    @@map("Team")
+  User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  UserId Int  @map("user_id")
+
+  Inventory   Inventory @relation(fields: [InventoryId], references: [inventoryId], onDelete: Cascade)
+  InventoryId Int       @map("inventory_id")
+
+  @@map("Team")
 }
 
 model Inventory {
-    inventoryId     Int @id @default(autoincrement()) @map("inventory_id")
-    count   Int @map("count")
-    level Int @map("level")
+  inventoryId Int @id @default(autoincrement()) @map("inventory_id")
+  count       Int @map("count")
+  level       Int @map("level")
 
-    User    User    @relation(fields: [UserId], references: [userId], onDelete: Cascade)
-    UserId     Int @map("user_id")
-    
-    PlayerId   Int @map("player_id")
+  User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  UserId Int  @map("user_id")
 
-    Team Team[]
-    @@map("Inventory")
+  PlayerId Int @map("player_id")
+
+  Team Team[]
+
+  @@map("Inventory")
 }
