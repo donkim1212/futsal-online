@@ -2,6 +2,7 @@ import { playerPrisma, userPrisma } from "../utils/prisma/index.js";
 import PlayerNotFoundError from "./classes/player-not-found.error.js";
 import UserNotFoundError from "./classes/user-not-found.error.js";
 import NotEnoughMoneyError from "./classes/not-enough-money.error.js";
+import TeamNotReadyError from "./classes/team-not-ready.error.js";
 
 const queryBuilder = (where, select) => {
   const query = {
@@ -75,5 +76,12 @@ export default errorChecker = {
     const user = await userPrisma.user.findUnique(query);
     if (requiredMoney > user.money) throw new NotEnoughMoneyError();
     return user;
+  },
+
+  teamChecker: async function (userId, select) {
+    const query = queryBuilder({ UserId: userId }, select);
+    const team = await userPrisma.findMany(query);
+    if (team.length != 3) throw new TeamNotReadyError();
+    return team;
   },
 };
