@@ -1005,6 +1005,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
+    TierName: number | null
   }
 
   export type PlayerSumAggregateOutputType = {
@@ -1014,6 +1015,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
+    TierName: number | null
   }
 
   export type PlayerMinAggregateOutputType = {
@@ -1024,7 +1026,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    TierName: string | null
+    TierName: number | null
   }
 
   export type PlayerMaxAggregateOutputType = {
@@ -1035,7 +1037,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    TierName: string | null
+    TierName: number | null
   }
 
   export type PlayerCountAggregateOutputType = {
@@ -1058,6 +1060,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
+    TierName?: true
   }
 
   export type PlayerSumAggregateInputType = {
@@ -1067,6 +1070,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
+    TierName?: true
   }
 
   export type PlayerMinAggregateInputType = {
@@ -1197,7 +1201,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    TierName: string
+    TierName: number
     _count: PlayerCountAggregateOutputType | null
     _avg: PlayerAvgAggregateOutputType | null
     _sum: PlayerSumAggregateOutputType | null
@@ -1261,7 +1265,7 @@ export namespace Prisma {
       power: number
       defense: number
       stamina: number
-      TierName: string
+      TierName: number
     }, ExtArgs["result"]["player"]>
     composites: {}
   }
@@ -1664,7 +1668,7 @@ export namespace Prisma {
     readonly power: FieldRef<"Player", 'Int'>
     readonly defense: FieldRef<"Player", 'Int'>
     readonly stamina: FieldRef<"Player", 'Int'>
-    readonly TierName: FieldRef<"Player", 'String'>
+    readonly TierName: FieldRef<"Player", 'Int'>
   }
     
 
@@ -1992,20 +1996,22 @@ export namespace Prisma {
 
   export type TierAvgAggregateOutputType = {
     tierId: number | null
+    tierName: number | null
   }
 
   export type TierSumAggregateOutputType = {
     tierId: number | null
+    tierName: number | null
   }
 
   export type TierMinAggregateOutputType = {
     tierId: number | null
-    tierName: string | null
+    tierName: number | null
   }
 
   export type TierMaxAggregateOutputType = {
     tierId: number | null
-    tierName: string | null
+    tierName: number | null
   }
 
   export type TierCountAggregateOutputType = {
@@ -2019,10 +2025,12 @@ export namespace Prisma {
 
   export type TierAvgAggregateInputType = {
     tierId?: true
+    tierName?: true
   }
 
   export type TierSumAggregateInputType = {
     tierId?: true
+    tierName?: true
   }
 
   export type TierMinAggregateInputType = {
@@ -2131,7 +2139,7 @@ export namespace Prisma {
 
   export type TierGroupByOutputType = {
     tierId: number
-    tierName: string
+    tierName: number
     bonus: JsonValue
     successRate: JsonValue
     _count: TierCountAggregateOutputType | null
@@ -2185,7 +2193,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       tierId: number
-      tierName: string
+      tierName: number
       bonus: Prisma.JsonValue
       successRate: Prisma.JsonValue
     }, ExtArgs["result"]["tier"]>
@@ -2584,7 +2592,7 @@ export namespace Prisma {
    */ 
   interface TierFieldRefs {
     readonly tierId: FieldRef<"Tier", 'Int'>
-    readonly tierName: FieldRef<"Tier", 'String'>
+    readonly tierName: FieldRef<"Tier", 'Int'>
     readonly bonus: FieldRef<"Tier", 'Json'>
     readonly successRate: FieldRef<"Tier", 'Json'>
   }
@@ -3029,7 +3037,7 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    TierName?: StringFilter<"Player"> | string
+    TierName?: IntFilter<"Player"> | number
     Tier?: XOR<TierRelationFilter, TierWhereInput>
   }
 
@@ -3056,7 +3064,7 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    TierName?: StringFilter<"Player"> | string
+    TierName?: IntFilter<"Player"> | number
     Tier?: XOR<TierRelationFilter, TierWhereInput>
   }, "playerId" | "playerName">
 
@@ -3087,7 +3095,7 @@ export namespace Prisma {
     power?: IntWithAggregatesFilter<"Player"> | number
     defense?: IntWithAggregatesFilter<"Player"> | number
     stamina?: IntWithAggregatesFilter<"Player"> | number
-    TierName?: StringWithAggregatesFilter<"Player"> | string
+    TierName?: IntWithAggregatesFilter<"Player"> | number
   }
 
   export type TierWhereInput = {
@@ -3095,7 +3103,7 @@ export namespace Prisma {
     OR?: TierWhereInput[]
     NOT?: TierWhereInput | TierWhereInput[]
     tierId?: IntFilter<"Tier"> | number
-    tierName?: StringFilter<"Tier"> | string
+    tierName?: IntFilter<"Tier"> | number
     bonus?: JsonFilter<"Tier">
     successRate?: JsonFilter<"Tier">
     Player?: PlayerListRelationFilter
@@ -3111,7 +3119,7 @@ export namespace Prisma {
 
   export type TierWhereUniqueInput = Prisma.AtLeast<{
     tierId?: number
-    tierName?: string
+    tierName?: number
     AND?: TierWhereInput | TierWhereInput[]
     OR?: TierWhereInput[]
     NOT?: TierWhereInput | TierWhereInput[]
@@ -3137,7 +3145,7 @@ export namespace Prisma {
     OR?: TierScalarWhereWithAggregatesInput[]
     NOT?: TierScalarWhereWithAggregatesInput | TierScalarWhereWithAggregatesInput[]
     tierId?: IntWithAggregatesFilter<"Tier"> | number
-    tierName?: StringWithAggregatesFilter<"Tier"> | string
+    tierName?: IntWithAggregatesFilter<"Tier"> | number
     bonus?: JsonWithAggregatesFilter<"Tier">
     successRate?: JsonWithAggregatesFilter<"Tier">
   }
@@ -3160,7 +3168,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    TierName: string
+    TierName: number
   }
 
   export type PlayerUpdateInput = {
@@ -3181,7 +3189,7 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    TierName?: StringFieldUpdateOperationsInput | string
+    TierName?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerCreateManyInput = {
@@ -3192,7 +3200,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    TierName: string
+    TierName: number
   }
 
   export type PlayerUpdateManyMutationInput = {
@@ -3212,11 +3220,11 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    TierName?: StringFieldUpdateOperationsInput | string
+    TierName?: IntFieldUpdateOperationsInput | number
   }
 
   export type TierCreateInput = {
-    tierName: string
+    tierName: number
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
     Player?: PlayerCreateNestedManyWithoutTierInput
@@ -3224,14 +3232,14 @@ export namespace Prisma {
 
   export type TierUncheckedCreateInput = {
     tierId?: number
-    tierName: string
+    tierName: number
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
     Player?: PlayerUncheckedCreateNestedManyWithoutTierInput
   }
 
   export type TierUpdateInput = {
-    tierName?: StringFieldUpdateOperationsInput | string
+    tierName?: IntFieldUpdateOperationsInput | number
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
     Player?: PlayerUpdateManyWithoutTierNestedInput
@@ -3239,7 +3247,7 @@ export namespace Prisma {
 
   export type TierUncheckedUpdateInput = {
     tierId?: IntFieldUpdateOperationsInput | number
-    tierName?: StringFieldUpdateOperationsInput | string
+    tierName?: IntFieldUpdateOperationsInput | number
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
     Player?: PlayerUncheckedUpdateManyWithoutTierNestedInput
@@ -3247,20 +3255,20 @@ export namespace Prisma {
 
   export type TierCreateManyInput = {
     tierId?: number
-    tierName: string
+    tierName: number
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
   }
 
   export type TierUpdateManyMutationInput = {
-    tierName?: StringFieldUpdateOperationsInput | string
+    tierName?: IntFieldUpdateOperationsInput | number
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
   }
 
   export type TierUncheckedUpdateManyInput = {
     tierId?: IntFieldUpdateOperationsInput | number
-    tierName?: StringFieldUpdateOperationsInput | string
+    tierName?: IntFieldUpdateOperationsInput | number
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
   }
@@ -3313,6 +3321,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
+    TierName?: SortOrder
   }
 
   export type PlayerMaxOrderByAggregateInput = {
@@ -3344,6 +3353,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
+    TierName?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3420,6 +3430,7 @@ export namespace Prisma {
 
   export type TierAvgOrderByAggregateInput = {
     tierId?: SortOrder
+    tierName?: SortOrder
   }
 
   export type TierMaxOrderByAggregateInput = {
@@ -3434,6 +3445,7 @@ export namespace Prisma {
 
   export type TierSumOrderByAggregateInput = {
     tierId?: SortOrder
+    tierName?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -3621,14 +3633,14 @@ export namespace Prisma {
   }
 
   export type TierCreateWithoutPlayerInput = {
-    tierName: string
+    tierName: number
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
   }
 
   export type TierUncheckedCreateWithoutPlayerInput = {
     tierId?: number
-    tierName: string
+    tierName: number
     bonus: JsonNullValueInput | InputJsonValue
     successRate: JsonNullValueInput | InputJsonValue
   }
@@ -3650,14 +3662,14 @@ export namespace Prisma {
   }
 
   export type TierUpdateWithoutPlayerInput = {
-    tierName?: StringFieldUpdateOperationsInput | string
+    tierName?: IntFieldUpdateOperationsInput | number
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
   }
 
   export type TierUncheckedUpdateWithoutPlayerInput = {
     tierId?: IntFieldUpdateOperationsInput | number
-    tierName?: StringFieldUpdateOperationsInput | string
+    tierName?: IntFieldUpdateOperationsInput | number
     bonus?: JsonNullValueInput | InputJsonValue
     successRate?: JsonNullValueInput | InputJsonValue
   }
@@ -3718,7 +3730,7 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    TierName?: StringFilter<"Player"> | string
+    TierName?: IntFilter<"Player"> | number
   }
 
   export type PlayerCreateManyTierInput = {
