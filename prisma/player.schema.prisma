@@ -17,8 +17,16 @@ model Player {
   power Int @map("power")
   defense   Int @map("defense")
   stamina   Int @map("stamina")
-  level Int?    @map("level")
-  grade Int @map("grade")
+  tier Int @map("tier")
 
   @@map("Player")
+}
+
+model Tier {
+  tierId Int @id @default(autoincrement()) @map("tier_id")
+  tierName String @unique @map("tier_name")
+  bonus Json @map("bonus")
+  successRate Json @map("success_rate")
+
+  @@map("Tier")
 }
