@@ -12,7 +12,7 @@ const checkHeaders = async function (headers) {
   });
 };
 
-export default UserAuthenticator = {
+const UserAuthenticator = {
   authStrict: async function (req, res, next) {
     try {
       req.body.user = await checkHeaders(req.headers);
@@ -31,3 +31,5 @@ export default UserAuthenticator = {
     }
   },
 };
+
+export default UserAuthenticator

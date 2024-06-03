@@ -12,7 +12,7 @@ const queryBuilder = (where, select) => {
   return query;
 };
 
-export default errorChecker = {
+const errorChecker = {
   /**
    *
    * @param {Number} userId target user's userId
@@ -86,3 +86,5 @@ export default errorChecker = {
     return team;
   },
 };
+
+export default errorChecker
