@@ -75,6 +75,7 @@ export default errorChecker = {
     const query = queryBuilder({ userId: userId }, select);
     const user = await userPrisma.user.findUnique(query);
     if (requiredMoney > user.money) throw new NotEnoughMoneyError();
+    delete user.password;
     return user;
   },
 
