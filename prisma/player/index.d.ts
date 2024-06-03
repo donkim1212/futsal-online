@@ -1024,7 +1024,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    tierName: string | null
+    TierName: string | null
   }
 
   export type PlayerMaxAggregateOutputType = {
@@ -1035,7 +1035,7 @@ export namespace Prisma {
     power: number | null
     defense: number | null
     stamina: number | null
-    tierName: string | null
+    TierName: string | null
   }
 
   export type PlayerCountAggregateOutputType = {
@@ -1046,7 +1046,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tierName: number
+    TierName: number
     _all: number
   }
 
@@ -1077,7 +1077,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tierName?: true
+    TierName?: true
   }
 
   export type PlayerMaxAggregateInputType = {
@@ -1088,7 +1088,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tierName?: true
+    TierName?: true
   }
 
   export type PlayerCountAggregateInputType = {
@@ -1099,7 +1099,7 @@ export namespace Prisma {
     power?: true
     defense?: true
     stamina?: true
-    tierName?: true
+    TierName?: true
     _all?: true
   }
 
@@ -1197,7 +1197,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tierName: string
+    TierName: string
     _count: PlayerCountAggregateOutputType | null
     _avg: PlayerAvgAggregateOutputType | null
     _sum: PlayerSumAggregateOutputType | null
@@ -1227,7 +1227,7 @@ export namespace Prisma {
     power?: boolean
     defense?: boolean
     stamina?: boolean
-    tierName?: boolean
+    TierName?: boolean
     Tier?: boolean | TierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["player"]>
 
@@ -1239,7 +1239,7 @@ export namespace Prisma {
     power?: boolean
     defense?: boolean
     stamina?: boolean
-    tierName?: boolean
+    TierName?: boolean
   }
 
 
@@ -1261,7 +1261,7 @@ export namespace Prisma {
       power: number
       defense: number
       stamina: number
-      tierName: string
+      TierName: string
     }, ExtArgs["result"]["player"]>
     composites: {}
   }
@@ -1664,7 +1664,7 @@ export namespace Prisma {
     readonly power: FieldRef<"Player", 'Int'>
     readonly defense: FieldRef<"Player", 'Int'>
     readonly stamina: FieldRef<"Player", 'Int'>
-    readonly tierName: FieldRef<"Player", 'String'>
+    readonly TierName: FieldRef<"Player", 'String'>
   }
     
 
@@ -2942,7 +2942,7 @@ export namespace Prisma {
     power: 'power',
     defense: 'defense',
     stamina: 'stamina',
-    tierName: 'tierName'
+    TierName: 'TierName'
   };
 
   export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
@@ -3029,7 +3029,7 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    tierName?: StringFilter<"Player"> | string
+    TierName?: StringFilter<"Player"> | string
     Tier?: XOR<TierRelationFilter, TierWhereInput>
   }
 
@@ -3041,7 +3041,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tierName?: SortOrder
+    TierName?: SortOrder
     Tier?: TierOrderByWithRelationInput
   }
 
@@ -3056,7 +3056,7 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    tierName?: StringFilter<"Player"> | string
+    TierName?: StringFilter<"Player"> | string
     Tier?: XOR<TierRelationFilter, TierWhereInput>
   }, "playerId" | "playerName">
 
@@ -3068,7 +3068,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tierName?: SortOrder
+    TierName?: SortOrder
     _count?: PlayerCountOrderByAggregateInput
     _avg?: PlayerAvgOrderByAggregateInput
     _max?: PlayerMaxOrderByAggregateInput
@@ -3087,7 +3087,7 @@ export namespace Prisma {
     power?: IntWithAggregatesFilter<"Player"> | number
     defense?: IntWithAggregatesFilter<"Player"> | number
     stamina?: IntWithAggregatesFilter<"Player"> | number
-    tierName?: StringWithAggregatesFilter<"Player"> | string
+    TierName?: StringWithAggregatesFilter<"Player"> | string
   }
 
   export type TierWhereInput = {
@@ -3160,7 +3160,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tierName: string
+    TierName: string
   }
 
   export type PlayerUpdateInput = {
@@ -3181,7 +3181,7 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    tierName?: StringFieldUpdateOperationsInput | string
+    TierName?: StringFieldUpdateOperationsInput | string
   }
 
   export type PlayerCreateManyInput = {
@@ -3192,7 +3192,7 @@ export namespace Prisma {
     power: number
     defense: number
     stamina: number
-    tierName: string
+    TierName: string
   }
 
   export type PlayerUpdateManyMutationInput = {
@@ -3212,7 +3212,7 @@ export namespace Prisma {
     power?: IntFieldUpdateOperationsInput | number
     defense?: IntFieldUpdateOperationsInput | number
     stamina?: IntFieldUpdateOperationsInput | number
-    tierName?: StringFieldUpdateOperationsInput | string
+    TierName?: StringFieldUpdateOperationsInput | string
   }
 
   export type TierCreateInput = {
@@ -3303,7 +3303,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tierName?: SortOrder
+    TierName?: SortOrder
   }
 
   export type PlayerAvgOrderByAggregateInput = {
@@ -3323,7 +3323,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tierName?: SortOrder
+    TierName?: SortOrder
   }
 
   export type PlayerMinOrderByAggregateInput = {
@@ -3334,7 +3334,7 @@ export namespace Prisma {
     power?: SortOrder
     defense?: SortOrder
     stamina?: SortOrder
-    tierName?: SortOrder
+    TierName?: SortOrder
   }
 
   export type PlayerSumOrderByAggregateInput = {
@@ -3718,7 +3718,7 @@ export namespace Prisma {
     power?: IntFilter<"Player"> | number
     defense?: IntFilter<"Player"> | number
     stamina?: IntFilter<"Player"> | number
-    tierName?: StringFilter<"Player"> | string
+    TierName?: StringFilter<"Player"> | string
   }
 
   export type PlayerCreateManyTierInput = {

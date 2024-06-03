@@ -14,7 +14,7 @@ model User {
   username  String   @unique @map("username")
   password  String   @map("password")
   money     String   @map("name")
-  rating    Int      @map("rating")
+  rating    Int      @default(1000) @map("rating")
   createdAt DateTime @default(now()) @map("createdAt")
   updatedAt DateTime @updatedAt @map("updatedAt")
 

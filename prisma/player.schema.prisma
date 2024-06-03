@@ -18,8 +18,8 @@ model Player {
   defense    Int    @map("defense")
   stamina    Int    @map("stamina")
 
-  Tier     Tier   @relation(fields: [tierName], references: [tierName])
-  tierName String @map("tier_name")
+  Tier     Tier   @relation(fields: [TierName], references: [tierName])
+  TierName String @map("tier_name")
 
   @@map("Player")
 }

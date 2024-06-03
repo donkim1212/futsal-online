@@ -127,7 +127,7 @@ exports.Prisma.PlayerScalarFieldEnum = {
   power: 'power',
   defense: 'defense',
   stamina: 'stamina',
-  tierName: 'tierName'
+  TierName: 'TierName'
 };
 
 exports.Prisma.TierScalarFieldEnum = {

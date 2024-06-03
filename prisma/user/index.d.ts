@@ -4307,7 +4307,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Team?: TeamCreateNestedManyWithoutUserInput
@@ -4319,7 +4319,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
@@ -4354,7 +4354,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5073,7 +5073,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Inventory?: InventoryCreateNestedManyWithoutUserInput
@@ -5084,7 +5084,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
@@ -5177,7 +5177,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Team?: TeamCreateNestedManyWithoutUserInput
@@ -5188,7 +5188,7 @@ export namespace Prisma {
     username: string
     password: string
     money: string
-    rating: number
+    rating?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
