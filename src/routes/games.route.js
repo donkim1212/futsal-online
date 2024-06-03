@@ -35,6 +35,12 @@ const calcTeamPower = async (team) => {
   }, 0);
 };
 
+const getSign = (number) => {
+  if (number > 0) return 1;
+  else if (number < 0) return -1;
+  else 0;
+};
+
 const play = async (me, opponent) => {
   const me = await ec.userChecker(req.body.userId);
   const opponent = await ec.userChecker(userId);
@@ -42,25 +48,28 @@ const play = async (me, opponent) => {
   const opTeam = await ec.teamChecker(userId);
   const myTeamPower = calcTeamPower(myTeam);
   const opTeamPower = calcTeamPower(opTeam);
-  if (myTeamPower == opTeamPower) return 0;
-  const sign = myTeamPower - opTeamPower;
-  userPrisma.user.update({
+
+  const sum = myTeamPower + opTeamPower;
+  const result = getSign(myTeamPower - Math.random() * sum);
+
+  if (result == 0) return 0;
+  await userPrisma.user.update({
     where: { userId: me },
     data: {
       rating: {
-        increment: POINTS * sign,
+        increment: POINTS * result,
       },
     },
   });
-  userPrisma.update({
+  await userPrisma.update({
     where: { userId: opponent },
     data: {
       rating: {
-        increment: POINTS * -sign,
+        increment: POINTS * -result,
       },
     },
   });
-  return sign;
+  return result;
 };
 
 const matchMaking = () => {};
