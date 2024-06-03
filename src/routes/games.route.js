@@ -31,7 +31,7 @@ const calcTeamPower = async (team) => {
         MODIFIERS.goalRate +
       (player.power + tier.bonus[`${inventory.level}`]) * MODIFIERS.power +
       (player.defense + tier.bonus[`${inventory.level}`]) * MODIFIERS.defense +
-      (player.stamina + tier.bonus[`${inventory.level}`]) * MODIFIERS;
+      (player.stamina + tier.bonus[`${inventory.level}`]) * MODIFIERS.stamina;
   }, 0);
 };
 
