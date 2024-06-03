@@ -6,7 +6,7 @@ const router = express.Router();
 /* 플레이어 생성 API */
 router.post("/players", async (req, res, next) => {
   try {
-    const { playerName, speed, goalRate, power, defense, stamina, grade } =
+    const { playerName, speed, goalRate, power, defense, stamina, tierName } =
       req.body;
 
     const isExistPlayer = await playerPrisma.player.findFirst({
@@ -27,7 +27,7 @@ router.post("/players", async (req, res, next) => {
         power,
         defense,
         stamina,
-        grade,
+        TierName: tierName,
       },
     });
 
@@ -70,7 +70,7 @@ router.get("/players/:playerId", async (req, res, next) => {
         power: true,
         defense: true,
         stamina: true,
-        grade: true,
+        TierName: true,
       },
     });
 
