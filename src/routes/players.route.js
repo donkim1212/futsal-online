@@ -80,4 +80,45 @@ router.get("/players/:playerId", async (req, res, next) => {
   }
 });
 
+/* 플레이어 정보 변경 API */
+router.patch("/players/:playerId", async (req, res, next) => {
+  try {
+    const { playerId } = req.params;
+    const { playerName, speed, goalRate, power, defense, stamina, tierName } =
+      req.body;
+
+    const player = await playerPrisma.player.findFirst({
+      where: {
+        playerId: +playerId,
+      },
+    });
+
+    if (!player) {
+      return res.status(409).json({ message: "플레이어가 존재하지 않습니다." });
+    }
+
+    await playerPrisma.player.update({
+      where: {
+        playerId: +playerId,
+      },
+
+      data: {
+        playerName: playerName,
+        speed: speed,
+        goalRate: goalRate,
+        power: power,
+        defense: defense,
+        stamina: stamina,
+        TierName: tierName,
+      },
+    });
+
+    return res.status(200).json({
+      message: `${player.playerName}의 데이터 변경이 완료 되었습니다.`,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
