@@ -16,32 +16,58 @@ const MODIFIERS = {
 
 const calcTeamPower = async (team) => {
   return team.reduce(async (acc, member) => {
-    const member = await ec.inventoryChecker();
+    const inventory = await userPrisma.inventory.findFirst({
+      where: { InventoryId: member.InventoryId },
+    });
+    const player = await ec.playerChecker(inventory.PlayerId);
+    const tier = await playerPrisma.tier.findUnique({
+      // player.tier
+    });
     acc +=
       member.speed * MODIFIERS.speed +
-      goalRate * MODIFIERS.goalRate +
-      power * MODIFIERS.power +
-      defense * MODIFIERS.defense +
-      stamina * MODIFIERS;
+      member.goalRate * MODIFIERS.goalRate +
+      member.power * MODIFIERS.power +
+      member.defense * MODIFIERS.defense +
+      member.stamina * MODIFIERS;
   }, 0);
 };
 
-const play = async (myTeam, opTeam) => {
+const play = async (me, opponent) => {
+  const me = await ec.userChecker(req.body.userId);
+  const opponent = await ec.userChecker(userId);
+  const myTeam = await ec.teamChecker(req.body.user.userId);
+  const opTeam = await ec.teamChecker(userId);
   const myTeamPower = calcTeamPower(myTeam);
   const opTeamPower = calcTeamPower(opTeam);
-  return myTeamPower - opTeamPower;
+  if (myTeamPower == opTeamPower) return 0;
+  const sign = myTeamPower - opTeamPower;
+  userPrisma.user.update({
+    where: { userId: me },
+    data: {
+      rating: {
+        increment: POINTS * sign,
+      },
+    },
+  });
+  userPrisma.update({
+    where: { userId: opponent },
+    data: {
+      rating: {
+        increment: POINTS * -sign,
+      },
+    },
+  });
+  return sign;
 };
 
 const matchMaking = () => {};
 
 router.post("/games/play/:userId", ua.authStrict, async (req, res, next) => {
   try {
-    const { userId } = req.params;
-    const me = await ec.userChecker(req.body.userId);
-    const opponent = await ec.userChecker(userId);
-    const myTeam = await ec.teamChecker(req.body.user.userId);
-    const opTeam = await ec.teamChecker(userId);
-    const result = play(myTeam, opTeam);
+    const result = play(req.body.user.userId, req.params.userId);
+    if (result == 0) res.status(200).json({ message: "무승부입니다." });
+    else if (result > 0) res.status(200).json({ message: "승리했습니다!" });
+    else res.status(200).json({ message: "패배했습니다." });
   } catch (err) {
     next(err);
   }
