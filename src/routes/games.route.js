@@ -1,6 +1,7 @@
 import express from "express";
 import { userPrisma, playerPrisma } from "../lib/utils/prisma/index.js";
 import ua from "../middlewares/auths/user.authenticator.js";
+import uv from "../middlewares/validators/user-validator.middleware.js";
 import ec from "../lib/errors/error-checker.js";
 
 const router = express.Router();
@@ -64,16 +65,21 @@ const play = async (me, opponent) => {
 
 const matchMaking = () => {};
 
-router.post("/games/play/:userId", ua.authStrict, async (req, res, next) => {
-  try {
-    const result = play(req.body.user.userId, req.params.userId);
-    if (result == 0) res.status(200).json({ message: "무승부입니다." });
-    else if (result > 0) res.status(200).json({ message: "승리했습니다!" });
-    else res.status(200).json({ message: "패배했습니다." });
-  } catch (err) {
-    next(err);
-  }
-});
+router.post(
+  "/games/play/:userId",
+  ua.authStrict,
+  uv.userIdValidation,
+  async (req, res, next) => {
+    try {
+      const result = play(req.body.user.userId, req.params.userId);
+      if (result == 0) res.status(200).json({ message: "무승부입니다." });
+      else if (result > 0) res.status(200).json({ message: "승리했습니다!" });
+      else res.status(200).json({ message: "패배했습니다." });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
 
 //
 router.post("/games/matchmaking", ua.authStrict, async (req, res, next) => {
