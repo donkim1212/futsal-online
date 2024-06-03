@@ -3,11 +3,7 @@ import Joi from "joi";
 const userId = Joi.number().strict().integer().min(1);
 const username = Joi.string().alphanum.min(6).max(20);
 const password = Joi.string().min(6).max(20);
-const money = Joi.number()
-  .strict()
-  .integer()
-  .min(0)
-  .max(Number.MAX_SAFE_INTEGER);
+const amount = Joi.number().strict().integer().min(1000).max(1000000);
 const isAll = Joi.boolean().strict();
 
 const signInSchema = Joi.object({
@@ -26,6 +22,10 @@ const userIdSchema = Joi.object({
 
 const isAllSchema = Joi.object({
   isAll: isAll.required(),
+}).unknown(true);
+
+const cashPurchaseSchema = Joi.object({
+  amount: amount.required,
 }).unknown(true);
 
 const userValidationErrorHandler = async (err, res, msg, code) => {
@@ -67,6 +67,15 @@ export default userValidatorJoi = {
       await isAllSchema.validateAsync(req.body);
       next();
     } catch (err) {
+      return userValidationErrorHandler(err, res);
+    }
+  },
+  cashPurchaseValidation: async function (req, res, next) {
+    try {
+      await cashPurchaseSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      // TODO: set msg to fit the error case
       return userValidationErrorHandler(err, res);
     }
   },
