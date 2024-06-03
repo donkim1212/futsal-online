@@ -132,12 +132,13 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.TeamScalarFieldEnum = {
   teamId: 'teamId',
   UserId: 'UserId',
-  PlayerId: 'PlayerId'
+  InventoryId: 'InventoryId'
 };
 
 exports.Prisma.InventoryScalarFieldEnum = {
   inventoryId: 'inventoryId',
   count: 'count',
+  level: 'level',
   UserId: 'UserId',
   PlayerId: 'PlayerId'
 };

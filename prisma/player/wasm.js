@@ -127,8 +127,14 @@ exports.Prisma.PlayerScalarFieldEnum = {
   power: 'power',
   defense: 'defense',
   stamina: 'stamina',
-  level: 'level',
-  grade: 'grade'
+  TierName: 'TierName'
+};
+
+exports.Prisma.TierScalarFieldEnum = {
+  tierId: 'tierId',
+  tierName: 'tierName',
+  bonus: 'bonus',
+  successRate: 'successRate'
 };
 
 exports.Prisma.SortOrder = {
@@ -136,14 +142,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 
 exports.Prisma.ModelName = {
-  Player: 'Player'
+  Player: 'Player',
+  Tier: 'Tier'
 };
 
 /**

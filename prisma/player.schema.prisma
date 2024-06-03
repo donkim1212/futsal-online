@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./player"
+  provider      = "prisma-client-js"
+  output        = "./player"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -10,15 +10,27 @@ datasource db {
 }
 
 model Player {
-  playerId Int @id @default(autoincrement()) @map("player_id")
-  playerName   String @unique @map("player_name")
-  speed Int @map("speed")
-  goalRate Int @map("goal_rate")
-  power Int @map("power")
-  defense   Int @map("defense")
-  stamina   Int @map("stamina")
-  level Int?    @map("level")
-  grade Int @map("grade")
+  playerId   Int    @id @default(autoincrement()) @map("player_id")
+  playerName String @unique @map("player_name")
+  speed      Int    @map("speed")
+  goalRate   Int    @map("goal_rate")
+  power      Int    @map("power")
+  defense    Int    @map("defense")
+  stamina    Int    @map("stamina")
+
+  Tier     Tier @relation(fields: [TierName], references: [tierName])
+  TierName Int  @map("tier_name")
 
   @@map("Player")
+}
+
+model Tier {
+  tierId      Int  @id @default(autoincrement()) @map("tier_id")
+  tierName    Int  @unique @map("tier_name")
+  bonus       Json @map("bonus")
+  successRate Json @map("success_rate")
+
+  Player Player[]
+
+  @@map("Tier")
 }
