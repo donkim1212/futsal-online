@@ -3,6 +3,7 @@ import dotenv from "dotenv/config";
 import dotenvExpand from "dotenv-expand";
 import logger from "./middlewares/logger.middleware.js";
 import errorHandler from "./middlewares/error-handler.middleware.js";
+import PlayersRouter from "./routes/players.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
-app.use("/api", []);
+app.use("/api", [PlayersRouter]);
 
 app.use(errorHandler);
 
