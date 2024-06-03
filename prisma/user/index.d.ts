@@ -1074,6 +1074,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type InventoryCountOutputType
+   */
+
+  export type InventoryCountOutputType = {
+    Team: number
+  }
+
+  export type InventoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Team?: boolean | InventoryCountOutputTypeCountTeamArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InventoryCountOutputType without action
+   */
+  export type InventoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryCountOutputType
+     */
+    select?: InventoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InventoryCountOutputType without action
+   */
+  export type InventoryCountOutputTypeCountTeamArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeamWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2104,31 +2135,31 @@ export namespace Prisma {
   export type TeamAvgAggregateOutputType = {
     teamId: number | null
     UserId: number | null
-    PlayerId: number | null
+    InventoryId: number | null
   }
 
   export type TeamSumAggregateOutputType = {
     teamId: number | null
     UserId: number | null
-    PlayerId: number | null
+    InventoryId: number | null
   }
 
   export type TeamMinAggregateOutputType = {
     teamId: number | null
     UserId: number | null
-    PlayerId: number | null
+    InventoryId: number | null
   }
 
   export type TeamMaxAggregateOutputType = {
     teamId: number | null
     UserId: number | null
-    PlayerId: number | null
+    InventoryId: number | null
   }
 
   export type TeamCountAggregateOutputType = {
     teamId: number
     UserId: number
-    PlayerId: number
+    InventoryId: number
     _all: number
   }
 
@@ -2136,31 +2167,31 @@ export namespace Prisma {
   export type TeamAvgAggregateInputType = {
     teamId?: true
     UserId?: true
-    PlayerId?: true
+    InventoryId?: true
   }
 
   export type TeamSumAggregateInputType = {
     teamId?: true
     UserId?: true
-    PlayerId?: true
+    InventoryId?: true
   }
 
   export type TeamMinAggregateInputType = {
     teamId?: true
     UserId?: true
-    PlayerId?: true
+    InventoryId?: true
   }
 
   export type TeamMaxAggregateInputType = {
     teamId?: true
     UserId?: true
-    PlayerId?: true
+    InventoryId?: true
   }
 
   export type TeamCountAggregateInputType = {
     teamId?: true
     UserId?: true
-    PlayerId?: true
+    InventoryId?: true
     _all?: true
   }
 
@@ -2253,7 +2284,7 @@ export namespace Prisma {
   export type TeamGroupByOutputType = {
     teamId: number
     UserId: number
-    PlayerId: number
+    InventoryId: number
     _count: TeamCountAggregateOutputType | null
     _avg: TeamAvgAggregateOutputType | null
     _sum: TeamSumAggregateOutputType | null
@@ -2278,19 +2309,21 @@ export namespace Prisma {
   export type TeamSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     teamId?: boolean
     UserId?: boolean
-    PlayerId?: boolean
+    InventoryId?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
+    Inventory?: boolean | InventoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["team"]>
 
   export type TeamSelectScalar = {
     teamId?: boolean
     UserId?: boolean
-    PlayerId?: boolean
+    InventoryId?: boolean
   }
 
 
   export type TeamInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
+    Inventory?: boolean | InventoryDefaultArgs<ExtArgs>
   }
 
 
@@ -2298,11 +2331,12 @@ export namespace Prisma {
     name: "Team"
     objects: {
       User: Prisma.$UserPayload<ExtArgs>
+      Inventory: Prisma.$InventoryPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       teamId: number
       UserId: number
-      PlayerId: number
+      InventoryId: number
     }, ExtArgs["result"]["team"]>
     composites: {}
   }
@@ -2670,6 +2704,8 @@ export namespace Prisma {
 
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    Inventory<T extends InventoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InventoryDefaultArgs<ExtArgs>>): Prisma__InventoryClient<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2700,7 +2736,7 @@ export namespace Prisma {
   interface TeamFieldRefs {
     readonly teamId: FieldRef<"Team", 'Int'>
     readonly UserId: FieldRef<"Team", 'Int'>
-    readonly PlayerId: FieldRef<"Team", 'Int'>
+    readonly InventoryId: FieldRef<"Team", 'Int'>
   }
     
 
@@ -3029,6 +3065,7 @@ export namespace Prisma {
   export type InventoryAvgAggregateOutputType = {
     inventoryId: number | null
     count: number | null
+    level: number | null
     UserId: number | null
     PlayerId: number | null
   }
@@ -3036,6 +3073,7 @@ export namespace Prisma {
   export type InventorySumAggregateOutputType = {
     inventoryId: number | null
     count: number | null
+    level: number | null
     UserId: number | null
     PlayerId: number | null
   }
@@ -3043,6 +3081,7 @@ export namespace Prisma {
   export type InventoryMinAggregateOutputType = {
     inventoryId: number | null
     count: number | null
+    level: number | null
     UserId: number | null
     PlayerId: number | null
   }
@@ -3050,6 +3089,7 @@ export namespace Prisma {
   export type InventoryMaxAggregateOutputType = {
     inventoryId: number | null
     count: number | null
+    level: number | null
     UserId: number | null
     PlayerId: number | null
   }
@@ -3057,6 +3097,7 @@ export namespace Prisma {
   export type InventoryCountAggregateOutputType = {
     inventoryId: number
     count: number
+    level: number
     UserId: number
     PlayerId: number
     _all: number
@@ -3066,6 +3107,7 @@ export namespace Prisma {
   export type InventoryAvgAggregateInputType = {
     inventoryId?: true
     count?: true
+    level?: true
     UserId?: true
     PlayerId?: true
   }
@@ -3073,6 +3115,7 @@ export namespace Prisma {
   export type InventorySumAggregateInputType = {
     inventoryId?: true
     count?: true
+    level?: true
     UserId?: true
     PlayerId?: true
   }
@@ -3080,6 +3123,7 @@ export namespace Prisma {
   export type InventoryMinAggregateInputType = {
     inventoryId?: true
     count?: true
+    level?: true
     UserId?: true
     PlayerId?: true
   }
@@ -3087,6 +3131,7 @@ export namespace Prisma {
   export type InventoryMaxAggregateInputType = {
     inventoryId?: true
     count?: true
+    level?: true
     UserId?: true
     PlayerId?: true
   }
@@ -3094,6 +3139,7 @@ export namespace Prisma {
   export type InventoryCountAggregateInputType = {
     inventoryId?: true
     count?: true
+    level?: true
     UserId?: true
     PlayerId?: true
     _all?: true
@@ -3188,6 +3234,7 @@ export namespace Prisma {
   export type InventoryGroupByOutputType = {
     inventoryId: number
     count: number
+    level: number
     UserId: number
     PlayerId: number
     _count: InventoryCountAggregateOutputType | null
@@ -3214,14 +3261,18 @@ export namespace Prisma {
   export type InventorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     inventoryId?: boolean
     count?: boolean
+    level?: boolean
     UserId?: boolean
     PlayerId?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
+    Team?: boolean | Inventory$TeamArgs<ExtArgs>
+    _count?: boolean | InventoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["inventory"]>
 
   export type InventorySelectScalar = {
     inventoryId?: boolean
     count?: boolean
+    level?: boolean
     UserId?: boolean
     PlayerId?: boolean
   }
@@ -3229,6 +3280,8 @@ export namespace Prisma {
 
   export type InventoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
+    Team?: boolean | Inventory$TeamArgs<ExtArgs>
+    _count?: boolean | InventoryCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
@@ -3236,10 +3289,12 @@ export namespace Prisma {
     name: "Inventory"
     objects: {
       User: Prisma.$UserPayload<ExtArgs>
+      Team: Prisma.$TeamPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       inventoryId: number
       count: number
+      level: number
       UserId: number
       PlayerId: number
     }, ExtArgs["result"]["inventory"]>
@@ -3609,6 +3664,8 @@ export namespace Prisma {
 
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    Team<T extends Inventory$TeamArgs<ExtArgs> = {}>(args?: Subset<T, Inventory$TeamArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3639,6 +3696,7 @@ export namespace Prisma {
   interface InventoryFieldRefs {
     readonly inventoryId: FieldRef<"Inventory", 'Int'>
     readonly count: FieldRef<"Inventory", 'Int'>
+    readonly level: FieldRef<"Inventory", 'Int'>
     readonly UserId: FieldRef<"Inventory", 'Int'>
     readonly PlayerId: FieldRef<"Inventory", 'Int'>
   }
@@ -3940,6 +3998,26 @@ export namespace Prisma {
   }
 
   /**
+   * Inventory.Team
+   */
+  export type Inventory$TeamArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Team
+     */
+    select?: TeamSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeamInclude<ExtArgs> | null
+    where?: TeamWhereInput
+    orderBy?: TeamOrderByWithRelationInput | TeamOrderByWithRelationInput[]
+    cursor?: TeamWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TeamScalarFieldEnum | TeamScalarFieldEnum[]
+  }
+
+  /**
    * Inventory without action
    */
   export type InventoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3984,7 +4062,7 @@ export namespace Prisma {
   export const TeamScalarFieldEnum: {
     teamId: 'teamId',
     UserId: 'UserId',
-    PlayerId: 'PlayerId'
+    InventoryId: 'InventoryId'
   };
 
   export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
@@ -3993,6 +4071,7 @@ export namespace Prisma {
   export const InventoryScalarFieldEnum: {
     inventoryId: 'inventoryId',
     count: 'count',
+    level: 'level',
     UserId: 'UserId',
     PlayerId: 'PlayerId'
   };
@@ -4120,15 +4199,17 @@ export namespace Prisma {
     NOT?: TeamWhereInput | TeamWhereInput[]
     teamId?: IntFilter<"Team"> | number
     UserId?: IntFilter<"Team"> | number
-    PlayerId?: IntFilter<"Team"> | number
+    InventoryId?: IntFilter<"Team"> | number
     User?: XOR<UserRelationFilter, UserWhereInput>
+    Inventory?: XOR<InventoryRelationFilter, InventoryWhereInput>
   }
 
   export type TeamOrderByWithRelationInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
     User?: UserOrderByWithRelationInput
+    Inventory?: InventoryOrderByWithRelationInput
   }
 
   export type TeamWhereUniqueInput = Prisma.AtLeast<{
@@ -4137,14 +4218,15 @@ export namespace Prisma {
     OR?: TeamWhereInput[]
     NOT?: TeamWhereInput | TeamWhereInput[]
     UserId?: IntFilter<"Team"> | number
-    PlayerId?: IntFilter<"Team"> | number
+    InventoryId?: IntFilter<"Team"> | number
     User?: XOR<UserRelationFilter, UserWhereInput>
+    Inventory?: XOR<InventoryRelationFilter, InventoryWhereInput>
   }, "teamId">
 
   export type TeamOrderByWithAggregationInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
     _count?: TeamCountOrderByAggregateInput
     _avg?: TeamAvgOrderByAggregateInput
     _max?: TeamMaxOrderByAggregateInput
@@ -4158,7 +4240,7 @@ export namespace Prisma {
     NOT?: TeamScalarWhereWithAggregatesInput | TeamScalarWhereWithAggregatesInput[]
     teamId?: IntWithAggregatesFilter<"Team"> | number
     UserId?: IntWithAggregatesFilter<"Team"> | number
-    PlayerId?: IntWithAggregatesFilter<"Team"> | number
+    InventoryId?: IntWithAggregatesFilter<"Team"> | number
   }
 
   export type InventoryWhereInput = {
@@ -4167,17 +4249,21 @@ export namespace Prisma {
     NOT?: InventoryWhereInput | InventoryWhereInput[]
     inventoryId?: IntFilter<"Inventory"> | number
     count?: IntFilter<"Inventory"> | number
+    level?: IntFilter<"Inventory"> | number
     UserId?: IntFilter<"Inventory"> | number
     PlayerId?: IntFilter<"Inventory"> | number
     User?: XOR<UserRelationFilter, UserWhereInput>
+    Team?: TeamListRelationFilter
   }
 
   export type InventoryOrderByWithRelationInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
     User?: UserOrderByWithRelationInput
+    Team?: TeamOrderByRelationAggregateInput
   }
 
   export type InventoryWhereUniqueInput = Prisma.AtLeast<{
@@ -4186,14 +4272,17 @@ export namespace Prisma {
     OR?: InventoryWhereInput[]
     NOT?: InventoryWhereInput | InventoryWhereInput[]
     count?: IntFilter<"Inventory"> | number
+    level?: IntFilter<"Inventory"> | number
     UserId?: IntFilter<"Inventory"> | number
     PlayerId?: IntFilter<"Inventory"> | number
     User?: XOR<UserRelationFilter, UserWhereInput>
+    Team?: TeamListRelationFilter
   }, "inventoryId">
 
   export type InventoryOrderByWithAggregationInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
     _count?: InventoryCountOrderByAggregateInput
@@ -4209,6 +4298,7 @@ export namespace Prisma {
     NOT?: InventoryScalarWhereWithAggregatesInput | InventoryScalarWhereWithAggregatesInput[]
     inventoryId?: IntWithAggregatesFilter<"Inventory"> | number
     count?: IntWithAggregatesFilter<"Inventory"> | number
+    level?: IntWithAggregatesFilter<"Inventory"> | number
     UserId?: IntWithAggregatesFilter<"Inventory"> | number
     PlayerId?: IntWithAggregatesFilter<"Inventory"> | number
   }
@@ -4289,84 +4379,95 @@ export namespace Prisma {
   }
 
   export type TeamCreateInput = {
-    PlayerId: number
     User: UserCreateNestedOneWithoutTeamInput
+    Inventory: InventoryCreateNestedOneWithoutTeamInput
   }
 
   export type TeamUncheckedCreateInput = {
     teamId?: number
     UserId: number
-    PlayerId: number
+    InventoryId: number
   }
 
   export type TeamUpdateInput = {
-    PlayerId?: IntFieldUpdateOperationsInput | number
     User?: UserUpdateOneRequiredWithoutTeamNestedInput
+    Inventory?: InventoryUpdateOneRequiredWithoutTeamNestedInput
   }
 
   export type TeamUncheckedUpdateInput = {
     teamId?: IntFieldUpdateOperationsInput | number
     UserId?: IntFieldUpdateOperationsInput | number
-    PlayerId?: IntFieldUpdateOperationsInput | number
+    InventoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type TeamCreateManyInput = {
     teamId?: number
     UserId: number
-    PlayerId: number
+    InventoryId: number
   }
 
   export type TeamUpdateManyMutationInput = {
-    PlayerId?: IntFieldUpdateOperationsInput | number
+
   }
 
   export type TeamUncheckedUpdateManyInput = {
     teamId?: IntFieldUpdateOperationsInput | number
     UserId?: IntFieldUpdateOperationsInput | number
-    PlayerId?: IntFieldUpdateOperationsInput | number
+    InventoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type InventoryCreateInput = {
     count: number
+    level: number
     PlayerId: number
     User: UserCreateNestedOneWithoutInventoryInput
+    Team?: TeamCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateInput = {
     inventoryId?: number
     count: number
+    level: number
     UserId: number
     PlayerId: number
+    Team?: TeamUncheckedCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUpdateInput = {
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
     User?: UserUpdateOneRequiredWithoutInventoryNestedInput
+    Team?: TeamUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateInput = {
     inventoryId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     UserId?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
+    Team?: TeamUncheckedUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryCreateManyInput = {
     inventoryId?: number
     count: number
+    level: number
     UserId: number
     PlayerId: number
   }
 
   export type InventoryUpdateManyMutationInput = {
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
   }
 
   export type InventoryUncheckedUpdateManyInput = {
     inventoryId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     UserId?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
   }
@@ -4519,39 +4620,45 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type InventoryRelationFilter = {
+    is?: InventoryWhereInput
+    isNot?: InventoryWhereInput
+  }
+
   export type TeamCountOrderByAggregateInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
   }
 
   export type TeamAvgOrderByAggregateInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
   }
 
   export type TeamMaxOrderByAggregateInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
   }
 
   export type TeamMinOrderByAggregateInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
   }
 
   export type TeamSumOrderByAggregateInput = {
     teamId?: SortOrder
     UserId?: SortOrder
-    PlayerId?: SortOrder
+    InventoryId?: SortOrder
   }
 
   export type InventoryCountOrderByAggregateInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
   }
@@ -4559,6 +4666,7 @@ export namespace Prisma {
   export type InventoryAvgOrderByAggregateInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
   }
@@ -4566,6 +4674,7 @@ export namespace Prisma {
   export type InventoryMaxOrderByAggregateInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
   }
@@ -4573,6 +4682,7 @@ export namespace Prisma {
   export type InventoryMinOrderByAggregateInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
   }
@@ -4580,6 +4690,7 @@ export namespace Prisma {
   export type InventorySumOrderByAggregateInput = {
     inventoryId?: SortOrder
     count?: SortOrder
+    level?: SortOrder
     UserId?: SortOrder
     PlayerId?: SortOrder
   }
@@ -4690,6 +4801,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type InventoryCreateNestedOneWithoutTeamInput = {
+    create?: XOR<InventoryCreateWithoutTeamInput, InventoryUncheckedCreateWithoutTeamInput>
+    connectOrCreate?: InventoryCreateOrConnectWithoutTeamInput
+    connect?: InventoryWhereUniqueInput
+  }
+
   export type UserUpdateOneRequiredWithoutTeamNestedInput = {
     create?: XOR<UserCreateWithoutTeamInput, UserUncheckedCreateWithoutTeamInput>
     connectOrCreate?: UserCreateOrConnectWithoutTeamInput
@@ -4698,10 +4815,32 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTeamInput, UserUpdateWithoutTeamInput>, UserUncheckedUpdateWithoutTeamInput>
   }
 
+  export type InventoryUpdateOneRequiredWithoutTeamNestedInput = {
+    create?: XOR<InventoryCreateWithoutTeamInput, InventoryUncheckedCreateWithoutTeamInput>
+    connectOrCreate?: InventoryCreateOrConnectWithoutTeamInput
+    upsert?: InventoryUpsertWithoutTeamInput
+    connect?: InventoryWhereUniqueInput
+    update?: XOR<XOR<InventoryUpdateToOneWithWhereWithoutTeamInput, InventoryUpdateWithoutTeamInput>, InventoryUncheckedUpdateWithoutTeamInput>
+  }
+
   export type UserCreateNestedOneWithoutInventoryInput = {
     create?: XOR<UserCreateWithoutInventoryInput, UserUncheckedCreateWithoutInventoryInput>
     connectOrCreate?: UserCreateOrConnectWithoutInventoryInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type TeamCreateNestedManyWithoutInventoryInput = {
+    create?: XOR<TeamCreateWithoutInventoryInput, TeamUncheckedCreateWithoutInventoryInput> | TeamCreateWithoutInventoryInput[] | TeamUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutInventoryInput | TeamCreateOrConnectWithoutInventoryInput[]
+    createMany?: TeamCreateManyInventoryInputEnvelope
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+  }
+
+  export type TeamUncheckedCreateNestedManyWithoutInventoryInput = {
+    create?: XOR<TeamCreateWithoutInventoryInput, TeamUncheckedCreateWithoutInventoryInput> | TeamCreateWithoutInventoryInput[] | TeamUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutInventoryInput | TeamCreateOrConnectWithoutInventoryInput[]
+    createMany?: TeamCreateManyInventoryInputEnvelope
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutInventoryNestedInput = {
@@ -4710,6 +4849,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutInventoryInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInventoryInput, UserUpdateWithoutInventoryInput>, UserUncheckedUpdateWithoutInventoryInput>
+  }
+
+  export type TeamUpdateManyWithoutInventoryNestedInput = {
+    create?: XOR<TeamCreateWithoutInventoryInput, TeamUncheckedCreateWithoutInventoryInput> | TeamCreateWithoutInventoryInput[] | TeamUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutInventoryInput | TeamCreateOrConnectWithoutInventoryInput[]
+    upsert?: TeamUpsertWithWhereUniqueWithoutInventoryInput | TeamUpsertWithWhereUniqueWithoutInventoryInput[]
+    createMany?: TeamCreateManyInventoryInputEnvelope
+    set?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    disconnect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    delete?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    update?: TeamUpdateWithWhereUniqueWithoutInventoryInput | TeamUpdateWithWhereUniqueWithoutInventoryInput[]
+    updateMany?: TeamUpdateManyWithWhereWithoutInventoryInput | TeamUpdateManyWithWhereWithoutInventoryInput[]
+    deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
+  }
+
+  export type TeamUncheckedUpdateManyWithoutInventoryNestedInput = {
+    create?: XOR<TeamCreateWithoutInventoryInput, TeamUncheckedCreateWithoutInventoryInput> | TeamCreateWithoutInventoryInput[] | TeamUncheckedCreateWithoutInventoryInput[]
+    connectOrCreate?: TeamCreateOrConnectWithoutInventoryInput | TeamCreateOrConnectWithoutInventoryInput[]
+    upsert?: TeamUpsertWithWhereUniqueWithoutInventoryInput | TeamUpsertWithWhereUniqueWithoutInventoryInput[]
+    createMany?: TeamCreateManyInventoryInputEnvelope
+    set?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    disconnect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    delete?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    connect?: TeamWhereUniqueInput | TeamWhereUniqueInput[]
+    update?: TeamUpdateWithWhereUniqueWithoutInventoryInput | TeamUpdateWithWhereUniqueWithoutInventoryInput[]
+    updateMany?: TeamUpdateManyWithWhereWithoutInventoryInput | TeamUpdateManyWithWhereWithoutInventoryInput[]
+    deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4807,12 +4974,12 @@ export namespace Prisma {
   }
 
   export type TeamCreateWithoutUserInput = {
-    PlayerId: number
+    Inventory: InventoryCreateNestedOneWithoutTeamInput
   }
 
   export type TeamUncheckedCreateWithoutUserInput = {
     teamId?: number
-    PlayerId: number
+    InventoryId: number
   }
 
   export type TeamCreateOrConnectWithoutUserInput = {
@@ -4827,13 +4994,17 @@ export namespace Prisma {
 
   export type InventoryCreateWithoutUserInput = {
     count: number
+    level: number
     PlayerId: number
+    Team?: TeamCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryUncheckedCreateWithoutUserInput = {
     inventoryId?: number
     count: number
+    level: number
     PlayerId: number
+    Team?: TeamUncheckedCreateNestedManyWithoutInventoryInput
   }
 
   export type InventoryCreateOrConnectWithoutUserInput = {
@@ -4868,7 +5039,7 @@ export namespace Prisma {
     NOT?: TeamScalarWhereInput | TeamScalarWhereInput[]
     teamId?: IntFilter<"Team"> | number
     UserId?: IntFilter<"Team"> | number
-    PlayerId?: IntFilter<"Team"> | number
+    InventoryId?: IntFilter<"Team"> | number
   }
 
   export type InventoryUpsertWithWhereUniqueWithoutUserInput = {
@@ -4893,6 +5064,7 @@ export namespace Prisma {
     NOT?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
     inventoryId?: IntFilter<"Inventory"> | number
     count?: IntFilter<"Inventory"> | number
+    level?: IntFilter<"Inventory"> | number
     UserId?: IntFilter<"Inventory"> | number
     PlayerId?: IntFilter<"Inventory"> | number
   }
@@ -4921,6 +5093,26 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutTeamInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutTeamInput, UserUncheckedCreateWithoutTeamInput>
+  }
+
+  export type InventoryCreateWithoutTeamInput = {
+    count: number
+    level: number
+    PlayerId: number
+    User: UserCreateNestedOneWithoutInventoryInput
+  }
+
+  export type InventoryUncheckedCreateWithoutTeamInput = {
+    inventoryId?: number
+    count: number
+    level: number
+    UserId: number
+    PlayerId: number
+  }
+
+  export type InventoryCreateOrConnectWithoutTeamInput = {
+    where: InventoryWhereUniqueInput
+    create: XOR<InventoryCreateWithoutTeamInput, InventoryUncheckedCreateWithoutTeamInput>
   }
 
   export type UserUpsertWithoutTeamInput = {
@@ -4955,6 +5147,32 @@ export namespace Prisma {
     Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type InventoryUpsertWithoutTeamInput = {
+    update: XOR<InventoryUpdateWithoutTeamInput, InventoryUncheckedUpdateWithoutTeamInput>
+    create: XOR<InventoryCreateWithoutTeamInput, InventoryUncheckedCreateWithoutTeamInput>
+    where?: InventoryWhereInput
+  }
+
+  export type InventoryUpdateToOneWithWhereWithoutTeamInput = {
+    where?: InventoryWhereInput
+    data: XOR<InventoryUpdateWithoutTeamInput, InventoryUncheckedUpdateWithoutTeamInput>
+  }
+
+  export type InventoryUpdateWithoutTeamInput = {
+    count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    PlayerId?: IntFieldUpdateOperationsInput | number
+    User?: UserUpdateOneRequiredWithoutInventoryNestedInput
+  }
+
+  export type InventoryUncheckedUpdateWithoutTeamInput = {
+    inventoryId?: IntFieldUpdateOperationsInput | number
+    count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    UserId?: IntFieldUpdateOperationsInput | number
+    PlayerId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type UserCreateWithoutInventoryInput = {
     username: string
     password: string
@@ -4979,6 +5197,25 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutInventoryInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutInventoryInput, UserUncheckedCreateWithoutInventoryInput>
+  }
+
+  export type TeamCreateWithoutInventoryInput = {
+    User: UserCreateNestedOneWithoutTeamInput
+  }
+
+  export type TeamUncheckedCreateWithoutInventoryInput = {
+    teamId?: number
+    UserId: number
+  }
+
+  export type TeamCreateOrConnectWithoutInventoryInput = {
+    where: TeamWhereUniqueInput
+    create: XOR<TeamCreateWithoutInventoryInput, TeamUncheckedCreateWithoutInventoryInput>
+  }
+
+  export type TeamCreateManyInventoryInputEnvelope = {
+    data: TeamCreateManyInventoryInput | TeamCreateManyInventoryInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutInventoryInput = {
@@ -5013,46 +5250,87 @@ export namespace Prisma {
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type TeamUpsertWithWhereUniqueWithoutInventoryInput = {
+    where: TeamWhereUniqueInput
+    update: XOR<TeamUpdateWithoutInventoryInput, TeamUncheckedUpdateWithoutInventoryInput>
+    create: XOR<TeamCreateWithoutInventoryInput, TeamUncheckedCreateWithoutInventoryInput>
+  }
+
+  export type TeamUpdateWithWhereUniqueWithoutInventoryInput = {
+    where: TeamWhereUniqueInput
+    data: XOR<TeamUpdateWithoutInventoryInput, TeamUncheckedUpdateWithoutInventoryInput>
+  }
+
+  export type TeamUpdateManyWithWhereWithoutInventoryInput = {
+    where: TeamScalarWhereInput
+    data: XOR<TeamUpdateManyMutationInput, TeamUncheckedUpdateManyWithoutInventoryInput>
+  }
+
   export type TeamCreateManyUserInput = {
     teamId?: number
-    PlayerId: number
+    InventoryId: number
   }
 
   export type InventoryCreateManyUserInput = {
     inventoryId?: number
     count: number
+    level: number
     PlayerId: number
   }
 
   export type TeamUpdateWithoutUserInput = {
-    PlayerId?: IntFieldUpdateOperationsInput | number
+    Inventory?: InventoryUpdateOneRequiredWithoutTeamNestedInput
   }
 
   export type TeamUncheckedUpdateWithoutUserInput = {
     teamId?: IntFieldUpdateOperationsInput | number
-    PlayerId?: IntFieldUpdateOperationsInput | number
+    InventoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type TeamUncheckedUpdateManyWithoutUserInput = {
     teamId?: IntFieldUpdateOperationsInput | number
-    PlayerId?: IntFieldUpdateOperationsInput | number
+    InventoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type InventoryUpdateWithoutUserInput = {
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
+    Team?: TeamUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateWithoutUserInput = {
     inventoryId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
+    Team?: TeamUncheckedUpdateManyWithoutInventoryNestedInput
   }
 
   export type InventoryUncheckedUpdateManyWithoutUserInput = {
     inventoryId?: IntFieldUpdateOperationsInput | number
     count?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TeamCreateManyInventoryInput = {
+    teamId?: number
+    UserId: number
+  }
+
+  export type TeamUpdateWithoutInventoryInput = {
+    User?: UserUpdateOneRequiredWithoutTeamNestedInput
+  }
+
+  export type TeamUncheckedUpdateWithoutInventoryInput = {
+    teamId?: IntFieldUpdateOperationsInput | number
+    UserId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TeamUncheckedUpdateManyWithoutInventoryInput = {
+    teamId?: IntFieldUpdateOperationsInput | number
+    UserId?: IntFieldUpdateOperationsInput | number
   }
 
 
@@ -5064,6 +5342,10 @@ export namespace Prisma {
      * @deprecated Use UserCountOutputTypeDefaultArgs instead
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use InventoryCountOutputTypeDefaultArgs instead
+     */
+    export type InventoryCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InventoryCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */

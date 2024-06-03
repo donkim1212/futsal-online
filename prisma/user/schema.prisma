@@ -26,11 +26,13 @@ model User {
 
 model Team {
   teamId Int @id @default(autoincrement()) @map("team_id")
+  // teamPower Int @default(0)
 
   User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
   UserId Int  @map("user_id")
 
-  PlayerId Int @map("player_id")
+  Inventory   Inventory @relation(fields: [InventoryId], references: [inventoryId], onDelete: Cascade)
+  InventoryId Int       @map("inventory_id")
 
   @@map("Team")
 }
@@ -38,11 +40,14 @@ model Team {
 model Inventory {
   inventoryId Int @id @default(autoincrement()) @map("inventory_id")
   count       Int @map("count")
+  level       Int @map("level")
 
   User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
   UserId Int  @map("user_id")
 
   PlayerId Int @map("player_id")
+
+  Team Team[]
 
   @@map("Inventory")
 }
