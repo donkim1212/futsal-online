@@ -41,11 +41,11 @@ const getSign = (number) => {
   else 0;
 };
 
-const play = async (me, opponent) => {
-  const me = await ec.userChecker(req.body.userId);
-  const opponent = await ec.userChecker(userId);
-  const myTeam = await ec.teamChecker(req.body.user.userId);
-  const opTeam = await ec.teamChecker(userId);
+const play = async (a, b) => {
+  const me = await ec.userChecker(a);
+  const opponent = await ec.userChecker(b);
+  const myTeam = await ec.teamChecker(a);
+  const opTeam = await ec.teamChecker(b);
   const myTeamPower = calcTeamPower(myTeam);
   const opTeamPower = calcTeamPower(opTeam);
 

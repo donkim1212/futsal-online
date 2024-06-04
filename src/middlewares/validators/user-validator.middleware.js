@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const userId = Joi.number().strict().integer().min(1);
-const username = Joi.string().alphanum.min(6).max(20);
+const username = Joi.string().alphanum().min(6).max(20);
 const password = Joi.string().min(6).max(20);
 const amount = Joi.number().strict().integer().min(1000).max(1000000);
 const isAll = Joi.boolean().strict();
@@ -12,7 +12,8 @@ const signInSchema = Joi.object({
 });
 
 const signUpSchema = Joi.object({
-  ...signInSchema,
+  username: username.required(),
+  password: password.required(),
   passwordConfirmation: Joi.string().valid(Joi.ref("password")).required(),
 });
 
@@ -25,7 +26,7 @@ const isAllSchema = Joi.object({
 }).unknown(true);
 
 const cashPurchaseSchema = Joi.object({
-  amount: amount.required,
+  amount: amount.required(),
 }).unknown(true);
 
 const userValidationErrorHandler = async (err, res, msg, code) => {
@@ -34,7 +35,7 @@ const userValidationErrorHandler = async (err, res, msg, code) => {
     .json({ message: msg ? msg : err.message });
 };
 
-export default userValidatorJoi = {
+const userValidatorJoi = {
   signInValidation: async function (req, res, next) {
     try {
       await signInSchema.validateAsync(req.body);
@@ -80,3 +81,5 @@ export default userValidatorJoi = {
     }
   },
 };
+
+export default userValidatorJoi;

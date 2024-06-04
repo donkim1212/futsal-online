@@ -37,7 +37,7 @@ const playerValidationErrorHandler = async (err, res, msg, code) => {
     .json({ message: msg ? msg : err.message });
 };
 
-export default playerValidatorJoi = {
+const playerValidatorJoi = {
   playerIdParamsValidation: async function (req, res, next) {
     try {
       await playerIdSchema.validateAsync(req.params);
@@ -87,3 +87,5 @@ export default playerValidatorJoi = {
     }
   },
 };
+
+export default playerValidatorJoi;
