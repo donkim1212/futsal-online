@@ -8,6 +8,7 @@ import teamsRouter from "./routes/teams.route.js";
 // import usersRouter from "./routes/users.route.js";
 import storesRouter from "./routes/stores.route.js";
 import gamesRouter from "./routes/games.route.js";
+import usersRouter from "./routes/users.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -17,7 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
-app.use("/api", [playersRouter, teamsRouter, gamesRouter, storesRouter]);
+app.use("/api", [
+  playersRouter,
+  teamsRouter,
+  gamesRouter,
+  storesRouter,
+  usersRouter,
+]);
 
 app.use(errorHandler);
 
