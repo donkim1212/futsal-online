@@ -1122,11 +1122,13 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     userId: number | null
+    money: number | null
     rating: number | null
   }
 
   export type UserSumAggregateOutputType = {
     userId: number | null
+    money: number | null
     rating: number | null
   }
 
@@ -1134,7 +1136,7 @@ export namespace Prisma {
     userId: number | null
     username: string | null
     password: string | null
-    money: string | null
+    money: number | null
     rating: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1144,7 +1146,7 @@ export namespace Prisma {
     userId: number | null
     username: string | null
     password: string | null
-    money: string | null
+    money: number | null
     rating: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1164,11 +1166,13 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     userId?: true
+    money?: true
     rating?: true
   }
 
   export type UserSumAggregateInputType = {
     userId?: true
+    money?: true
     rating?: true
   }
 
@@ -1293,10 +1297,10 @@ export namespace Prisma {
     userId: number
     username: string
     password: string
-    money: string
+    money: number
     rating: number
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1359,10 +1363,10 @@ export namespace Prisma {
       userId: number
       username: string
       password: string
-      money: string
+      money: number
       rating: number
       createdAt: Date
-      updatedAt: Date
+      updatedAt: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1763,7 +1767,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"User", 'Int'>
     readonly username: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly money: FieldRef<"User", 'String'>
+    readonly money: FieldRef<"User", 'Int'>
     readonly rating: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -4087,6 +4091,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references 
    */
@@ -4130,10 +4142,10 @@ export namespace Prisma {
     userId?: IntFilter<"User"> | number
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    money?: StringFilter<"User"> | string
+    money?: IntFilter<"User"> | number
     rating?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     Team?: TeamListRelationFilter
     Inventory?: InventoryListRelationFilter
   }
@@ -4145,7 +4157,7 @@ export namespace Prisma {
     money?: SortOrder
     rating?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     Team?: TeamOrderByRelationAggregateInput
     Inventory?: InventoryOrderByRelationAggregateInput
   }
@@ -4157,10 +4169,10 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
-    money?: StringFilter<"User"> | string
+    money?: IntFilter<"User"> | number
     rating?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     Team?: TeamListRelationFilter
     Inventory?: InventoryListRelationFilter
   }, "userId" | "username">
@@ -4172,7 +4184,7 @@ export namespace Prisma {
     money?: SortOrder
     rating?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4187,10 +4199,10 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"User"> | number
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
-    money?: StringWithAggregatesFilter<"User"> | string
+    money?: IntWithAggregatesFilter<"User"> | number
     rating?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type TeamWhereInput = {
@@ -4306,10 +4318,10 @@ export namespace Prisma {
   export type UserCreateInput = {
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
     Inventory?: InventoryCreateNestedManyWithoutUserInput
   }
@@ -4318,10 +4330,10 @@ export namespace Prisma {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
     Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
   }
@@ -4329,10 +4341,10 @@ export namespace Prisma {
   export type UserUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
     Inventory?: InventoryUpdateManyWithoutUserNestedInput
   }
@@ -4341,10 +4353,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
     Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -4353,29 +4365,29 @@ export namespace Prisma {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TeamCreateInput = {
@@ -4508,6 +4520,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type TeamListRelationFilter = {
     every?: TeamWhereInput
     some?: TeamWhereInput
@@ -4518,6 +4541,11 @@ export namespace Prisma {
     every?: InventoryWhereInput
     some?: InventoryWhereInput
     none?: InventoryWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type TeamOrderByRelationAggregateInput = {
@@ -4540,6 +4568,7 @@ export namespace Prisma {
 
   export type UserAvgOrderByAggregateInput = {
     userId?: SortOrder
+    money?: SortOrder
     rating?: SortOrder
   }
 
@@ -4565,6 +4594,7 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     userId?: SortOrder
+    money?: SortOrder
     rating?: SortOrder
   }
 
@@ -4613,6 +4643,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type UserRelationFilter = {
@@ -4737,6 +4781,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type TeamUpdateManyWithoutUserNestedInput = {
@@ -4915,6 +4963,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -4971,6 +5030,31 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type TeamCreateWithoutUserInput = {
@@ -5072,10 +5156,10 @@ export namespace Prisma {
   export type UserCreateWithoutTeamInput = {
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Inventory?: InventoryCreateNestedManyWithoutUserInput
   }
 
@@ -5083,10 +5167,10 @@ export namespace Prisma {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5129,10 +5213,10 @@ export namespace Prisma {
   export type UserUpdateWithoutTeamInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Inventory?: InventoryUpdateManyWithoutUserNestedInput
   }
 
@@ -5140,10 +5224,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -5176,10 +5260,10 @@ export namespace Prisma {
   export type UserCreateWithoutInventoryInput = {
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
   }
 
@@ -5187,10 +5271,10 @@ export namespace Prisma {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5232,10 +5316,10 @@ export namespace Prisma {
   export type UserUpdateWithoutInventoryInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
   }
 
@@ -5243,10 +5327,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
   }
 
