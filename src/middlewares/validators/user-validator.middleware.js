@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const userId = Joi.number().strict().integer().min(1);
-const username = Joi.string().alphanum().min(6).max(20);
+const username = Joi.string().alphanum().lowercase().min(6).max(20);
 const password = Joi.string().min(6).max(20);
 const amount = Joi.number().strict().integer().min(1000).max(1000000);
 const isAll = Joi.boolean().strict();
