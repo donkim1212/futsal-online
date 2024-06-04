@@ -3,8 +3,11 @@ import dotenv from "dotenv/config";
 import dotenvExpand from "dotenv-expand";
 import logger from "./middlewares/logger.middleware.js";
 import errorHandler from "./middlewares/error-handler.middleware.js";
-import PlayersRouter from "./routes/players.route.js";
+import playersRouter from "./routes/players.route.js";
 import teamsRouter from "./routes/teams.route.js";
+// import usersRouter from "./routes/users.route.js";
+import storesRouter from "./routes/stores.route.js";
+import gamesRouter from "./routes/games.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -14,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
-app.use("/api", [PlayersRouter],[teamsRouter]);
+app.use("/api", [playersRouter, teamsRouter, gamesRouter, storesRouter]);
 
 app.use(errorHandler);
 
