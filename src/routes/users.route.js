@@ -6,7 +6,6 @@ import authMiddleware from "../middlewares/auths/user.authenticator.js";
 import userValidator from "../middlewares/validators/user-validator.middleware.js";
 import errorChecker from "../lib/errors/error-checker.js";
 
-const userPrisma = new PrismaClient();
 const router = express.Router();
 // 회원가입 API
 router.post(
