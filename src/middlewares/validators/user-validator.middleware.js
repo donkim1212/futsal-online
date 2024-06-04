@@ -1,6 +1,8 @@
 import Joi from "joi";
 
+const regex = /[0-9]/;
 const userId = Joi.number().strict().integer().min(1);
+const userIdParams = Joi.regex();
 const username = Joi.string().alphanum().lowercase().min(6).max(20);
 const password = Joi.string().min(6).max(20);
 const amount = Joi.number().strict().integer().min(1000).max(1000000);
@@ -19,6 +21,10 @@ const signUpSchema = Joi.object({
 
 const userIdSchema = Joi.object({
   userId: userId.required(),
+}).unknown(true);
+
+const userIdParamsSchema = Joi.object({
+  userId: userIdParams.required(),
 }).unknown(true);
 
 const isAllSchema = Joi.object({
@@ -54,9 +60,17 @@ const userValidatorJoi = {
     }
   },
 
-  userIdValidation: async function (req, res, next) {
+  userIdBodyValidation: async function (req, res, next) {
     try {
-      await userIdSchema.validateAsync(req.params);
+      await userIdSchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return userValidationErrorHandler(err, res);
+    }
+  },
+  userIdParamsValidation: async function (req, res, next) {
+    try {
+      await userIdParamsSchema.validateAsync(req.params);
       next();
     } catch (err) {
       return userValidationErrorHandler(err, res);
