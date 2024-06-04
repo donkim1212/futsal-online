@@ -53,7 +53,7 @@ router.post(
 
       const token = jwt.sign(
         {
-          userId: user.id,
+          userId: user.userId,
         },
         process.env.SECRET,
       );
@@ -78,8 +78,8 @@ router.get(
         rating: true,
         money: true,
       });
-
-      if (req.body.user.userId != req.params.userId) delete user.money;
+      console.log(req.body.user, req.params.userId);
+      if (req.body.user?.userId != req.params.userId) delete user.money;
 
       // req.header("authorization", `Bearer ${token}`);
       return res.status(200).json(user);

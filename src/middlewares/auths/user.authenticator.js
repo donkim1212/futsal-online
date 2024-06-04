@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 
-const checkHeaders = async function (headers) {
+const checkHeaders = function (headers) {
   const authorization = headers.authorization?.split(" ");
   if (!authorization) throw new Error("로그인이 필요합니다.");
   if (authorization[0] !== "Bearer")
     throw new Error("토큰이 유효하지 않습니다.");
   if (!authorization[1]) throw new Error("토큰이 없습니다.");
-  jwt.verify(authorization[1], process.env.SECRET, (err, user) => {
+  return jwt.verify(authorization[1], process.env.SECRET, (err, user) => {
     if (err) throw new Error(err.message);
     return user;
   });
@@ -32,4 +32,4 @@ const UserAuthenticator = {
   },
 };
 
-export default UserAuthenticator
+export default UserAuthenticator;

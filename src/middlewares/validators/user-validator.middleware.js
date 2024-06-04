@@ -71,6 +71,7 @@ const userValidatorJoi = {
   userIdParamsValidation: async function (req, res, next) {
     try {
       await userIdParamsSchema.validateAsync(req.params);
+      req.params.userId = parseInt(req.params.userId);
       next();
     } catch (err) {
       return userValidationErrorHandler(err, res);
