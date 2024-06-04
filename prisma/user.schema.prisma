@@ -13,10 +13,10 @@ model User {
   userId    Int      @id @default(autoincrement()) @map("user_id")
   username  String   @unique @map("username")
   password  String   @map("password")
-  money     String   @map("name")
+  money     Int      @default(10000) @map("name")
   rating    Int      @default(1000) @map("rating")
-  createdAt DateTime @default(now()) @map("createdAt")
-  updatedAt DateTime @updatedAt @map("updatedAt")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
 
   Team      Team[]
   Inventory Inventory[]
