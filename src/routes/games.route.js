@@ -77,7 +77,7 @@ const matchMaking = () => {};
 router.post(
   "/games/versus/:userId",
   ua.authStrict,
-  uv.userIdValidation,
+  uv.userIdParamsValidation,
   async (req, res, next) => {
     try {
       const result = play(req.body.user.userId, req.params.userId);
