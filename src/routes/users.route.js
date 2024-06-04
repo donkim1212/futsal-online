@@ -70,6 +70,7 @@ router.post(
 router.get(
   "/users/:userId",
   authMiddleware.authOptional,
+  userValidator.userIdParamsValidation,
   async (req, res, next) => {
     try {
       const user = await errorChecker.userChecker(req.params.userId, {
