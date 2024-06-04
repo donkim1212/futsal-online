@@ -15,7 +15,7 @@ router.post(
     try {
       const { username, password } = req.body;
 
-      const hashedPassword = bcrypt.hashSync(password, process.env.SALT);
+      const hashedPassword = await bcrypt.hash(password, process.env.SALT);
       const user = await userPrisma.user.create({
         data: {
           username: username,
@@ -45,7 +45,7 @@ router.post(
         return res.status(401).json({ message: "존재하지 않는 아이디입니다." });
       }
 
-      if (await bcrypt.compare(password, user.password)) {
+      if (!bcrypt.compareSync(password, user.password)) {
         return res
           .status(401)
           .json({ message: "비밀번호가 일치하지 않습니다." });
