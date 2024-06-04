@@ -75,15 +75,17 @@ const play = async (a, b) => {
 const matchMaking = () => {};
 
 router.post(
-  "/games/play/:userId",
+  "/games/versus/:userId",
   ua.authStrict,
   uv.userIdValidation,
   async (req, res, next) => {
     try {
       const result = play(req.body.user.userId, req.params.userId);
-      if (result == 0) res.status(200).json({ message: "무승부입니다." });
-      else if (result > 0) res.status(200).json({ message: "승리했습니다!" });
-      else res.status(200).json({ message: "패배했습니다." });
+      if (result == 0)
+        return res.status(200).json({ message: "무승부입니다." });
+      else if (result > 0)
+        return res.status(200).json({ message: "승리했습니다!" });
+      else return res.status(200).json({ message: "패배했습니다." });
     } catch (err) {
       next(err);
     }
