@@ -39,13 +39,30 @@ router.post("/stores/gacha", ua.authStrict, async (req, res, next) => {
     user.money -= GACHA_STANDARD_PACK_PRICE;
 
     const player = await gacha();
-    await userPrisma.inventory.upsert({
+
+    const isPlayer = await userPrisma.inventory.findFirst({
       where: { PlayerId: player.playerId },
-      data: {
-        ...player,
-      },
     });
-    userPrisma.user.update({
+
+    if (!isPlayer) {
+      await userPrisma.inventory.create({
+        data: {
+          PlayerId: player.playerId,
+          count: 1,
+          level: 1,
+          UserId: req.body.user.userId,
+        },
+      });
+    } else {
+      await userPrisma.inventory.update({
+        where: { PlayerId: player.playerId, inventoryId: isPlayer.inventoryId },
+        data: {
+          count: isPlayer.count + 1,
+        },
+      });
+    }
+
+    await userPrisma.user.update({
       where: { userId: req.body.user.userId },
       data: {
         money: user.money,
