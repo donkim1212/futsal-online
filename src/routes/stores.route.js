@@ -113,4 +113,94 @@ router.patch(
   },
 );
 
+router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
+  try {
+    const { user, inventoryId } = req.body;
+    await ec.userChecker(user.userId);
+    const inventory = await ec.inventoryUserChecker(user.userId, inventoryId);
+    if (inventory.count <= 0)
+      return res
+        .status(409)
+        .json({ message: "선수를 보유하고 있지 않습니다." });
+
+    const tier = await playerPrisma.tier.findFirst({
+      where: { tierName: inventory.TierName },
+    });
+
+    const successRate = tier.successRate[`${inventory.level}`];
+    if (!successRate) {
+      return res.status(409).json({ message: "강화 레벨이 최대입니다." });
+    }
+    // Upgrade
+    const result = Math.random() * 100;
+    if (successRate - result >= 0) {
+      // for (let key in tier.bonus) {
+      //   if (parseInt(key) < inventory.level + 1) bonus += tier.bonus[key];
+      // }
+      const where = {
+        UserId: user.userId,
+        PlayerId: inventory.PlayerId,
+        level: inventory.level + 1,
+      };
+
+      let upgradedInventory = await userPrisma.inventory.findFirst({
+        where: { ...where },
+      });
+
+      if (!upgradedInventory) {
+        upgradedInventory = await userPrisma.inventory.create({
+          data: {
+            count: 1,
+            ...where,
+          },
+        });
+      } else {
+        upgradedInventory = await userPrisma.inventory.update({
+          where: { inventoryId: upgradedInventory.inventoryId },
+          data: {
+            count: {
+              increment: 1,
+            },
+          },
+        });
+      }
+
+      await userPrisma.inventory.update({
+        where: {
+          inventoryId: inventory.inventoryId,
+        },
+        data: {
+          count: {
+            increment: -1,
+          },
+        },
+      });
+
+      const bonus = tier.bonus[`${inventory.level}`];
+      const player = await playerPrisma.player.findUnique({
+        where: { playerId: inventory.PlayerId },
+      });
+
+      delete player.TierName;
+      player.speed += bonus;
+      player.goalRate += bonus;
+      player.power += bonus;
+      player.defense += bonus;
+      player.stamina += bonus;
+
+      return res.status(200).json({
+        message: "강화 성공!",
+        data: {
+          inventoryId: upgradedInventory.inventoryId,
+          ...player,
+          level: upgradedInventory.level,
+        },
+      });
+    }
+    return res.status(200).json({ message: "강화 실패!" });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
