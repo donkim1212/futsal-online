@@ -3,7 +3,7 @@ import { playerPrisma } from "../lib/utils/prisma/index.js";
 
 const router = express.Router();
 
-router.post("/tier", async (req, res, next) => {
+router.post("/tiers", async (req, res, next) => {
   //
   const { tierName, bonus, successRate } = req.body;
   await playerPrisma.tier.create({
@@ -17,7 +17,7 @@ router.post("/tier", async (req, res, next) => {
   return res.status(200).json({ message: "h" });
 });
 
-router.patch("/tier/:tierName", async (req, res, next) => {
+router.patch("/tiers/:tierName", async (req, res, next) => {
   const { bonus, successRate } = req.body;
   await playerPrisma.tier.update({
     where: { tierName: tierName },
