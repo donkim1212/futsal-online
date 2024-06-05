@@ -49,13 +49,16 @@ const errorChecker = {
    * @returns a row of an inventory
    * @throws PlayerNotFoundError if no such inventory data exists.
    */
-  inventoryChecker: async function (userId, playerId, select) {
+  inventoryChecker: async function (userId, playerId, level, select) {
     // TODO: change query method, maybe checker function parameters as well
     // -> inventoryId as parameter?
-    await userChecker(userId);
-    await playerChecker(playerId);
-    const query = queryBuilder({ userId: userId, playerId: playerId }, select);
-    const inventory = await userPrisma.inventory.findUnique(query);
+    await this.userChecker(userId);
+    await this.playerChecker(playerId);
+    const query = queryBuilder(
+      { UserId: userId, PlayerId: playerId, level: level },
+      select,
+    );
+    const inventory = await userPrisma.inventory.findFirst(query);
     if (!inventory)
       throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
     return inventory;
