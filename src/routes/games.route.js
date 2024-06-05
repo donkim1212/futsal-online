@@ -39,11 +39,11 @@ const getSign = (number) => {
   else 0;
 };
 
-const play = async (a, b) => {
-  const me = await ec.userChecker(a);
-  const opponent = await ec.userChecker(b);
-  const myTeam = await ec.teamChecker(a);
-  const opTeam = await ec.teamChecker(b);
+const play = async (myId, opId, opponent) => {
+  const me = await ec.userChecker(myId);
+  const opponent = opponent ? opponent : await ec.userChecker(opId);
+  const myTeam = await ec.teamChecker(myId);
+  const opTeam = await ec.teamChecker(opId);
   const myTeamPower = calcTeamPower(myTeam);
   const opTeamPower = calcTeamPower(opTeam);
 
@@ -104,8 +104,8 @@ router.post(
 //
 router.post("/games/matchmaking", ua.authStrict, async (req, res, next) => {
   try {
-    const opponentId = await matchMaking(req.body.user.userId);
-    const result = await play(req.body.user.userId, opponentId);
+    const opponent = await matchMaking(req.body.user.userId);
+    const result = await play(req.body.user.userId, null, opponent);
     return matchResultResponse(result, res);
   } catch (err) {
     next(err);
