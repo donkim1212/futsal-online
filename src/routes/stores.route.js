@@ -118,6 +118,10 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
     const { user, inventoryId } = req.body;
     await ec.userChecker(user.userId);
     const inventory = await ec.inventoryUserChecker(user.userId, inventoryId);
+    if (inventory.count <= 0)
+      return res
+        .status(409)
+        .json({ message: "선수를 보유하고 있지 않습니다." });
 
     const tier = await playerPrisma.tier.findFirst({
       where: { tierName: inventory.TierName },
@@ -129,24 +133,46 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
     }
     // Upgrade
     const result = Math.random() * 100;
-    if (successRate <= result) {
+    if (successRate - result >= 0) {
       // for (let key in tier.bonus) {
       //   if (parseInt(key) < inventory.level + 1) bonus += tier.bonus[key];
       // }
-      const upgradedInventory = await userPrisma.inventory.upsert({
+      const where = {
+        UserId: user.userId,
+        PlayerId: inventory.PlayerId,
+        level: inventory.level + 1,
+      };
+
+      let upgradedInventory = await userPrisma.inventory.findFirst({
+        where: { ...where },
+      });
+
+      if (!upgradedInventory) {
+        upgradedInventory = await userPrisma.inventory.create({
+          data: {
+            count: 1,
+            ...where,
+          },
+        });
+      } else {
+        upgradedInventory = await userPrisma.inventory.update({
+          where: { inventoryId: upgradedInventory.inventoryId },
+          data: {
+            count: {
+              increment: 1,
+            },
+          },
+        });
+      }
+
+      await userPrisma.inventory.update({
         where: {
-          UserId: user.userId,
-          PlayerId: inventory.PlayerId,
-          level: inventory.level + 1,
+          inventoryId: inventory.inventoryId,
         },
-        update: {
-          level: inventory.level + 1,
-        },
-        create: {
-          count: 1,
-          level: inventory.level + 1,
-          UserId: user.userId,
-          PlayerId: inventory.PlayerId,
+        data: {
+          count: {
+            increment: -1,
+          },
         },
       });
 
