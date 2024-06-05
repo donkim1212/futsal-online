@@ -41,7 +41,7 @@ const inventoryIdBodySchema = Joi.object({
 }).unknown(true);
 
 const inventoryIdParamsSchema = Joi.object({
-  invenoryId: userIdParams.required(),
+  inventoryId: userIdParams.required(),
 }).unknown(true);
 
 const userValidationErrorHandler = async (err, res, msg, code) => {
