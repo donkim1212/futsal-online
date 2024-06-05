@@ -81,10 +81,13 @@ const errorChecker = {
 
   teamChecker: async function (userId, select) {
     const query = queryBuilder({ UserId: userId }, select);
-    const team = await userPrisma.findMany(query);
+    query.include = {
+      Inventory: true,
+    };
+    const team = await userPrisma.team.findMany(query);
     if (team.length != 3) throw new TeamNotReadyError();
     return team;
   },
 };
 
-export default errorChecker
+export default errorChecker;
