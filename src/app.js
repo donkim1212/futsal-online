@@ -9,6 +9,7 @@ import teamsRouter from "./routes/teams.route.js";
 import storesRouter from "./routes/stores.route.js";
 import gamesRouter from "./routes/games.route.js";
 import usersRouter from "./routes/users.route.js";
+import rankRouter from "./routes/rankings.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -24,6 +25,7 @@ app.use("/api", [
   //gamesRouter,
   storesRouter,
   usersRouter,
+  rankRouter,
 ]);
 
 app.use(errorHandler);
