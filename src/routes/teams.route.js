@@ -33,9 +33,8 @@ router.post(
           .json({ message: "이미 팀에 추가된 플레이어입니다." });
       }
 
-    const transaction = await userPrisma.$transaction(async (prisma) => {
     // Add player to team
-    const addPlayer = await prisma.team.create({
+    const addPlayer = await userPrisma.team.create({
       data: {
         User: { connect: { userId: +userId } }, // Connect to an existing user
         Inventory: { connect: { inventoryId: +inventoryId } }, // Connect to an existing inventory
@@ -45,40 +44,13 @@ router.post(
       },
     });
 
-    const teamPlayerInventoryId = addPlayer.Inventory.inventoryId;
-
-    // Remove player from inventory or reduce the count
-    if (myInventory.count > 1) {
-      await prisma.inventory.update({
-        where: {
-          inventoryId: myInventory.inventoryId,
-        },
-        data: {
-          count: myInventory.count - 1,
-        },
-      });
-    } else {
-      await prisma.inventory.delete({
-        where: {
-          inventoryId: myInventory.inventoryId,
-        },
-      });
-    }
-
-    return addPlayer;
-  });
-
-      return res
-        .status(200)
-        .json({ message: `플레이어가 팀에 추가되었습니다.` });
-    } catch (error) {
-      next(error);
-    }
-  },
+    return res.status(200).json({ message: "플레이어가 팀에 추가되었습니다." });
+  } catch (error) {
+    next(error)  }
+}
 );
 
 /** Remove Team Players Api **/
-
 router.delete(
   "/teams",
   userAuthMiddleware.authStrict,
