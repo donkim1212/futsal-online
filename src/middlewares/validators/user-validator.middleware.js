@@ -7,6 +7,7 @@ const username = Joi.string().alphanum().lowercase().min(6).max(20);
 const password = Joi.string().min(6).max(20);
 const amount = Joi.number().strict().integer().min(1000).max(1000000);
 const isAll = Joi.boolean().strict();
+const inventoryId = Joi.number().integer().strict().min(1);
 
 const signInSchema = Joi.object({
   username: username.required(),
@@ -33,6 +34,14 @@ const isAllSchema = Joi.object({
 
 const cashPurchaseSchema = Joi.object({
   amount: amount.required(),
+}).unknown(true);
+
+const inventoryIdBodySchema = Joi.object({
+  inventoryId: inventoryId.required(),
+}).unknown(true);
+
+const inventoryIdParamsSchema = Joi.object({
+  invenoryId: userIdParams.required(),
 }).unknown(true);
 
 const userValidationErrorHandler = async (err, res, msg, code) => {
@@ -71,7 +80,9 @@ const userValidatorJoi = {
   userIdParamsValidation: async function (req, res, next) {
     try {
       await userIdParamsSchema.validateAsync(req.params);
-      req.params.userId = parseInt(req.params.userId);
+      const parsed = parseInt(req.params.userId);
+      if (parsed == 0) throw new Error("userId is invalid.");
+      req.params.userId = parsed;
       next();
     } catch (err) {
       return userValidationErrorHandler(err, res);
@@ -92,6 +103,27 @@ const userValidatorJoi = {
       next();
     } catch (err) {
       // TODO: set msg to fit the error case
+      return userValidationErrorHandler(err, res);
+    }
+  },
+
+  inventoryIdBodyValidation: async function (req, res, next) {
+    try {
+      await inventoryIdBodySchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return userValidationErrorHandler(err, res);
+    }
+  },
+
+  inventoryIdParamValidation: async function (req, res, next) {
+    try {
+      await inventoryIdParamsSchema.validateAsync(req.params);
+      const parsed = parseInt(req.params.inventoryId);
+      if (parsed == 0) throw new Error("inventoryId is invalid.");
+      req.params.inventoryId = parsed;
+      next();
+    } catch (err) {
       return userValidationErrorHandler(err, res);
     }
   },
