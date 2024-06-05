@@ -70,8 +70,9 @@ const play = async (a, b) => {
   return result;
 };
 
-const matchMaking = () => {};
-
+const matchMaking = async (myUserId) => {
+  const me = await ec.userChecker();
+};
 
 router.post(
   "/games/versus/:userId",
@@ -95,7 +96,7 @@ router.post(
 //
 router.post("/games/matchmaking", ua.authStrict, async (req, res, next) => {
   try {
-    //
+    const opponentId = await matchMaking();
   } catch (err) {
     next(err);
   }
