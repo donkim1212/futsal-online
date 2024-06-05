@@ -6,15 +6,15 @@ import { playerPrisma, userPrisma } from "../lib/utils/prisma/index.js";
 
 const router = express.Router();
 const GACHA_STANDARD_PACK_PRICE = 1000;
-const GACHA_STANDARD_PACK_RATES = [0.05, 0.1, 0.2, 0.3, 0.35]; //
+const GACHA_STANDARD_PACK_RATES = [5, 10, 20, 30, 35]; //
 // const GACHA_MAX = 5; // 0~4, 5 is converted to 4
 
 const gacha = async () => {
   // implement gacha logic, returns player
-  const gachaTier = Math.random();
+  const gachaTier = Math.floor(Math.random() * 99 + 1);
   let acc = 0;
   for (let i = 0; i < GACHA_STANDARD_PACK_RATES.length; i++) {
-    if ((acc += GACHA_STANDARD_PACK_RATES[i]) <= gachaTier) {
+    if ((acc += GACHA_STANDARD_PACK_RATES[i]) >= gachaTier) {
       acc = i;
       break;
     }
