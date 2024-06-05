@@ -17,13 +17,11 @@ const MODIFIERS = {
 
 const calcTeamPower = async (team) => {
   return team.reduce(async (acc, member) => {
-    const inventory = await userPrisma.inventory.findFirst({
-      where: { InventoryId: member.InventoryId },
-    });
-    const player = await ec.playerChecker(inventory.PlayerId);
+    const player = await ec.playerChecker(member.PlayerId);
     const tier = await playerPrisma.tier.findUnique({
-      where: { tierName: player.tierName },
+      where: { TierName: player.TierName },
     });
+    // member.level
 
     acc +=
       (player.speed + tier.bonus[`${inventory.level}`]) * MODIFIERS.speed +
@@ -80,8 +78,9 @@ router.post(
   uv.userIdParamsValidation,
   async (req, res, next) => {
     try {
-      const result = play(req.body.user.userId, req.params.userId);
-      if (result == 0)
+      const result = await play(req.body.user.userId, req.params.userId);
+
+      if (result === 0)
         return res.status(200).json({ message: "무승부입니다." });
       else if (result > 0)
         return res.status(200).json({ message: "승리했습니다!" });
