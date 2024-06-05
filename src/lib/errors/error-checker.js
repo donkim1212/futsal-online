@@ -64,6 +64,25 @@ const errorChecker = {
   /**
    *
    * @param {*} userId target user's userId
+   * @param {*} inventoryId target inventory's inventoryId
+   * @param {*} select object literal containing fields to select, e.g., { id: true, password: false }
+   * @returns a row of an inventory
+   * @throws PlayerNotFoundError if no such inventory data exists.
+   */
+  
+   inventoryUserChecker: async function (userId, inventoryId, select) {
+    // Call the userChecker function without using `this`
+    await errorChecker.userChecker(userId);
+    const query = queryBuilder({ UserId: userId, inventoryId: inventoryId }, select);
+    const inventory = await userPrisma.inventory.findUnique(query);
+    if (!inventory)
+        throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
+    return inventory;
+},
+
+  /**
+   *
+   * @param {*} userId target user's userId
    * @param {*} requiredMoney money required for the job
    * @param {*} select object literal containing fields to select, e.g., { id: true, password: false }
    * @returns the user w. money field selected
