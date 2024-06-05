@@ -70,8 +70,22 @@ const play = async (a, b) => {
   return result;
 };
 
-const matchMaking = () => {};
+const matchMaking = async (myUserId) => {
+  const me = await ec.userChecker(myUserId);
+  return await userPrisma.$queryRaw`
+    SELECT *
+    FROM User
+    ORDER BY ABS(rating - ${me.rating})
+    LIMIT 1
+  `;
+};
 
+const matchResultResponse = (result, res) => {
+  if (result === 0) return res.status(200).json({ message: "무승부입니다." });
+  else if (result > 0)
+    return res.status(200).json({ message: "승리했습니다!" });
+  else return res.status(200).json({ message: "패배했습니다." });
+};
 
 router.post(
   "/games/versus/:userId",
@@ -80,12 +94,7 @@ router.post(
   async (req, res, next) => {
     try {
       const result = await play(req.body.user.userId, req.params.userId);
-
-      if (result === 0)
-        return res.status(200).json({ message: "무승부입니다." });
-      else if (result > 0)
-        return res.status(200).json({ message: "승리했습니다!" });
-      else return res.status(200).json({ message: "패배했습니다." });
+      return matchResultResponse(result, res);
     } catch (err) {
       next(err);
     }
@@ -95,7 +104,9 @@ router.post(
 //
 router.post("/games/matchmaking", ua.authStrict, async (req, res, next) => {
   try {
-    //
+    const opponentId = await matchMaking(req.body.user.userId);
+    const result = await play(req.body.user.userId, opponentId);
+    return matchResultResponse(result, res);
   } catch (err) {
     next(err);
   }
