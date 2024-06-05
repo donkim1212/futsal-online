@@ -7,7 +7,7 @@ const username = Joi.string().alphanum().lowercase().min(6).max(20);
 const password = Joi.string().min(6).max(20);
 const amount = Joi.number().strict().integer().min(1000).max(1000000);
 const isAll = Joi.boolean().strict();
-const inventoryId = joi.number().integer().strict().min(1);
+const inventoryId = Joi.number().integer().strict().min(1);
 
 const signInSchema = Joi.object({
   username: username.required(),
