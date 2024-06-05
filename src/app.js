@@ -9,6 +9,7 @@ import teamsRouter from "./routes/teams.route.js";
 import storesRouter from "./routes/stores.route.js";
 import gamesRouter from "./routes/games.route.js";
 import usersRouter from "./routes/users.route.js";
+import rankRouter from "./routes/rankings.route.js";
 import inventoriesRouter from "./routes/inventories.route.js";
 
 const app = express();
@@ -26,6 +27,7 @@ app.use("/api", [
   inventoriesRouter,
   storesRouter,
   usersRouter,
+  rankRouter,
 ]);
 
 app.use(errorHandler);

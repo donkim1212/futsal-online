@@ -62,6 +62,7 @@ router.post(
             count: myInventory.count - 1,
           },
         });
+
       }
     });
 
@@ -101,7 +102,6 @@ router.delete(
           teamId: equippedPlayer.teamId,
         },
       });
-
       await userPrisma.inventory.update({
         where:{
           inventoryId:+inventoryId,
