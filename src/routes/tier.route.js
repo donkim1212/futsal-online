@@ -20,7 +20,7 @@ router.post("/tiers", async (req, res, next) => {
 router.patch("/tiers/:tierName", async (req, res, next) => {
   const { bonus, successRate } = req.body;
   await playerPrisma.tier.update({
-    where: { tierName: tierName },
+    where: { tierName: parseInt(req.params.tierName) },
     data: {
       bonus: bonus,
       successRate: successRate,
