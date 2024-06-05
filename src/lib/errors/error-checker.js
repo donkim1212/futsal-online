@@ -72,8 +72,9 @@ const errorChecker = {
   moneyChecker: async function (userId, requiredMoney, select) {
     if (!select) select = { money: true };
     else if (!select.money) select.money = true;
-    const query = queryBuilder({ userId: userId }, select);
-    const user = await userPrisma.user.findUnique(query);
+    // const query = queryBuilder({ userId: userId }, select);
+    // const user = await userPrisma.user.findUnique(query);
+    const user = await this.userChecker(userId, select);
     if (requiredMoney > user.money) throw new NotEnoughMoneyError();
     delete user.password;
     return user;
