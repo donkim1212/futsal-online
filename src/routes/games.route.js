@@ -40,8 +40,8 @@ const getSign = (number) => {
 };
 
 const play = async (myId, opId, opponent) => {
-  const me = await ec.userChecker(myId);
-  const opponent = opponent ? opponent : await ec.userChecker(opId);
+  await ec.userChecker(myId);
+  opponent ? opponent : await ec.userChecker(opId);
   const myTeam = await ec.teamChecker(myId);
   const opTeam = await ec.teamChecker(opId);
   const myTeamPower = calcTeamPower(myTeam);
