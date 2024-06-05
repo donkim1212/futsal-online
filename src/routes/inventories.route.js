@@ -17,7 +17,6 @@ router.get(
         select: {
           inventoryId: true,
           PlayerId: true,
-          PlayerName: true,
           level: true,
           count: true,
         },
@@ -28,16 +27,14 @@ router.get(
           },
         },
       });
-
+      if (!invendata) {
+        return res
+          .status(401)
+          .json({ errmessage: "인벤토리에 존재하지 않습니다" });
+      }
       return res.status(200).json(invendata);
     } catch (err) {
       next(err);
-    }
-
-    if (!invendata) {
-      return res
-        .status(401)
-        .json({ errmessage: "인벤토리에 존재하지 않습니다" });
     }
   },
 );
