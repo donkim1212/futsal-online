@@ -69,16 +69,19 @@ const errorChecker = {
    * @returns a row of an inventory
    * @throws PlayerNotFoundError if no such inventory data exists.
    */
-  
-   inventoryUserChecker: async function (userId, inventoryId, select) {
+
+  inventoryUserChecker: async function (userId, inventoryId, select) {
     // Call the userChecker function without using `this`
     await errorChecker.userChecker(userId);
-    const query = queryBuilder({ UserId: userId, inventoryId: inventoryId }, select);
+    const query = queryBuilder(
+      { UserId: userId, inventoryId: inventoryId },
+      select,
+    );
     const inventory = await userPrisma.inventory.findUnique(query);
     if (!inventory)
-        throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
+      throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
     return inventory;
-},
+  },
 
   /**
    *
@@ -89,8 +92,7 @@ const errorChecker = {
    * @throws NotEnoughMoneyError if user has not enough money
    */
   moneyChecker: async function (userId, requiredMoney, select) {
-    if (!select) select = { money: true };
-    else if (!select.money) select.money = true;
+    if (select && !select.money) select.money = true;
     // const query = queryBuilder({ userId: userId }, select);
     // const user = await userPrisma.user.findUnique(query);
     const user = await this.userChecker(userId, select);

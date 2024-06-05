@@ -16,51 +16,55 @@ const MODIFIERS = {
 };
 
 const calcTeamPower = async (team) => {
-  return team.reduce(async (acc, member) => {
-    const player = await ec.playerChecker(member.PlayerId);
+  let tp = 0;
+  for (let member in team) {
+    const player = await ec.playerChecker(team[member].Inventory.PlayerId);
     const tier = await playerPrisma.tier.findUnique({
-      where: { TierName: player.TierName },
+      where: { tierName: player.TierName },
     });
-    // member.level
-
-    acc +=
-      (player.speed + tier.bonus[`${inventory.level}`]) * MODIFIERS.speed +
-      (player.goalRate + tier.bonus[`${inventory.level}`]) *
+    tp +=
+      (player.speed + tier.bonus[`${team[member].Inventory.level}`]) *
+        MODIFIERS.speed +
+      (player.goalRate + tier.bonus[`${team[member].Inventory.level}`]) *
         MODIFIERS.goalRate +
-      (player.power + tier.bonus[`${inventory.level}`]) * MODIFIERS.power +
-      (player.defense + tier.bonus[`${inventory.level}`]) * MODIFIERS.defense +
-      (player.stamina + tier.bonus[`${inventory.level}`]) * MODIFIERS.stamina;
-  }, 0);
+      (player.power + tier.bonus[`${team[member].Inventory.level}`]) *
+        MODIFIERS.power +
+      (player.defense + tier.bonus[`${team[member].Inventory.level}`]) *
+        MODIFIERS.defense +
+      (player.stamina + tier.bonus[`${team[member].Inventory.level}`]) *
+        MODIFIERS.stamina;
+  }
+  return tp;
 };
 
 const getSign = (number) => {
   if (number > 0) return 1;
   else if (number < 0) return -1;
-  else 0;
+  else return 0;
 };
 
 const play = async (myId, opId, opponent) => {
-  await ec.userChecker(myId);
-  opponent ? opponent : await ec.userChecker(opId);
+  const me = await ec.userChecker(myId);
+  opponent ? opponent : (opponent = await ec.userChecker(opId));
   const myTeam = await ec.teamChecker(myId);
   const opTeam = await ec.teamChecker(opId);
-  const myTeamPower = calcTeamPower(myTeam);
-  const opTeamPower = calcTeamPower(opTeam);
-
-  const sum = myTeamPower + opTeamPower;
-  const result = getSign(myTeamPower - Math.random() * sum);
+  const myTeamPower = await calcTeamPower(myTeam);
+  const opTeamPower = await calcTeamPower(opTeam);
+  console.log(myTeamPower, opTeamPower);
+  const randomNumber = Math.random() * (myTeamPower + opTeamPower);
+  const result = getSign(myTeamPower - randomNumber);
 
   if (result == 0) return 0;
   await userPrisma.user.update({
-    where: { userId: me },
+    where: { userId: me.userId },
     data: {
       rating: {
         increment: POINTS * result,
       },
     },
   });
-  await userPrisma.update({
-    where: { userId: opponent },
+  await userPrisma.user.update({
+    where: { userId: opponent.userId },
     data: {
       rating: {
         increment: POINTS * -result,
