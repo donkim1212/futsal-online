@@ -21,7 +21,7 @@ app.use(logger);
 app.use("/api", [
   playersRouter,
   teamsRouter,
-  gamesRouter,
+  //gamesRouter,
   storesRouter,
   usersRouter,
 ]);
