@@ -5,7 +5,6 @@ import logger from "./middlewares/logger.middleware.js";
 import errorHandler from "./middlewares/error-handler.middleware.js";
 import playersRouter from "./routes/players.route.js";
 import teamsRouter from "./routes/teams.route.js";
-// import usersRouter from "./routes/users.route.js";
 import storesRouter from "./routes/stores.route.js";
 import gamesRouter from "./routes/games.route.js";
 import usersRouter from "./routes/users.route.js";
@@ -23,7 +22,7 @@ app.use(logger);
 app.use("/api", [
   playersRouter,
   teamsRouter,
-  //gamesRouter,
+  gamesRouter,
   inventoriesRouter,
   storesRouter,
   usersRouter,
