@@ -36,8 +36,12 @@ const cashPurchaseSchema = Joi.object({
   amount: amount.required(),
 }).unknown(true);
 
-const inventoryIdSchema = Joi.object({
+const inventoryIdBodySchema = Joi.object({
   inventoryId: inventoryId.required(),
+}).unknown(true);
+
+const inventoryIdParamsSchema = Joi.object({
+  invenoryId: userIdParams.required(),
 }).unknown(true);
 
 const userValidationErrorHandler = async (err, res, msg, code) => {
@@ -76,7 +80,9 @@ const userValidatorJoi = {
   userIdParamsValidation: async function (req, res, next) {
     try {
       await userIdParamsSchema.validateAsync(req.params);
-      req.params.userId = parseInt(req.params.userId);
+      const parsed = parseInt(req.params.userId);
+      if (parsed == 0) throw new Error("userId is invalid.");
+      req.params.userId = parsed;
       next();
     } catch (err) {
       return userValidationErrorHandler(err, res);
@@ -101,9 +107,21 @@ const userValidatorJoi = {
     }
   },
 
-  inventoryIdValidation: async function (req, res, next) {
+  inventoryIdBodyValidation: async function (req, res, next) {
     try {
-      await inventoryIdSchema.validateAsync(req, body);
+      await inventoryIdBodySchema.validateAsync(req.body);
+      next();
+    } catch (err) {
+      return userValidationErrorHandler(err, res);
+    }
+  },
+
+  inventoryIdParamValidation: async function (req, res, next) {
+    try {
+      await inventoryIdParamsSchema.validateAsync(req.params);
+      const parsed = parseInt(req.params.inventoryId);
+      if (parsed == 0) throw new Error("inventoryId is invalid.");
+      req.params.inventoryId = parsed;
       next();
     } catch (err) {
       return userValidationErrorHandler(err, res);

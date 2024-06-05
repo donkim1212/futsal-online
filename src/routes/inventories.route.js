@@ -46,7 +46,7 @@ router.get(
 router.get(
   "/inventories/:inventoryId",
   userAuthMiddleware.authStrict,
-  userValidation,
+  userValidation.inventoryIdParamValidation,
   async (req, res, next) => {
     const { inventoryId } = req.params;
     try {
