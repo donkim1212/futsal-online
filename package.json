@@ -5,6 +5,9 @@
   "repository": "https://github.com/donkim1212/futsal-online",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "dev": "pm2 start app.js --watch"
+  },
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "bcrypt": "^5.1.1",
