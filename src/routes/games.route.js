@@ -47,7 +47,7 @@ const play = async (myId, opId, opponent) => {
   const me = await ec.userChecker(myId);
   opponent ? opponent : (opponent = await ec.userChecker(opId));
   const myTeam = await ec.teamChecker(myId);
-  const opTeam = await ec.teamChecker(opId);
+  const opTeam = await ec.teamChecker(opId || opponent.userId);
   const myTeamPower = await calcTeamPower(myTeam);
   const opTeamPower = await calcTeamPower(opTeam);
   console.log(myTeamPower, opTeamPower);
