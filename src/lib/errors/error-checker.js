@@ -105,6 +105,7 @@ const errorChecker = {
   },
 
   teamChecker: async function (userId, select) {
+    await this.userChecker(userId);
     const query = queryBuilder({ UserId: userId }, select);
     query.include = {
       Inventory: true,
