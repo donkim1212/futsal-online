@@ -56,6 +56,7 @@ router.post(
           userId: user.userId,
         },
         process.env.SECRET,
+        { expiresIn: "1h" },
       );
 
       res.header("authorization", `Bearer ${token}`);

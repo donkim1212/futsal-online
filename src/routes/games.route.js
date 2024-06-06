@@ -87,33 +87,24 @@ const getSign = (number) => {
 };
 
 const play = async (myId, opId) => {
-  const me = await ec.userChecker(myId);
-  const opponent = await ec.userChecker(opId);
   const myTeam = await ec.teamChecker(myId);
   const opTeam = await ec.teamChecker(opId);
   const myTeamPower = await calcTeamPowerEx(myTeam);
   const opTeamPower = await calcTeamPowerEx(opTeam);
-  const randomNumber = Math.random() * (myTeamPower + opTeamPower);
-  const result = getSign(myTeamPower - randomNumber);
+  const totalGoals = Math.round(
+    (Math.random() * Math.abs(myTeamPower - opTeamPower)) / 10 +
+      Math.floor(Math.random() * 3),
+  );
 
-  if (result == 0) return 0;
-  await userPrisma.user.update({
-    where: { userId: me.userId },
-    data: {
-      rating: {
-        increment: POINTS * result,
-      },
-    },
-  });
-  await userPrisma.user.update({
-    where: { userId: opponent.userId },
-    data: {
-      rating: {
-        increment: POINTS * -result,
-      },
-    },
-  });
-  return result;
+  const score = [0, 0];
+  for (let i = 0; i < totalGoals; i++) {
+    const randomNumber = Math.random() * (myTeamPower + opTeamPower);
+    const sign = getSign(myTeamPower - randomNumber);
+    if (sign > 0) score[0]++;
+    else if (sign < 0) score[1]++;
+  }
+
+  return score;
 };
 
 const matchMaking = async (myUserId) => {
@@ -131,19 +122,57 @@ const matchMaking = async (myUserId) => {
   return opponent[index];
 };
 
-const matchResultResponse = (result, res, myId, opponentId) => {
-  if (result === 0)
-    return res
-      .status(200)
-      .json({ message: `userId ${opponentId} 과(와)의 승부에서 비겼습니다.` });
-  else if (result > 0)
-    return res.status(200).json({
-      message: `userId ${opponentId} 과(와)의 승부에서 승리했습니다!`,
+const matchResultResponse = async (score, res, myId, opId) => {
+  const result = getSign(score[0] - score[1]);
+  await userPrisma.$transaction(async (tx) => {
+    await tx.matchHistory.create({
+      data: {
+        myUserId: myId,
+        opUserId: opId,
+        score1: score[0],
+        score2: score[1],
+      },
     });
-  else
-    return res.status(200).json({
-      message: `userId ${opponentId} 과(와)의 승부에서 패배했습니다.`,
+    const myData = {
+      rating: { increment: POINTS * result },
+    };
+    const opData = {
+      rating: { increment: POINTS * -result },
+    };
+
+    if (result > 0) {
+      myData.wins = { increment: 1 };
+      opData.loses = { increment: 1 };
+    } else if (result < 0) {
+      myData.loses = { increment: 1 };
+      opData.wins = { increment: 1 };
+    } else {
+      myData.draws = { increment: 1 };
+      opData.draws = { increment: 1 };
+    }
+
+    await tx.user.update({
+      where: { userId: myId },
+      data: { ...myData },
     });
+    await tx.user.update({
+      where: { userId: opId },
+      data: { ...opData },
+    });
+  });
+
+  const data = {};
+  if (result === 0) {
+    data.message = `userId ${opId} 과(와)의 승부에서 비겼습니다.`;
+  } else if (result > 0)
+    data.message = `userId ${opId} 과(와)의 승부에서 승리했습니다!`;
+  else {
+    data.message = `userId ${opId} 과(와)의 승부에서 패배했습니다.`;
+  }
+  data.data = {
+    score: `${score[0]} : ${score[1]}`,
+  };
+  return res.status(200).json(data);
 };
 
 router.post(
@@ -152,9 +181,9 @@ router.post(
   uv.userIdParamsValidation,
   async (req, res, next) => {
     try {
-      const result = await play(req.body.user.userId, req.params.userId);
-      return matchResultResponse(
-        result,
+      const score = await play(req.body.user.userId, req.params.userId);
+      return await matchResultResponse(
+        score,
         res,
         req.body.user.userId,
         req.params.userId,
@@ -169,9 +198,9 @@ router.post(
 router.post("/games/matchmaking", ua.authStrict, async (req, res, next) => {
   try {
     const opponent = await matchMaking(req.body.user.userId);
-    const result = await play(req.body.user.userId, opponent.user_id);
-    return matchResultResponse(
-      result,
+    const score = await play(req.body.user.userId, opponent.user_id);
+    return await matchResultResponse(
+      score,
       res,
       req.body.user.userId,
       opponent.user_id,
