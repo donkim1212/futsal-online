@@ -143,6 +143,11 @@ exports.Prisma.InventoryScalarFieldEnum = {
   PlayerId: 'PlayerId'
 };
 
+exports.Prisma.MatchQueueScalarFieldEnum = {
+  matchId: 'matchId',
+  UserId: 'UserId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -157,7 +162,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Team: 'Team',
-  Inventory: 'Inventory'
+  Inventory: 'Inventory',
+  MatchQueue: 'MatchQueue'
 };
 
 /**

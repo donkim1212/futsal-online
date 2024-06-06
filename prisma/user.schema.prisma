@@ -20,6 +20,7 @@ model User {
 
   Team      Team[]
   Inventory Inventory[]
+  MatchQueue MatchQueue[]
 
   @@map("User")
 }
@@ -50,4 +51,11 @@ model Inventory {
   Team Team[]
 
   @@map("Inventory")
+}
+
+model MatchQueue {
+  matchId Int @id @default(autoincrement()) @map("match_id")
+
+  User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  UserId Int  @map("user_id")
 }
