@@ -5,10 +5,20 @@ const router = express.Router();
 
 router.get("/rankings", async (req, res, next) => {
   try {
+    const { pageNumber, loadCount } = req.body;
+    const start = (pageNumber - 1) * loadCount;
     const rank = await userPrisma.$queryRaw`
-    SELECT CONVERT(RANK()OVER(ORDER BY rating DESC), CHAR) 
-    "랭킹", user_id, username, rating
-    FROM User;`;
+      SELECT *
+      FROM (
+        SELECT CONVERT(RANK()OVER(ORDER BY rating DESC), CHAR) as ranking,
+          user_id as userId,
+          username,
+          rating
+        FROM User
+      ) a
+      WHERE ranking > ${start}
+      LIMIT ${loadCount}
+    `;
 
     return res.status(200).json({ data: rank });
   } catch (error) {
