@@ -57,5 +57,5 @@ model MatchQueue {
   matchId Int @id @default(autoincrement()) @map("match_id")
 
   User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
-  UserId Int  @map("user_id")
+  UserId Int  @unique @map("user_id")
 }

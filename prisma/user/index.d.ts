@@ -5369,12 +5369,12 @@ export namespace Prisma {
 
   export type MatchQueueWhereUniqueInput = Prisma.AtLeast<{
     matchId?: number
+    UserId?: number
     AND?: MatchQueueWhereInput | MatchQueueWhereInput[]
     OR?: MatchQueueWhereInput[]
     NOT?: MatchQueueWhereInput | MatchQueueWhereInput[]
-    UserId?: IntFilter<"MatchQueue"> | number
     User?: XOR<UserRelationFilter, UserWhereInput>
-  }, "matchId">
+  }, "matchId" | "UserId">
 
   export type MatchQueueOrderByWithAggregationInput = {
     matchId?: SortOrder
