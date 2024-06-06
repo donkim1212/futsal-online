@@ -13,26 +13,35 @@ router.get(
   async (req, res, next) => {
     try {
       await errorChecker.userChecker(req.body.user.userId);
-      const invendata = await userPrisma.inventory.findMany({
-        select: {
-          inventoryId: true,
-          PlayerId: true,
-          level: true,
-          count: true,
-        },
-        where: {
-          UserId: req.body.user.userId,
-          count: {
-            not: 0,
-          },
-        },
-      });
-      if (!invendata) {
-        return res
-          .status(401)
-          .json({ errmessage: "인벤토리에 존재하지 않습니다" });
-      }
-      return res.status(200).json(invendata);
+      const inventories = await userPrisma.$queryRaw`
+        SELECT inv.*, pl.player_name
+        FROM game_db.Inventory inv
+        JOIN player_db.Player pl
+        ON inv.player_id=pl.player_id
+        WHERE inv.user_id=${req.body.user.userId}
+      `;
+
+      return res.status(200).json(inventories);
+      // const invendata = await userPrisma.inventory.findMany({
+      //   select: {
+      //     inventoryId: true,
+      //     PlayerId: true,
+      //     level: true,
+      //     count: true,
+      //   },
+      //   where: {
+      //     UserId: req.body.user.userId,
+      //     count: {
+      //       not: 0,
+      //     },
+      //   },
+      // });
+      // if (!invendata) {
+      //   return res
+      //     .status(401)
+      //     .json({ errmessage: "인벤토리에 존재하지 않습니다" });
+      // }
+      // return res.status(200).json(invendata);
     } catch (err) {
       next(err);
     }
@@ -45,23 +54,41 @@ router.get(
   userAuthMiddleware.authStrict,
   userValidation.inventoryIdParamValidation,
   async (req, res, next) => {
-    const { inventoryId } = req.params;
     try {
-      const inventory = await userPrisma.inventory.findFirst({
-        where: {
-          inventoryId: inventoryId,
-        },
-      });
-      // const { PlayerId } = inventory
-      const player = await playerPrisma.player.findUnique({
-        where: {
-          playerId: inventory.PlayerId,
-        },
-      });
+      const { inventoryId } = req.params;
+      const inventory = await userPrisma.$queryRaw`
+        SELECT inv.*, pl.*
+        FROM game_db.Inventory inv
+        JOIN player_db.Player pl
+        ON inv.player_id=pl.player_id
+        WHERE inv.inventory_id=${inventoryId}
+      `;
 
-      return res
-        .status(200)
-        .json({ inventoryId: inventory.inventoryId, ...player });
+      if (inventory[0].level > 1) {
+        //
+      }
+
+      if (!inventory[0])
+        return res
+          .status(404)
+          .json({ message: "선수를 보유 중이지 않습니다." });
+
+      return res.status(200).json(inventory[0]);
+      // const inventory = await userPrisma.inventory.findFirst({
+      //   where: {
+      //     inventoryId: inventoryId,
+      //   },
+      // });
+      // // const { PlayerId } = inventory
+      // const player = await playerPrisma.player.findUnique({
+      //   where: {
+      //     playerId: inventory.PlayerId,
+      //   },
+      // });
+
+      // return res
+      //   .status(200)
+      //   .json({ inventoryId: inventory.inventoryId, ...player });
     } catch (err) {
       next(err);
     }
