@@ -203,6 +203,15 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
       });
     }
 
+    await prisma.user.update({
+      where: { userId: user.userId },
+      data: {
+        money: {
+          increment: -UPGRADE_COST,
+        },
+      },
+    });
+
     return res.status(200).json({ message: "강화 실패!" });
   } catch (err) {
     next(err);
