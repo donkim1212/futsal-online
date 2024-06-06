@@ -44,6 +44,11 @@ const inventoryIdParamsSchema = Joi.object({
   inventoryId: userIdParams.required(),
 }).unknown(true);
 
+const pagenationSchema = Joi.object({
+  pageNumber: userId.required(),
+  loadCount: userId.required(),
+});
+
 const userValidationErrorHandler = async (err, res, msg, code) => {
   return res
     .status(code ? code : 400)
@@ -89,6 +94,19 @@ const userValidatorJoi = {
     }
   },
 
+  userIdQueryValidationOptional: async function (req, res, next) {
+    try {
+      await userIdParamsSchema.validateAsync(req.query);
+      const parsed = parseInt(req.query.userId);
+      if (parsed == 0) throw new Error("userId is invalid.");
+      req.query.userId = parsed;
+      next();
+    } catch (err) {
+      req.query.userId = null;
+      next();
+    }
+  },
+
   isAllValidation: async function (req, res, next) {
     try {
       await isAllSchema.validateAsync(req.body);
@@ -122,6 +140,15 @@ const userValidatorJoi = {
       const parsed = parseInt(req.params.inventoryId);
       if (parsed == 0) throw new Error("inventoryId is invalid.");
       req.params.inventoryId = parsed;
+      next();
+    } catch (err) {
+      return userValidationErrorHandler(err, res);
+    }
+  },
+
+  pagenationValidation: async function (req, res, next) {
+    try {
+      await pagenationSchema.validateAsync(req.body);
       next();
     } catch (err) {
       return userValidationErrorHandler(err, res);
