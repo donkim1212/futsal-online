@@ -11,7 +11,8 @@ const userRanking = async (userId) => {
       SELECT CONVERT(RANK()OVER(ORDER BY rating DESC), CHAR) as ranking,
         user_id as userId,
         username,
-        rating
+        rating,
+        CONCAT(wins,'/',draws,'/',loses) as 'W/D/L'
       FROM User
     ) a
     WHERE userId=${userId}
@@ -26,7 +27,8 @@ const allRankings = async (pageNumber, loadCount) => {
       SELECT CONVERT(RANK()OVER(ORDER BY rating DESC), CHAR) as ranking,
         user_id as userId,
         username,
-        rating
+        rating,
+        CONCAT(wins,'/',draws,'/',loses) as 'W/D/L'
       FROM User
     ) a
     WHERE ranking > ${start}
