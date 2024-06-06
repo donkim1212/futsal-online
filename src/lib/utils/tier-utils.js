@@ -55,15 +55,15 @@ const tierUtils = {
    * Get upgrade success rate for given 'tier' and 'level' from Tier table
    * @param {Number} tier tier of a player
    * @param {Number} level level of an inventory's player
-   * @returns Upgrade success rate at current 'level' of the 'tier'
+   * @returns Upgrade success rate at current 'level' of the 'tier', 0 if MAX level, or NULL if any one (or all) of args is invalid.
    */
   getTierUpgradeSuccessRate: async function (tier, level) {
-    if (!tier && tier !== 0) return;
-    else if (!level && level !== 0) return;
-    if (typeof tier !== "number" || typeof level !== "number") return;
+    if (!tier && tier !== 0) return null;
+    else if (!level && level !== 0) return null;
+    if (typeof tier !== "number" || typeof level !== "number") return null;
     if (!tiers) await init();
-    if (tier >= tiers.length) return;
-    if (level >= Object.keys(tiers[tier].successRate).length) return;
+    if (tier >= tiers.length) return null;
+    if (level > Object.keys(tiers[tier].successRate).length) return 0;
     return tiers[tier].successRate[level];
   },
 
@@ -71,15 +71,15 @@ const tierUtils = {
    * Get tier bonus for given 'tier' and 'level' from Tier table
    * @param {Number} tier tier of a player
    * @param {Number} level level of an inventory's player
-   * @returns stat bonus at current 'level' of the 'tier'
+   * @returns Stat bonus at current 'level' of the 'tier', or NULL if any one (or all) of args is invalid.
    */
   getTierStatBonus: async function (tier, level) {
-    if (!tier && tier !== 0) return;
-    else if (!level && level !== 0) return;
-    if (typeof tier !== "number" || typeof level !== "number") return;
+    if (!tier && tier !== 0) return null;
+    else if (!level && level !== 0) return null;
+    if (typeof tier !== "number" || typeof level !== "number") return null;
     if (!tiers) await init();
-    if (tier >= tiers.length) return;
-    if (level >= Object.keys(tiers[tier].bonus).length) return;
+    if (tier >= tiers.length) return null;
+    if (level > Object.keys(tiers[tier].bonus).length) return null;
     return tiers[tier].bonus[level];
   },
 };
