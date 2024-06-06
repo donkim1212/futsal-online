@@ -203,7 +203,7 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
       });
     }
 
-    await prisma.user.update({
+    await userPrisma.user.update({
       where: { userId: user.userId },
       data: {
         money: {
