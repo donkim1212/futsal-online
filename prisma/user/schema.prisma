@@ -24,6 +24,8 @@ model User {
   Team       Team[]
   Inventory  Inventory[]
   MatchQueue MatchQueue[]
+  User1      MatchHistory[] @relation("User1")
+  User2      MatchHistory[] @relation("User2")
 
   @@map("User")
 }
@@ -57,8 +59,19 @@ model Inventory {
 }
 
 model MatchQueue {
-  matchId Int @id @default(autoincrement()) @map("match_id")
+  matchQueueId Int @id @default(autoincrement()) @map("match_queue_id")
 
   User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
   UserId Int  @unique @map("user_id")
+}
+
+model MatchHistory {
+  matchHistroyId Int      @id @default(autoincrement()) @map("match_history_id")
+  User1          User     @relation("User1", fields: [myUserId], references: [userId])
+  myUserId       Int      @map("myId")
+  User2          User     @relation("User2", fields: [opUserId], references: [userId])
+  opUserId       Int      @map("opId")
+  score1         Int      @map("score1")
+  score2         Int      @map("score2")
+  createdAt      DateTime @default(now()) @map("created_at")
 }
