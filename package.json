@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "pm2 start app.js --watch"
+    "dev": "pm2 start src/app.js --watch"
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
