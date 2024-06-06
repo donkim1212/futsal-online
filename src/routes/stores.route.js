@@ -183,7 +183,7 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
           upgradedInventory,
         );
 
-        await prisma.user.update({
+        const updatedUser = await prisma.user.update({
           where: { userId: user.userId },
           data: {
             money: {
@@ -198,12 +198,13 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
       return res.status(200).json({
         message: "강화 성공!",
         data: {
-          ...upgradedInventory,
+          money: updatedUser.money,
+          inventory: { ...upgradedInventory },
         },
       });
     }
 
-    await userPrisma.user.update({
+    const updatedUser = await userPrisma.user.update({
       where: { userId: user.userId },
       data: {
         money: {
@@ -212,7 +213,9 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
       },
     });
 
-    return res.status(200).json({ message: "강화 실패!" });
+    return res
+      .status(200)
+      .json({ message: "강화 실패!", data: { money: updatedUser.money } });
   } catch (err) {
     next(err);
   }
