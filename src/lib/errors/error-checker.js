@@ -81,7 +81,7 @@ const errorChecker = {
       select,
     );
     const inventory = await userPrisma.inventory.findUnique(query);
-    if (!inventory)
+    if (!inventory || (inventory && inventory.count == 0))
       throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
     return inventory;
   },

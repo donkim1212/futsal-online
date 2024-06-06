@@ -18,8 +18,9 @@ model User {
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
-  Team      Team[]
-  Inventory Inventory[]
+  Team       Team[]
+  Inventory  Inventory[]
+  MatchQueue MatchQueue[]
 
   @@map("User")
 }
@@ -50,4 +51,11 @@ model Inventory {
   Team Team[]
 
   @@map("Inventory")
+}
+
+model MatchQueue {
+  matchId Int @id @default(autoincrement()) @map("match_id")
+
+  User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  UserId Int  @unique @map("user_id")
 }
