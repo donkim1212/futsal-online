@@ -3,10 +3,13 @@ import ua from "../middlewares/auths/user.authenticator.js";
 import uv from "../middlewares/validators/user-validator.middleware.js";
 import ec from "../lib/errors/error-checker.js";
 import { playerPrisma, userPrisma } from "../lib/utils/prisma/index.js";
+import tierUtils from "../lib/utils/tier-utils.js";
+import { Prisma } from "@prisma/client";
 
 const router = express.Router();
 const GACHA_STANDARD_PACK_PRICE = 1000;
-const GACHA_STANDARD_PACK_RATES = [5, 10, 20, 30, 35]; //
+const GACHA_STANDARD_PACK_RATES = [5, 10, 20, 30, 35];
+const UPGRADE_COST = 500;
 // const GACHA_MAX = 5; // 0~4, 5 is converted to 4
 
 const gacha = async () => {
@@ -39,10 +42,10 @@ router.post("/stores/gacha", ua.authStrict, async (req, res, next) => {
 
     const player = await gacha();
 
-    const isPlayer = await userPrisma.inventory.findFirst({
+    const inventory = await userPrisma.inventory.findFirst({
       where: { PlayerId: player.playerId, UserId: req.body.user.userId },
     });
-    if (!isPlayer) {
+    if (!inventory) {
       await userPrisma.inventory.create({
         data: {
           PlayerId: player.playerId,
@@ -56,10 +59,10 @@ router.post("/stores/gacha", ua.authStrict, async (req, res, next) => {
         where: {
           UserId: req.body.user.userId,
           PlayerId: player.playerId,
-          inventoryId: isPlayer.inventoryId,
+          inventoryId: inventory.inventoryId,
         },
         data: {
-          count: isPlayer.count + 1,
+          count: inventory.count + 1,
         },
       });
     }
@@ -116,87 +119,90 @@ router.patch(
 router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
   try {
     const { user, inventoryId } = req.body;
-    await ec.userChecker(user.userId);
+    await ec.moneyChecker(user.userId, UPGRADE_COST);
     const inventory = await ec.inventoryUserChecker(user.userId, inventoryId);
-    if (inventory.count <= 0)
-      return res
-        .status(409)
-        .json({ message: "선수를 보유하고 있지 않습니다." });
+    const player = await ec.playerChecker(inventory.PlayerId);
+    const successRate = await tierUtils.getTierUpgradeSuccessRate(
+      player.TierName,
+      inventory.level,
+    );
 
-    const tier = await playerPrisma.tier.findFirst({
-      where: { tierName: inventory.TierName },
-    });
-
-    const successRate = tier.successRate[`${inventory.level}`];
-    if (!successRate) {
+    if (successRate === 0) {
       return res.status(409).json({ message: "강화 레벨이 최대입니다." });
+    } else if (!successRate) {
+      throw new Error(`/stores/upgrade  |  invalid data`);
     }
+
     // Upgrade
     const result = Math.random() * 100;
     if (successRate - result >= 0) {
-      // for (let key in tier.bonus) {
-      //   if (parseInt(key) < inventory.level + 1) bonus += tier.bonus[key];
-      // }
       const where = {
         UserId: user.userId,
         PlayerId: inventory.PlayerId,
         level: inventory.level + 1,
       };
 
-      let upgradedInventory = await userPrisma.inventory.findFirst({
-        where: { ...where },
-      });
-
-      if (!upgradedInventory) {
-        upgradedInventory = await userPrisma.inventory.create({
-          data: {
-            count: 1,
-            ...where,
-          },
+      let upgradedInventory;
+      await userPrisma.$transaction(async (prisma) => {
+        // check if inv. player w. upgraded lvl already exists
+        upgradedInventory = await prisma.inventory.findFirst({
+          where: { ...where },
         });
-      } else {
-        upgradedInventory = await userPrisma.inventory.update({
-          where: { inventoryId: upgradedInventory.inventoryId },
+
+        if (!upgradedInventory) {
+          upgradedInventory = await prisma.inventory.create({
+            data: {
+              count: 1,
+              ...where,
+            },
+          });
+        } else {
+          upgradedInventory = await prisma.inventory.update({
+            where: { inventoryId: upgradedInventory.inventoryId },
+            data: {
+              count: {
+                increment: 1,
+              },
+            },
+          });
+        }
+
+        // decrement orignal inventory player count
+        await prisma.inventory.update({
+          where: {
+            inventoryId: inventory.inventoryId,
+          },
           data: {
             count: {
-              increment: 1,
+              increment: -1,
             },
           },
         });
-      }
 
-      await userPrisma.inventory.update({
-        where: {
-          inventoryId: inventory.inventoryId,
-        },
-        data: {
-          count: {
-            increment: -1,
+        upgradedInventory = await tierUtils.applyActualPlayerStats(
+          upgradedInventory,
+        );
+
+        await prisma.user.update({
+          where: { userId: user.userId },
+          data: {
+            money: {
+              increment: -UPGRADE_COST,
+            },
           },
-        },
+        });
       });
 
-      const bonus = tier.bonus[`${inventory.level}`];
-      const player = await playerPrisma.player.findUnique({
-        where: { playerId: inventory.PlayerId },
-      });
-
-      delete player.TierName;
-      player.speed += bonus;
-      player.goalRate += bonus;
-      player.power += bonus;
-      player.defense += bonus;
-      player.stamina += bonus;
+      if (!upgradedInventory) throw new Error("Upgrade: transaction failed.");
 
       return res.status(200).json({
         message: "강화 성공!",
         data: {
-          inventoryId: upgradedInventory.inventoryId,
-          ...player,
-          level: upgradedInventory.level,
+          ...upgradedInventory,
         },
       });
     }
+
     return res.status(200).json({ message: "강화 실패!" });
   } catch (err) {
     next(err);
