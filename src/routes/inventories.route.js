@@ -25,6 +25,7 @@ router.get(
         JOIN player_db.Player pl
         ON inv.player_id=pl.player_id
         WHERE inv.user_id=${req.body.user.userId}
+          AND count > 0
       `;
 
       return res.status(200).json(inventories);
