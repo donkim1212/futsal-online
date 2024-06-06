@@ -1215,12 +1215,18 @@ export namespace Prisma {
     userId: number | null
     money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
   }
 
   export type UserSumAggregateOutputType = {
     userId: number | null
     money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1229,6 +1235,9 @@ export namespace Prisma {
     password: string | null
     money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1239,6 +1248,9 @@ export namespace Prisma {
     password: string | null
     money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1249,6 +1261,9 @@ export namespace Prisma {
     password: number
     money: number
     rating: number
+    wins: number
+    draws: number
+    loses: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1259,12 +1274,18 @@ export namespace Prisma {
     userId?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
   }
 
   export type UserSumAggregateInputType = {
     userId?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -1273,6 +1294,9 @@ export namespace Prisma {
     password?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1283,6 +1307,9 @@ export namespace Prisma {
     password?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1293,6 +1320,9 @@ export namespace Prisma {
     password?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1390,6 +1420,9 @@ export namespace Prisma {
     password: string
     money: number
     rating: number
+    wins: number
+    draws: number
+    loses: number
     createdAt: Date
     updatedAt: Date | null
     _count: UserCountAggregateOutputType | null
@@ -1419,6 +1452,9 @@ export namespace Prisma {
     password?: boolean
     money?: boolean
     rating?: boolean
+    wins?: boolean
+    draws?: boolean
+    loses?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     Team?: boolean | User$TeamArgs<ExtArgs>
@@ -1433,6 +1469,9 @@ export namespace Prisma {
     password?: boolean
     money?: boolean
     rating?: boolean
+    wins?: boolean
+    draws?: boolean
+    loses?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -1459,6 +1498,9 @@ export namespace Prisma {
       password: string
       money: number
       rating: number
+      wins: number
+      draws: number
+      loses: number
       createdAt: Date
       updatedAt: Date | null
     }, ExtArgs["result"]["user"]>
@@ -1865,6 +1907,9 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly money: FieldRef<"User", 'Int'>
     readonly rating: FieldRef<"User", 'Int'>
+    readonly wins: FieldRef<"User", 'Int'>
+    readonly draws: FieldRef<"User", 'Int'>
+    readonly loses: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -5082,6 +5127,9 @@ export namespace Prisma {
     password: 'password',
     money: 'money',
     rating: 'rating',
+    wins: 'wins',
+    draws: 'draws',
+    loses: 'loses',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5178,6 +5226,9 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     money?: IntFilter<"User"> | number
     rating?: IntFilter<"User"> | number
+    wins?: IntFilter<"User"> | number
+    draws?: IntFilter<"User"> | number
+    loses?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     Team?: TeamListRelationFilter
@@ -5191,6 +5242,9 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
     Team?: TeamOrderByRelationAggregateInput
@@ -5207,6 +5261,9 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     money?: IntFilter<"User"> | number
     rating?: IntFilter<"User"> | number
+    wins?: IntFilter<"User"> | number
+    draws?: IntFilter<"User"> | number
+    loses?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     Team?: TeamListRelationFilter
@@ -5220,6 +5277,9 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -5238,6 +5298,9 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     money?: IntWithAggregatesFilter<"User"> | number
     rating?: IntWithAggregatesFilter<"User"> | number
+    wins?: IntWithAggregatesFilter<"User"> | number
+    draws?: IntWithAggregatesFilter<"User"> | number
+    loses?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
@@ -5399,6 +5462,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
@@ -5412,6 +5478,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
@@ -5424,6 +5493,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
@@ -5437,6 +5509,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
@@ -5450,6 +5525,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
@@ -5459,6 +5537,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -5469,6 +5550,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -5687,6 +5771,9 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5695,6 +5782,9 @@ export namespace Prisma {
     userId?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5703,6 +5793,9 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5713,6 +5806,9 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5721,6 +5817,9 @@ export namespace Prisma {
     userId?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -6406,6 +6505,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Inventory?: InventoryCreateNestedManyWithoutUserInput
@@ -6418,6 +6520,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
@@ -6465,6 +6570,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Inventory?: InventoryUpdateManyWithoutUserNestedInput
@@ -6477,6 +6585,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
@@ -6514,6 +6625,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
@@ -6526,6 +6640,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
@@ -6572,6 +6689,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
@@ -6584,6 +6704,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
@@ -6611,6 +6734,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
@@ -6623,6 +6749,9 @@ export namespace Prisma {
     password: string
     money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
     updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
@@ -6650,6 +6779,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
@@ -6662,6 +6794,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput

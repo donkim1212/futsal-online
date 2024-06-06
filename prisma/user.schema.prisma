@@ -13,8 +13,11 @@ model User {
   userId    Int      @id @default(autoincrement()) @map("user_id")
   username  String   @unique @map("username")
   password  String   @map("password")
-  money     Int      @default(10000) @map("name")
+  money     Int      @default(10000) @map("money")
   rating    Int      @default(1000) @map("rating")
+  wins Int @default(0) @map("wins")
+  draws Int @default(0) @map("draws")
+  loses Int @default(0) @map("loses")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
