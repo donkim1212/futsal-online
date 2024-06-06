@@ -78,7 +78,7 @@ router.get(
         rating: true,
         money: true,
       });
-      console.log(req.body.user, req.params.userId);
+
       if (req.body.user?.userId != req.params.userId) delete user.money;
 
       // req.header("authorization", `Bearer ${token}`);
