@@ -43,18 +43,17 @@ const getSign = (number) => {
   else return 0;
 };
 
-const play = async (myId, opId, opponent) => {
+const play = async (myId, opId) => {
   const me = await ec.userChecker(myId);
-  opponent ? opponent : (opponent = await ec.userChecker(opId));
+  const opponent = await ec.userChecker(opId);
   const myTeam = await ec.teamChecker(myId);
-  const opTeam = await ec.teamChecker(opId || opponent.userId);
+  const opTeam = await ec.teamChecker(opId);
   const myTeamPower = await calcTeamPower(myTeam);
   const opTeamPower = await calcTeamPower(opTeam);
-  console.log(myTeamPower, opTeamPower);
   const randomNumber = Math.random() * (myTeamPower + opTeamPower);
   const result = getSign(myTeamPower - randomNumber);
 
-  if (result == 0) return 0;
+  // if (result == 0) return 0;
   await userPrisma.user.update({
     where: { userId: me.userId },
     data: {
@@ -76,19 +75,32 @@ const play = async (myId, opId, opponent) => {
 
 const matchMaking = async (myUserId) => {
   const me = await ec.userChecker(myUserId);
-  return await userPrisma.$queryRaw`
+  const opponent = await userPrisma.$queryRaw`
     SELECT *
-    FROM User
-    ORDER BY ABS(rating - ${me.rating})
-    LIMIT 1
+    FROM MatchQueue mq
+    INNER JOIN User u
+    ON mq.user_id=u.user_id
+    ORDER BY ABS(u.rating - ${me.rating})
+    LIMIT 10
   `;
+  if (opponent.length < 2) throw new Error("상대를 찾을 수 없습니다.");
+  const index = Math.trunc(Math.random() * (opponent.length - 1)) + 1;
+  return opponent[index];
 };
 
-const matchResultResponse = (result, res) => {
-  if (result === 0) return res.status(200).json({ message: "무승부입니다." });
+const matchResultResponse = (result, res, myId, opponentId) => {
+  if (result === 0)
+    return res
+      .status(200)
+      .json({ message: `userId ${opponentId} 과(와)의 승부에서 비겼습니다.` });
   else if (result > 0)
-    return res.status(200).json({ message: "승리했습니다!" });
-  else return res.status(200).json({ message: "패배했습니다." });
+    return res.status(200).json({
+      message: `userId ${opponentId} 과(와)의 승부에서 승리했습니다!`,
+    });
+  else
+    return res.status(200).json({
+      message: `userId ${opponentId} 과(와)의 승부에서 패배했습니다.`,
+    });
 };
 
 router.post(
@@ -98,7 +110,12 @@ router.post(
   async (req, res, next) => {
     try {
       const result = await play(req.body.user.userId, req.params.userId);
-      return matchResultResponse(result, res);
+      return matchResultResponse(
+        result,
+        res,
+        req.body.user.userId,
+        req.params.userId,
+      );
     } catch (err) {
       next(err);
     }
@@ -109,8 +126,13 @@ router.post(
 router.post("/games/matchmaking", ua.authStrict, async (req, res, next) => {
   try {
     const opponent = await matchMaking(req.body.user.userId);
-    const result = await play(req.body.user.userId, null, opponent);
-    return matchResultResponse(result, res);
+    const result = await play(req.body.user.userId, opponent.user_id);
+    return matchResultResponse(
+      result,
+      res,
+      req.body.user.userId,
+      opponent.user_id,
+    );
   } catch (err) {
     next(err);
   }
