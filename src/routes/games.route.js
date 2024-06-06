@@ -3,6 +3,7 @@ import { userPrisma, playerPrisma } from "../lib/utils/prisma/index.js";
 import ua from "../middlewares/auths/user.authenticator.js";
 import uv from "../middlewares/validators/user-validator.middleware.js";
 import ec from "../lib/errors/error-checker.js";
+import tierUtils from "../lib/utils/tier-utils.js";
 
 const router = express.Router();
 
@@ -15,6 +16,12 @@ const MODIFIERS = {
   stamina: 0.2,
 };
 
+/**
+ * Calculate team's total power based on team members' stats multiplied by a preset MODIFIERS.
+ * @deprecated Use calcTeamPowerEx instead.
+ * @param {Object} team team data from 'team' table in 'games_db'
+ * @returns team's tp (total power to be compared for)
+ */
 const calcTeamPower = async (team) => {
   let tp = 0;
   for (let member in team) {
@@ -37,6 +44,42 @@ const calcTeamPower = async (team) => {
   return tp;
 };
 
+/**
+ * Calculate team's total power based on team members' stats multiplied by a preset MODIFIERS.
+ * @param {Object} team team data from 'team' table in 'games_db'
+ * @returns team's tp (total power to be compared for)
+ */
+const calcTeamPowerEx = async (team) => {
+  const inventories = await userPrisma.$queryRaw`
+    SELECT iv.level,
+      iv.player_id as playerId,
+      pl.speed,
+      pl.goal_rate as goalRate,
+      pl.power,
+      pl.defense,
+      pl.stamina,
+      pl.tier_name as tierName
+    FROM game_db.Inventory iv
+    JOIN player_db.Player pl
+    ON iv.player_id=pl.player_id
+    WHERE iv.inventory_id=${team[0].InventoryId}
+      OR iv.inventory_id=${team[1].InventoryId}
+      OR iv.inventory_id=${team[2].InventoryId}
+  `;
+
+  let tp = 0;
+  for (let member in inventories) {
+    await tierUtils.applyActualPlayerStats(inventories[member]);
+    tp +=
+      inventories[member].speed * MODIFIERS.speed +
+      inventories[member].goalRate * MODIFIERS.goalRate +
+      inventories[member].power * MODIFIERS.power +
+      inventories[member].defense * MODIFIERS.defense +
+      inventories[member].stamina * MODIFIERS.stamina;
+  }
+  return tp;
+};
+
 const getSign = (number) => {
   if (number > 0) return 1;
   else if (number < 0) return -1;
@@ -48,12 +91,12 @@ const play = async (myId, opId) => {
   const opponent = await ec.userChecker(opId);
   const myTeam = await ec.teamChecker(myId);
   const opTeam = await ec.teamChecker(opId);
-  const myTeamPower = await calcTeamPower(myTeam);
-  const opTeamPower = await calcTeamPower(opTeam);
+  const myTeamPower = await calcTeamPowerEx(myTeam);
+  const opTeamPower = await calcTeamPowerEx(opTeam);
   const randomNumber = Math.random() * (myTeamPower + opTeamPower);
   const result = getSign(myTeamPower - randomNumber);
 
-  // if (result == 0) return 0;
+  if (result == 0) return 0;
   await userPrisma.user.update({
     where: { userId: me.userId },
     data: {
