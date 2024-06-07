@@ -125,6 +125,9 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   money: 'money',
   rating: 'rating',
+  wins: 'wins',
+  draws: 'draws',
+  loses: 'loses',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -143,16 +146,37 @@ exports.Prisma.InventoryScalarFieldEnum = {
   PlayerId: 'PlayerId'
 };
 
+exports.Prisma.MatchQueueScalarFieldEnum = {
+  matchQueueId: 'matchQueueId',
+  UserId: 'UserId'
+};
+
+exports.Prisma.MatchHistoryScalarFieldEnum = {
+  matchHistroyId: 'matchHistroyId',
+  myUserId: 'myUserId',
+  opUserId: 'opUserId',
+  score1: 'score1',
+  score2: 'score2',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
 exports.Prisma.ModelName = {
   User: 'User',
   Team: 'Team',
-  Inventory: 'Inventory'
+  Inventory: 'Inventory',
+  MatchQueue: 'MatchQueue',
+  MatchHistory: 'MatchHistory'
 };
 
 /**

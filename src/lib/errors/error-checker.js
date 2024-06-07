@@ -12,7 +12,7 @@ const queryBuilder = (where, select) => {
   return query;
 };
 
-export default errorChecker = {
+const errorChecker = {
   /**
    *
    * @param {Number} userId target user's userId
@@ -49,14 +49,39 @@ export default errorChecker = {
    * @returns a row of an inventory
    * @throws PlayerNotFoundError if no such inventory data exists.
    */
-  inventoryChecker: async function (userId, playerId, select) {
+  inventoryChecker: async function (userId, playerId, level, select) {
     // TODO: change query method, maybe checker function parameters as well
     // -> inventoryId as parameter?
-    await userChecker(userId);
-    await playerChecker(playerId);
-    const query = queryBuilder({ userId: userId, playerId: playerId }, select);
-    const inventory = await userPrisma.inventory.findUnique(query);
+    await this.userChecker(userId);
+    await this.playerChecker(playerId);
+    const query = queryBuilder(
+      { UserId: userId, PlayerId: playerId, level: level },
+      select,
+    );
+    const inventory = await userPrisma.inventory.findFirst(query);
     if (!inventory)
+      throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
+    return inventory;
+  },
+
+  /**
+   *
+   * @param {*} userId target user's userId
+   * @param {*} inventoryId target inventory's inventoryId
+   * @param {*} select object literal containing fields to select, e.g., { id: true, password: false }
+   * @returns a row of an inventory
+   * @throws PlayerNotFoundError if no such inventory data exists.
+   */
+
+  inventoryUserChecker: async function (userId, inventoryId, select) {
+    // Call the userChecker function without using `this`
+    await errorChecker.userChecker(userId);
+    const query = queryBuilder(
+      { UserId: userId, inventoryId: inventoryId },
+      select,
+    );
+    const inventory = await userPrisma.inventory.findUnique(query);
+    if (!inventory || (inventory && inventory.count == 0))
       throw new PlayerNotFoundError("선수를 보유하고 있지 않습니다.");
     return inventory;
   },
@@ -70,18 +95,25 @@ export default errorChecker = {
    * @throws NotEnoughMoneyError if user has not enough money
    */
   moneyChecker: async function (userId, requiredMoney, select) {
-    if (!select) select = { money: true };
-    else if (!select.money) select.money = true;
-    const query = queryBuilder({ userId: userId }, select);
-    const user = await userPrisma.user.findUnique(query);
+    if (select && !select.money) select.money = true;
+    // const query = queryBuilder({ userId: userId }, select);
+    // const user = await userPrisma.user.findUnique(query);
+    const user = await this.userChecker(userId, select);
     if (requiredMoney > user.money) throw new NotEnoughMoneyError();
+    delete user.password;
     return user;
   },
 
   teamChecker: async function (userId, select) {
+    await this.userChecker(userId);
     const query = queryBuilder({ UserId: userId }, select);
-    const team = await userPrisma.findMany(query);
+    query.include = {
+      Inventory: true,
+    };
+    const team = await userPrisma.team.findMany(query);
     if (team.length != 3) throw new TeamNotReadyError();
     return team;
   },
 };
+
+export default errorChecker;

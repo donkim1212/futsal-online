@@ -13,13 +13,19 @@ model User {
   userId    Int      @id @default(autoincrement()) @map("user_id")
   username  String   @unique @map("username")
   password  String   @map("password")
-  money     String   @map("name")
+  money     Int      @default(10000) @map("money")
   rating    Int      @default(1000) @map("rating")
-  createdAt DateTime @default(now()) @map("createdAt")
-  updatedAt DateTime @updatedAt @map("updatedAt")
+  wins Int @default(0) @map("wins")
+  draws Int @default(0) @map("draws")
+  loses Int @default(0) @map("loses")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
 
   Team      Team[]
   Inventory Inventory[]
+  MatchQueue MatchQueue[]
+  User1 MatchHistory[] @relation("User1")
+  User2 MatchHistory[] @relation("User2")
 
   @@map("User")
 }
@@ -50,4 +56,22 @@ model Inventory {
   Team Team[]
 
   @@map("Inventory")
+}
+
+model MatchQueue {
+  matchQueueId Int @id @default(autoincrement()) @map("match_queue_id")
+
+  User   User @relation(fields: [UserId], references: [userId], onDelete: Cascade)
+  UserId Int  @unique @map("user_id")
+}
+
+model MatchHistory {
+  matchHistroyId Int @id @default(autoincrement()) @map("match_history_id")
+  User1 User @relation("User1", fields: [myUserId], references: [userId])
+  myUserId Int @map("myId")
+  User2 User @relation("User2", fields: [opUserId], references: [userId])
+  opUserId Int @map("opId")
+  score1 Int @map("score1")
+  score2 Int @map("score2")
+  createdAt DateTime @default(now()) @map("created_at")
 }

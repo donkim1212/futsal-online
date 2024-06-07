@@ -3,8 +3,14 @@ import dotenv from "dotenv/config";
 import dotenvExpand from "dotenv-expand";
 import logger from "./middlewares/logger.middleware.js";
 import errorHandler from "./middlewares/error-handler.middleware.js";
-import PlayersRouter from "./routes/players.route.js";
 import tierRouter from "./routes/tier.route.js";
+import playersRouter from "./routes/players.route.js";
+import teamsRouter from "./routes/teams.route.js";
+import storesRouter from "./routes/stores.route.js";
+import gamesRouter from "./routes/games.route.js";
+import usersRouter from "./routes/users.route.js";
+import rankRouter from "./routes/rankings.route.js";
+import inventoriesRouter from "./routes/inventories.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -14,7 +20,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
-app.use("/api", [PlayersRouter, tierRouter]);
+app.use("/api", [
+  playersRouter,
+  teamsRouter,
+  gamesRouter,
+  inventoriesRouter,
+  storesRouter,
+  usersRouter,
+  rankRouter,
+]);
 
 app.use(errorHandler);
 

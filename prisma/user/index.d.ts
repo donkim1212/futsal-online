@@ -28,6 +28,16 @@ export type Team = $Result.DefaultSelection<Prisma.$TeamPayload>
  * 
  */
 export type Inventory = $Result.DefaultSelection<Prisma.$InventoryPayload>
+/**
+ * Model MatchQueue
+ * 
+ */
+export type MatchQueue = $Result.DefaultSelection<Prisma.$MatchQueuePayload>
+/**
+ * Model MatchHistory
+ * 
+ */
+export type MatchHistory = $Result.DefaultSelection<Prisma.$MatchHistoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -180,6 +190,26 @@ export class PrismaClient<
     * ```
     */
   get inventory(): Prisma.InventoryDelegate<ExtArgs>;
+
+  /**
+   * `prisma.matchQueue`: Exposes CRUD operations for the **MatchQueue** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MatchQueues
+    * const matchQueues = await prisma.matchQueue.findMany()
+    * ```
+    */
+  get matchQueue(): Prisma.MatchQueueDelegate<ExtArgs>;
+
+  /**
+   * `prisma.matchHistory`: Exposes CRUD operations for the **MatchHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MatchHistories
+    * const matchHistories = await prisma.matchHistory.findMany()
+    * ```
+    */
+  get matchHistory(): Prisma.MatchHistoryDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -659,7 +689,9 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Team: 'Team',
-    Inventory: 'Inventory'
+    Inventory: 'Inventory',
+    MatchQueue: 'MatchQueue',
+    MatchHistory: 'MatchHistory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -676,7 +708,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'team' | 'inventory'
+      modelProps: 'user' | 'team' | 'inventory' | 'matchQueue' | 'matchHistory'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -878,6 +910,138 @@ export namespace Prisma {
           }
         }
       }
+      MatchQueue: {
+        payload: Prisma.$MatchQueuePayload<ExtArgs>
+        fields: Prisma.MatchQueueFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MatchQueueFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MatchQueueFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>
+          }
+          findFirst: {
+            args: Prisma.MatchQueueFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MatchQueueFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>
+          }
+          findMany: {
+            args: Prisma.MatchQueueFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>[]
+          }
+          create: {
+            args: Prisma.MatchQueueCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>
+          }
+          createMany: {
+            args: Prisma.MatchQueueCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.MatchQueueDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>
+          }
+          update: {
+            args: Prisma.MatchQueueUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>
+          }
+          deleteMany: {
+            args: Prisma.MatchQueueDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MatchQueueUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.MatchQueueUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchQueuePayload>
+          }
+          aggregate: {
+            args: Prisma.MatchQueueAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateMatchQueue>
+          }
+          groupBy: {
+            args: Prisma.MatchQueueGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<MatchQueueGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MatchQueueCountArgs<ExtArgs>,
+            result: $Utils.Optional<MatchQueueCountAggregateOutputType> | number
+          }
+        }
+      }
+      MatchHistory: {
+        payload: Prisma.$MatchHistoryPayload<ExtArgs>
+        fields: Prisma.MatchHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MatchHistoryFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MatchHistoryFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.MatchHistoryFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MatchHistoryFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.MatchHistoryFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.MatchHistoryCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.MatchHistoryCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.MatchHistoryDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>
+          }
+          update: {
+            args: Prisma.MatchHistoryUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.MatchHistoryDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MatchHistoryUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.MatchHistoryUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MatchHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.MatchHistoryAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateMatchHistory>
+          }
+          groupBy: {
+            args: Prisma.MatchHistoryGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<MatchHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MatchHistoryCountArgs<ExtArgs>,
+            result: $Utils.Optional<MatchHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1040,11 +1204,17 @@ export namespace Prisma {
   export type UserCountOutputType = {
     Team: number
     Inventory: number
+    MatchQueue: number
+    User1: number
+    User2: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Team?: boolean | UserCountOutputTypeCountTeamArgs
     Inventory?: boolean | UserCountOutputTypeCountInventoryArgs
+    MatchQueue?: boolean | UserCountOutputTypeCountMatchQueueArgs
+    User1?: boolean | UserCountOutputTypeCountUser1Args
+    User2?: boolean | UserCountOutputTypeCountUser2Args
   }
 
   // Custom InputTypes
@@ -1070,6 +1240,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountInventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InventoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMatchQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchQueueWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUser1Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchHistoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUser2Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchHistoryWhereInput
   }
 
 
@@ -1122,20 +1313,31 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     userId: number | null
+    money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
   }
 
   export type UserSumAggregateOutputType = {
     userId: number | null
+    money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
   }
 
   export type UserMinAggregateOutputType = {
     userId: number | null
     username: string | null
     password: string | null
-    money: string | null
+    money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1144,8 +1346,11 @@ export namespace Prisma {
     userId: number | null
     username: string | null
     password: string | null
-    money: string | null
+    money: number | null
     rating: number | null
+    wins: number | null
+    draws: number | null
+    loses: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1156,6 +1361,9 @@ export namespace Prisma {
     password: number
     money: number
     rating: number
+    wins: number
+    draws: number
+    loses: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1164,12 +1372,20 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     userId?: true
+    money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
   }
 
   export type UserSumAggregateInputType = {
     userId?: true
+    money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -1178,6 +1394,9 @@ export namespace Prisma {
     password?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1188,6 +1407,9 @@ export namespace Prisma {
     password?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1198,6 +1420,9 @@ export namespace Prisma {
     password?: true
     money?: true
     rating?: true
+    wins?: true
+    draws?: true
+    loses?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1293,10 +1518,13 @@ export namespace Prisma {
     userId: number
     username: string
     password: string
-    money: string
+    money: number
     rating: number
+    wins: number
+    draws: number
+    loses: number
     createdAt: Date
-    updatedAt: Date
+    updatedAt: Date | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1324,10 +1552,16 @@ export namespace Prisma {
     password?: boolean
     money?: boolean
     rating?: boolean
+    wins?: boolean
+    draws?: boolean
+    loses?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     Team?: boolean | User$TeamArgs<ExtArgs>
     Inventory?: boolean | User$InventoryArgs<ExtArgs>
+    MatchQueue?: boolean | User$MatchQueueArgs<ExtArgs>
+    User1?: boolean | User$User1Args<ExtArgs>
+    User2?: boolean | User$User2Args<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1337,6 +1571,9 @@ export namespace Prisma {
     password?: boolean
     money?: boolean
     rating?: boolean
+    wins?: boolean
+    draws?: boolean
+    loses?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -1345,6 +1582,9 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Team?: boolean | User$TeamArgs<ExtArgs>
     Inventory?: boolean | User$InventoryArgs<ExtArgs>
+    MatchQueue?: boolean | User$MatchQueueArgs<ExtArgs>
+    User1?: boolean | User$User1Args<ExtArgs>
+    User2?: boolean | User$User2Args<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1354,15 +1594,21 @@ export namespace Prisma {
     objects: {
       Team: Prisma.$TeamPayload<ExtArgs>[]
       Inventory: Prisma.$InventoryPayload<ExtArgs>[]
+      MatchQueue: Prisma.$MatchQueuePayload<ExtArgs>[]
+      User1: Prisma.$MatchHistoryPayload<ExtArgs>[]
+      User2: Prisma.$MatchHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
       username: string
       password: string
-      money: string
+      money: number
       rating: number
+      wins: number
+      draws: number
+      loses: number
       createdAt: Date
-      updatedAt: Date
+      updatedAt: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1732,6 +1978,12 @@ export namespace Prisma {
 
     Inventory<T extends User$InventoryArgs<ExtArgs> = {}>(args?: Subset<T, User$InventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    MatchQueue<T extends User$MatchQueueArgs<ExtArgs> = {}>(args?: Subset<T, User$MatchQueueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    User1<T extends User$User1Args<ExtArgs> = {}>(args?: Subset<T, User$User1Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    User2<T extends User$User2Args<ExtArgs> = {}>(args?: Subset<T, User$User2Args<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1763,8 +2015,11 @@ export namespace Prisma {
     readonly userId: FieldRef<"User", 'Int'>
     readonly username: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
-    readonly money: FieldRef<"User", 'String'>
+    readonly money: FieldRef<"User", 'Int'>
     readonly rating: FieldRef<"User", 'Int'>
+    readonly wins: FieldRef<"User", 'Int'>
+    readonly draws: FieldRef<"User", 'Int'>
+    readonly loses: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -2103,6 +2358,66 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InventoryScalarFieldEnum | InventoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.MatchQueue
+   */
+  export type User$MatchQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    where?: MatchQueueWhereInput
+    orderBy?: MatchQueueOrderByWithRelationInput | MatchQueueOrderByWithRelationInput[]
+    cursor?: MatchQueueWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatchQueueScalarFieldEnum | MatchQueueScalarFieldEnum[]
+  }
+
+  /**
+   * User.User1
+   */
+  export type User$User1Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    where?: MatchHistoryWhereInput
+    orderBy?: MatchHistoryOrderByWithRelationInput | MatchHistoryOrderByWithRelationInput[]
+    cursor?: MatchHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatchHistoryScalarFieldEnum | MatchHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * User.User2
+   */
+  export type User$User2Args<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    where?: MatchHistoryWhereInput
+    orderBy?: MatchHistoryOrderByWithRelationInput | MatchHistoryOrderByWithRelationInput[]
+    cursor?: MatchHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MatchHistoryScalarFieldEnum | MatchHistoryScalarFieldEnum[]
   }
 
   /**
@@ -4033,6 +4348,1887 @@ export namespace Prisma {
 
 
   /**
+   * Model MatchQueue
+   */
+
+  export type AggregateMatchQueue = {
+    _count: MatchQueueCountAggregateOutputType | null
+    _avg: MatchQueueAvgAggregateOutputType | null
+    _sum: MatchQueueSumAggregateOutputType | null
+    _min: MatchQueueMinAggregateOutputType | null
+    _max: MatchQueueMaxAggregateOutputType | null
+  }
+
+  export type MatchQueueAvgAggregateOutputType = {
+    matchQueueId: number | null
+    UserId: number | null
+  }
+
+  export type MatchQueueSumAggregateOutputType = {
+    matchQueueId: number | null
+    UserId: number | null
+  }
+
+  export type MatchQueueMinAggregateOutputType = {
+    matchQueueId: number | null
+    UserId: number | null
+  }
+
+  export type MatchQueueMaxAggregateOutputType = {
+    matchQueueId: number | null
+    UserId: number | null
+  }
+
+  export type MatchQueueCountAggregateOutputType = {
+    matchQueueId: number
+    UserId: number
+    _all: number
+  }
+
+
+  export type MatchQueueAvgAggregateInputType = {
+    matchQueueId?: true
+    UserId?: true
+  }
+
+  export type MatchQueueSumAggregateInputType = {
+    matchQueueId?: true
+    UserId?: true
+  }
+
+  export type MatchQueueMinAggregateInputType = {
+    matchQueueId?: true
+    UserId?: true
+  }
+
+  export type MatchQueueMaxAggregateInputType = {
+    matchQueueId?: true
+    UserId?: true
+  }
+
+  export type MatchQueueCountAggregateInputType = {
+    matchQueueId?: true
+    UserId?: true
+    _all?: true
+  }
+
+  export type MatchQueueAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MatchQueue to aggregate.
+     */
+    where?: MatchQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchQueues to fetch.
+     */
+    orderBy?: MatchQueueOrderByWithRelationInput | MatchQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MatchQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchQueues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MatchQueues
+    **/
+    _count?: true | MatchQueueCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MatchQueueAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MatchQueueSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MatchQueueMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MatchQueueMaxAggregateInputType
+  }
+
+  export type GetMatchQueueAggregateType<T extends MatchQueueAggregateArgs> = {
+        [P in keyof T & keyof AggregateMatchQueue]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMatchQueue[P]>
+      : GetScalarType<T[P], AggregateMatchQueue[P]>
+  }
+
+
+
+
+  export type MatchQueueGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchQueueWhereInput
+    orderBy?: MatchQueueOrderByWithAggregationInput | MatchQueueOrderByWithAggregationInput[]
+    by: MatchQueueScalarFieldEnum[] | MatchQueueScalarFieldEnum
+    having?: MatchQueueScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MatchQueueCountAggregateInputType | true
+    _avg?: MatchQueueAvgAggregateInputType
+    _sum?: MatchQueueSumAggregateInputType
+    _min?: MatchQueueMinAggregateInputType
+    _max?: MatchQueueMaxAggregateInputType
+  }
+
+  export type MatchQueueGroupByOutputType = {
+    matchQueueId: number
+    UserId: number
+    _count: MatchQueueCountAggregateOutputType | null
+    _avg: MatchQueueAvgAggregateOutputType | null
+    _sum: MatchQueueSumAggregateOutputType | null
+    _min: MatchQueueMinAggregateOutputType | null
+    _max: MatchQueueMaxAggregateOutputType | null
+  }
+
+  type GetMatchQueueGroupByPayload<T extends MatchQueueGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MatchQueueGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MatchQueueGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MatchQueueGroupByOutputType[P]>
+            : GetScalarType<T[P], MatchQueueGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MatchQueueSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    matchQueueId?: boolean
+    UserId?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matchQueue"]>
+
+  export type MatchQueueSelectScalar = {
+    matchQueueId?: boolean
+    UserId?: boolean
+  }
+
+
+  export type MatchQueueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+
+  export type $MatchQueuePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MatchQueue"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      matchQueueId: number
+      UserId: number
+    }, ExtArgs["result"]["matchQueue"]>
+    composites: {}
+  }
+
+
+  type MatchQueueGetPayload<S extends boolean | null | undefined | MatchQueueDefaultArgs> = $Result.GetResult<Prisma.$MatchQueuePayload, S>
+
+  type MatchQueueCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MatchQueueFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MatchQueueCountAggregateInputType | true
+    }
+
+  export interface MatchQueueDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MatchQueue'], meta: { name: 'MatchQueue' } }
+    /**
+     * Find zero or one MatchQueue that matches the filter.
+     * @param {MatchQueueFindUniqueArgs} args - Arguments to find a MatchQueue
+     * @example
+     * // Get one MatchQueue
+     * const matchQueue = await prisma.matchQueue.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends MatchQueueFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchQueueFindUniqueArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one MatchQueue that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MatchQueueFindUniqueOrThrowArgs} args - Arguments to find a MatchQueue
+     * @example
+     * // Get one MatchQueue
+     * const matchQueue = await prisma.matchQueue.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends MatchQueueFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchQueueFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first MatchQueue that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueFindFirstArgs} args - Arguments to find a MatchQueue
+     * @example
+     * // Get one MatchQueue
+     * const matchQueue = await prisma.matchQueue.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends MatchQueueFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchQueueFindFirstArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first MatchQueue that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueFindFirstOrThrowArgs} args - Arguments to find a MatchQueue
+     * @example
+     * // Get one MatchQueue
+     * const matchQueue = await prisma.matchQueue.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends MatchQueueFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchQueueFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more MatchQueues that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MatchQueues
+     * const matchQueues = await prisma.matchQueue.findMany()
+     * 
+     * // Get first 10 MatchQueues
+     * const matchQueues = await prisma.matchQueue.findMany({ take: 10 })
+     * 
+     * // Only select the `matchQueueId`
+     * const matchQueueWithMatchQueueIdOnly = await prisma.matchQueue.findMany({ select: { matchQueueId: true } })
+     * 
+    **/
+    findMany<T extends MatchQueueFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchQueueFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a MatchQueue.
+     * @param {MatchQueueCreateArgs} args - Arguments to create a MatchQueue.
+     * @example
+     * // Create one MatchQueue
+     * const MatchQueue = await prisma.matchQueue.create({
+     *   data: {
+     *     // ... data to create a MatchQueue
+     *   }
+     * })
+     * 
+    **/
+    create<T extends MatchQueueCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchQueueCreateArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many MatchQueues.
+     * @param {MatchQueueCreateManyArgs} args - Arguments to create many MatchQueues.
+     * @example
+     * // Create many MatchQueues
+     * const matchQueue = await prisma.matchQueue.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends MatchQueueCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchQueueCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a MatchQueue.
+     * @param {MatchQueueDeleteArgs} args - Arguments to delete one MatchQueue.
+     * @example
+     * // Delete one MatchQueue
+     * const MatchQueue = await prisma.matchQueue.delete({
+     *   where: {
+     *     // ... filter to delete one MatchQueue
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends MatchQueueDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchQueueDeleteArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one MatchQueue.
+     * @param {MatchQueueUpdateArgs} args - Arguments to update one MatchQueue.
+     * @example
+     * // Update one MatchQueue
+     * const matchQueue = await prisma.matchQueue.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends MatchQueueUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchQueueUpdateArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more MatchQueues.
+     * @param {MatchQueueDeleteManyArgs} args - Arguments to filter MatchQueues to delete.
+     * @example
+     * // Delete a few MatchQueues
+     * const { count } = await prisma.matchQueue.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends MatchQueueDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchQueueDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MatchQueues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MatchQueues
+     * const matchQueue = await prisma.matchQueue.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends MatchQueueUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchQueueUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MatchQueue.
+     * @param {MatchQueueUpsertArgs} args - Arguments to update or create a MatchQueue.
+     * @example
+     * // Update or create a MatchQueue
+     * const matchQueue = await prisma.matchQueue.upsert({
+     *   create: {
+     *     // ... data to create a MatchQueue
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MatchQueue we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends MatchQueueUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchQueueUpsertArgs<ExtArgs>>
+    ): Prisma__MatchQueueClient<$Result.GetResult<Prisma.$MatchQueuePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of MatchQueues.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueCountArgs} args - Arguments to filter MatchQueues to count.
+     * @example
+     * // Count the number of MatchQueues
+     * const count = await prisma.matchQueue.count({
+     *   where: {
+     *     // ... the filter for the MatchQueues we want to count
+     *   }
+     * })
+    **/
+    count<T extends MatchQueueCountArgs>(
+      args?: Subset<T, MatchQueueCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MatchQueueCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MatchQueue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MatchQueueAggregateArgs>(args: Subset<T, MatchQueueAggregateArgs>): Prisma.PrismaPromise<GetMatchQueueAggregateType<T>>
+
+    /**
+     * Group by MatchQueue.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchQueueGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MatchQueueGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MatchQueueGroupByArgs['orderBy'] }
+        : { orderBy?: MatchQueueGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MatchQueueGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMatchQueueGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MatchQueue model
+   */
+  readonly fields: MatchQueueFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MatchQueue.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MatchQueueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the MatchQueue model
+   */ 
+  interface MatchQueueFieldRefs {
+    readonly matchQueueId: FieldRef<"MatchQueue", 'Int'>
+    readonly UserId: FieldRef<"MatchQueue", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MatchQueue findUnique
+   */
+  export type MatchQueueFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchQueue to fetch.
+     */
+    where: MatchQueueWhereUniqueInput
+  }
+
+  /**
+   * MatchQueue findUniqueOrThrow
+   */
+  export type MatchQueueFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchQueue to fetch.
+     */
+    where: MatchQueueWhereUniqueInput
+  }
+
+  /**
+   * MatchQueue findFirst
+   */
+  export type MatchQueueFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchQueue to fetch.
+     */
+    where?: MatchQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchQueues to fetch.
+     */
+    orderBy?: MatchQueueOrderByWithRelationInput | MatchQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MatchQueues.
+     */
+    cursor?: MatchQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchQueues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MatchQueues.
+     */
+    distinct?: MatchQueueScalarFieldEnum | MatchQueueScalarFieldEnum[]
+  }
+
+  /**
+   * MatchQueue findFirstOrThrow
+   */
+  export type MatchQueueFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchQueue to fetch.
+     */
+    where?: MatchQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchQueues to fetch.
+     */
+    orderBy?: MatchQueueOrderByWithRelationInput | MatchQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MatchQueues.
+     */
+    cursor?: MatchQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchQueues.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MatchQueues.
+     */
+    distinct?: MatchQueueScalarFieldEnum | MatchQueueScalarFieldEnum[]
+  }
+
+  /**
+   * MatchQueue findMany
+   */
+  export type MatchQueueFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchQueues to fetch.
+     */
+    where?: MatchQueueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchQueues to fetch.
+     */
+    orderBy?: MatchQueueOrderByWithRelationInput | MatchQueueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MatchQueues.
+     */
+    cursor?: MatchQueueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchQueues from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchQueues.
+     */
+    skip?: number
+    distinct?: MatchQueueScalarFieldEnum | MatchQueueScalarFieldEnum[]
+  }
+
+  /**
+   * MatchQueue create
+   */
+  export type MatchQueueCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MatchQueue.
+     */
+    data: XOR<MatchQueueCreateInput, MatchQueueUncheckedCreateInput>
+  }
+
+  /**
+   * MatchQueue createMany
+   */
+  export type MatchQueueCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MatchQueues.
+     */
+    data: MatchQueueCreateManyInput | MatchQueueCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MatchQueue update
+   */
+  export type MatchQueueUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MatchQueue.
+     */
+    data: XOR<MatchQueueUpdateInput, MatchQueueUncheckedUpdateInput>
+    /**
+     * Choose, which MatchQueue to update.
+     */
+    where: MatchQueueWhereUniqueInput
+  }
+
+  /**
+   * MatchQueue updateMany
+   */
+  export type MatchQueueUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MatchQueues.
+     */
+    data: XOR<MatchQueueUpdateManyMutationInput, MatchQueueUncheckedUpdateManyInput>
+    /**
+     * Filter which MatchQueues to update
+     */
+    where?: MatchQueueWhereInput
+  }
+
+  /**
+   * MatchQueue upsert
+   */
+  export type MatchQueueUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MatchQueue to update in case it exists.
+     */
+    where: MatchQueueWhereUniqueInput
+    /**
+     * In case the MatchQueue found by the `where` argument doesn't exist, create a new MatchQueue with this data.
+     */
+    create: XOR<MatchQueueCreateInput, MatchQueueUncheckedCreateInput>
+    /**
+     * In case the MatchQueue was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MatchQueueUpdateInput, MatchQueueUncheckedUpdateInput>
+  }
+
+  /**
+   * MatchQueue delete
+   */
+  export type MatchQueueDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+    /**
+     * Filter which MatchQueue to delete.
+     */
+    where: MatchQueueWhereUniqueInput
+  }
+
+  /**
+   * MatchQueue deleteMany
+   */
+  export type MatchQueueDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MatchQueues to delete
+     */
+    where?: MatchQueueWhereInput
+  }
+
+  /**
+   * MatchQueue without action
+   */
+  export type MatchQueueDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchQueue
+     */
+    select?: MatchQueueSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchQueueInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MatchHistory
+   */
+
+  export type AggregateMatchHistory = {
+    _count: MatchHistoryCountAggregateOutputType | null
+    _avg: MatchHistoryAvgAggregateOutputType | null
+    _sum: MatchHistorySumAggregateOutputType | null
+    _min: MatchHistoryMinAggregateOutputType | null
+    _max: MatchHistoryMaxAggregateOutputType | null
+  }
+
+  export type MatchHistoryAvgAggregateOutputType = {
+    matchHistroyId: number | null
+    myUserId: number | null
+    opUserId: number | null
+    score1: number | null
+    score2: number | null
+  }
+
+  export type MatchHistorySumAggregateOutputType = {
+    matchHistroyId: number | null
+    myUserId: number | null
+    opUserId: number | null
+    score1: number | null
+    score2: number | null
+  }
+
+  export type MatchHistoryMinAggregateOutputType = {
+    matchHistroyId: number | null
+    myUserId: number | null
+    opUserId: number | null
+    score1: number | null
+    score2: number | null
+    createdAt: Date | null
+  }
+
+  export type MatchHistoryMaxAggregateOutputType = {
+    matchHistroyId: number | null
+    myUserId: number | null
+    opUserId: number | null
+    score1: number | null
+    score2: number | null
+    createdAt: Date | null
+  }
+
+  export type MatchHistoryCountAggregateOutputType = {
+    matchHistroyId: number
+    myUserId: number
+    opUserId: number
+    score1: number
+    score2: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MatchHistoryAvgAggregateInputType = {
+    matchHistroyId?: true
+    myUserId?: true
+    opUserId?: true
+    score1?: true
+    score2?: true
+  }
+
+  export type MatchHistorySumAggregateInputType = {
+    matchHistroyId?: true
+    myUserId?: true
+    opUserId?: true
+    score1?: true
+    score2?: true
+  }
+
+  export type MatchHistoryMinAggregateInputType = {
+    matchHistroyId?: true
+    myUserId?: true
+    opUserId?: true
+    score1?: true
+    score2?: true
+    createdAt?: true
+  }
+
+  export type MatchHistoryMaxAggregateInputType = {
+    matchHistroyId?: true
+    myUserId?: true
+    opUserId?: true
+    score1?: true
+    score2?: true
+    createdAt?: true
+  }
+
+  export type MatchHistoryCountAggregateInputType = {
+    matchHistroyId?: true
+    myUserId?: true
+    opUserId?: true
+    score1?: true
+    score2?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MatchHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MatchHistory to aggregate.
+     */
+    where?: MatchHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchHistories to fetch.
+     */
+    orderBy?: MatchHistoryOrderByWithRelationInput | MatchHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MatchHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MatchHistories
+    **/
+    _count?: true | MatchHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MatchHistoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MatchHistorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MatchHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MatchHistoryMaxAggregateInputType
+  }
+
+  export type GetMatchHistoryAggregateType<T extends MatchHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateMatchHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMatchHistory[P]>
+      : GetScalarType<T[P], AggregateMatchHistory[P]>
+  }
+
+
+
+
+  export type MatchHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MatchHistoryWhereInput
+    orderBy?: MatchHistoryOrderByWithAggregationInput | MatchHistoryOrderByWithAggregationInput[]
+    by: MatchHistoryScalarFieldEnum[] | MatchHistoryScalarFieldEnum
+    having?: MatchHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MatchHistoryCountAggregateInputType | true
+    _avg?: MatchHistoryAvgAggregateInputType
+    _sum?: MatchHistorySumAggregateInputType
+    _min?: MatchHistoryMinAggregateInputType
+    _max?: MatchHistoryMaxAggregateInputType
+  }
+
+  export type MatchHistoryGroupByOutputType = {
+    matchHistroyId: number
+    myUserId: number
+    opUserId: number
+    score1: number
+    score2: number
+    createdAt: Date
+    _count: MatchHistoryCountAggregateOutputType | null
+    _avg: MatchHistoryAvgAggregateOutputType | null
+    _sum: MatchHistorySumAggregateOutputType | null
+    _min: MatchHistoryMinAggregateOutputType | null
+    _max: MatchHistoryMaxAggregateOutputType | null
+  }
+
+  type GetMatchHistoryGroupByPayload<T extends MatchHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MatchHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MatchHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MatchHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], MatchHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MatchHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    matchHistroyId?: boolean
+    myUserId?: boolean
+    opUserId?: boolean
+    score1?: boolean
+    score2?: boolean
+    createdAt?: boolean
+    User1?: boolean | UserDefaultArgs<ExtArgs>
+    User2?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["matchHistory"]>
+
+  export type MatchHistorySelectScalar = {
+    matchHistroyId?: boolean
+    myUserId?: boolean
+    opUserId?: boolean
+    score1?: boolean
+    score2?: boolean
+    createdAt?: boolean
+  }
+
+
+  export type MatchHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User1?: boolean | UserDefaultArgs<ExtArgs>
+    User2?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+
+  export type $MatchHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MatchHistory"
+    objects: {
+      User1: Prisma.$UserPayload<ExtArgs>
+      User2: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      matchHistroyId: number
+      myUserId: number
+      opUserId: number
+      score1: number
+      score2: number
+      createdAt: Date
+    }, ExtArgs["result"]["matchHistory"]>
+    composites: {}
+  }
+
+
+  type MatchHistoryGetPayload<S extends boolean | null | undefined | MatchHistoryDefaultArgs> = $Result.GetResult<Prisma.$MatchHistoryPayload, S>
+
+  type MatchHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MatchHistoryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MatchHistoryCountAggregateInputType | true
+    }
+
+  export interface MatchHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MatchHistory'], meta: { name: 'MatchHistory' } }
+    /**
+     * Find zero or one MatchHistory that matches the filter.
+     * @param {MatchHistoryFindUniqueArgs} args - Arguments to find a MatchHistory
+     * @example
+     * // Get one MatchHistory
+     * const matchHistory = await prisma.matchHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends MatchHistoryFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchHistoryFindUniqueArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one MatchHistory that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MatchHistoryFindUniqueOrThrowArgs} args - Arguments to find a MatchHistory
+     * @example
+     * // Get one MatchHistory
+     * const matchHistory = await prisma.matchHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends MatchHistoryFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchHistoryFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first MatchHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryFindFirstArgs} args - Arguments to find a MatchHistory
+     * @example
+     * // Get one MatchHistory
+     * const matchHistory = await prisma.matchHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends MatchHistoryFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchHistoryFindFirstArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first MatchHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryFindFirstOrThrowArgs} args - Arguments to find a MatchHistory
+     * @example
+     * // Get one MatchHistory
+     * const matchHistory = await prisma.matchHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends MatchHistoryFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchHistoryFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more MatchHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MatchHistories
+     * const matchHistories = await prisma.matchHistory.findMany()
+     * 
+     * // Get first 10 MatchHistories
+     * const matchHistories = await prisma.matchHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `matchHistroyId`
+     * const matchHistoryWithMatchHistroyIdOnly = await prisma.matchHistory.findMany({ select: { matchHistroyId: true } })
+     * 
+    **/
+    findMany<T extends MatchHistoryFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchHistoryFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a MatchHistory.
+     * @param {MatchHistoryCreateArgs} args - Arguments to create a MatchHistory.
+     * @example
+     * // Create one MatchHistory
+     * const MatchHistory = await prisma.matchHistory.create({
+     *   data: {
+     *     // ... data to create a MatchHistory
+     *   }
+     * })
+     * 
+    **/
+    create<T extends MatchHistoryCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchHistoryCreateArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many MatchHistories.
+     * @param {MatchHistoryCreateManyArgs} args - Arguments to create many MatchHistories.
+     * @example
+     * // Create many MatchHistories
+     * const matchHistory = await prisma.matchHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends MatchHistoryCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchHistoryCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a MatchHistory.
+     * @param {MatchHistoryDeleteArgs} args - Arguments to delete one MatchHistory.
+     * @example
+     * // Delete one MatchHistory
+     * const MatchHistory = await prisma.matchHistory.delete({
+     *   where: {
+     *     // ... filter to delete one MatchHistory
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends MatchHistoryDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchHistoryDeleteArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one MatchHistory.
+     * @param {MatchHistoryUpdateArgs} args - Arguments to update one MatchHistory.
+     * @example
+     * // Update one MatchHistory
+     * const matchHistory = await prisma.matchHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends MatchHistoryUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchHistoryUpdateArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more MatchHistories.
+     * @param {MatchHistoryDeleteManyArgs} args - Arguments to filter MatchHistories to delete.
+     * @example
+     * // Delete a few MatchHistories
+     * const { count } = await prisma.matchHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends MatchHistoryDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MatchHistoryDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MatchHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MatchHistories
+     * const matchHistory = await prisma.matchHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends MatchHistoryUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchHistoryUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MatchHistory.
+     * @param {MatchHistoryUpsertArgs} args - Arguments to update or create a MatchHistory.
+     * @example
+     * // Update or create a MatchHistory
+     * const matchHistory = await prisma.matchHistory.upsert({
+     *   create: {
+     *     // ... data to create a MatchHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MatchHistory we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends MatchHistoryUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, MatchHistoryUpsertArgs<ExtArgs>>
+    ): Prisma__MatchHistoryClient<$Result.GetResult<Prisma.$MatchHistoryPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of MatchHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryCountArgs} args - Arguments to filter MatchHistories to count.
+     * @example
+     * // Count the number of MatchHistories
+     * const count = await prisma.matchHistory.count({
+     *   where: {
+     *     // ... the filter for the MatchHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends MatchHistoryCountArgs>(
+      args?: Subset<T, MatchHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MatchHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MatchHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MatchHistoryAggregateArgs>(args: Subset<T, MatchHistoryAggregateArgs>): Prisma.PrismaPromise<GetMatchHistoryAggregateType<T>>
+
+    /**
+     * Group by MatchHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MatchHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MatchHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MatchHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: MatchHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MatchHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMatchHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MatchHistory model
+   */
+  readonly fields: MatchHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MatchHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MatchHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    User1<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    User2<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the MatchHistory model
+   */ 
+  interface MatchHistoryFieldRefs {
+    readonly matchHistroyId: FieldRef<"MatchHistory", 'Int'>
+    readonly myUserId: FieldRef<"MatchHistory", 'Int'>
+    readonly opUserId: FieldRef<"MatchHistory", 'Int'>
+    readonly score1: FieldRef<"MatchHistory", 'Int'>
+    readonly score2: FieldRef<"MatchHistory", 'Int'>
+    readonly createdAt: FieldRef<"MatchHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MatchHistory findUnique
+   */
+  export type MatchHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchHistory to fetch.
+     */
+    where: MatchHistoryWhereUniqueInput
+  }
+
+  /**
+   * MatchHistory findUniqueOrThrow
+   */
+  export type MatchHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchHistory to fetch.
+     */
+    where: MatchHistoryWhereUniqueInput
+  }
+
+  /**
+   * MatchHistory findFirst
+   */
+  export type MatchHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchHistory to fetch.
+     */
+    where?: MatchHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchHistories to fetch.
+     */
+    orderBy?: MatchHistoryOrderByWithRelationInput | MatchHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MatchHistories.
+     */
+    cursor?: MatchHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MatchHistories.
+     */
+    distinct?: MatchHistoryScalarFieldEnum | MatchHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MatchHistory findFirstOrThrow
+   */
+  export type MatchHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchHistory to fetch.
+     */
+    where?: MatchHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchHistories to fetch.
+     */
+    orderBy?: MatchHistoryOrderByWithRelationInput | MatchHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MatchHistories.
+     */
+    cursor?: MatchHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MatchHistories.
+     */
+    distinct?: MatchHistoryScalarFieldEnum | MatchHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MatchHistory findMany
+   */
+  export type MatchHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MatchHistories to fetch.
+     */
+    where?: MatchHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MatchHistories to fetch.
+     */
+    orderBy?: MatchHistoryOrderByWithRelationInput | MatchHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MatchHistories.
+     */
+    cursor?: MatchHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MatchHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MatchHistories.
+     */
+    skip?: number
+    distinct?: MatchHistoryScalarFieldEnum | MatchHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MatchHistory create
+   */
+  export type MatchHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MatchHistory.
+     */
+    data: XOR<MatchHistoryCreateInput, MatchHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * MatchHistory createMany
+   */
+  export type MatchHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MatchHistories.
+     */
+    data: MatchHistoryCreateManyInput | MatchHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MatchHistory update
+   */
+  export type MatchHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MatchHistory.
+     */
+    data: XOR<MatchHistoryUpdateInput, MatchHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which MatchHistory to update.
+     */
+    where: MatchHistoryWhereUniqueInput
+  }
+
+  /**
+   * MatchHistory updateMany
+   */
+  export type MatchHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MatchHistories.
+     */
+    data: XOR<MatchHistoryUpdateManyMutationInput, MatchHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which MatchHistories to update
+     */
+    where?: MatchHistoryWhereInput
+  }
+
+  /**
+   * MatchHistory upsert
+   */
+  export type MatchHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MatchHistory to update in case it exists.
+     */
+    where: MatchHistoryWhereUniqueInput
+    /**
+     * In case the MatchHistory found by the `where` argument doesn't exist, create a new MatchHistory with this data.
+     */
+    create: XOR<MatchHistoryCreateInput, MatchHistoryUncheckedCreateInput>
+    /**
+     * In case the MatchHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MatchHistoryUpdateInput, MatchHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * MatchHistory delete
+   */
+  export type MatchHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which MatchHistory to delete.
+     */
+    where: MatchHistoryWhereUniqueInput
+  }
+
+  /**
+   * MatchHistory deleteMany
+   */
+  export type MatchHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MatchHistories to delete
+     */
+    where?: MatchHistoryWhereInput
+  }
+
+  /**
+   * MatchHistory without action
+   */
+  export type MatchHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MatchHistory
+     */
+    select?: MatchHistorySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatchHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4052,6 +6248,9 @@ export namespace Prisma {
     password: 'password',
     money: 'money',
     rating: 'rating',
+    wins: 'wins',
+    draws: 'draws',
+    loses: 'loses',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4079,12 +6278,40 @@ export namespace Prisma {
   export type InventoryScalarFieldEnum = (typeof InventoryScalarFieldEnum)[keyof typeof InventoryScalarFieldEnum]
 
 
+  export const MatchQueueScalarFieldEnum: {
+    matchQueueId: 'matchQueueId',
+    UserId: 'UserId'
+  };
+
+  export type MatchQueueScalarFieldEnum = (typeof MatchQueueScalarFieldEnum)[keyof typeof MatchQueueScalarFieldEnum]
+
+
+  export const MatchHistoryScalarFieldEnum: {
+    matchHistroyId: 'matchHistroyId',
+    myUserId: 'myUserId',
+    opUserId: 'opUserId',
+    score1: 'score1',
+    score2: 'score2',
+    createdAt: 'createdAt'
+  };
+
+  export type MatchHistoryScalarFieldEnum = (typeof MatchHistoryScalarFieldEnum)[keyof typeof MatchHistoryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -4130,12 +6357,18 @@ export namespace Prisma {
     userId?: IntFilter<"User"> | number
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
-    money?: StringFilter<"User"> | string
+    money?: IntFilter<"User"> | number
     rating?: IntFilter<"User"> | number
+    wins?: IntFilter<"User"> | number
+    draws?: IntFilter<"User"> | number
+    loses?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     Team?: TeamListRelationFilter
     Inventory?: InventoryListRelationFilter
+    MatchQueue?: MatchQueueListRelationFilter
+    User1?: MatchHistoryListRelationFilter
+    User2?: MatchHistoryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4144,10 +6377,16 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     Team?: TeamOrderByRelationAggregateInput
     Inventory?: InventoryOrderByRelationAggregateInput
+    MatchQueue?: MatchQueueOrderByRelationAggregateInput
+    User1?: MatchHistoryOrderByRelationAggregateInput
+    User2?: MatchHistoryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4157,12 +6396,18 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
-    money?: StringFilter<"User"> | string
+    money?: IntFilter<"User"> | number
     rating?: IntFilter<"User"> | number
+    wins?: IntFilter<"User"> | number
+    draws?: IntFilter<"User"> | number
+    loses?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     Team?: TeamListRelationFilter
     Inventory?: InventoryListRelationFilter
+    MatchQueue?: MatchQueueListRelationFilter
+    User1?: MatchHistoryListRelationFilter
+    User2?: MatchHistoryListRelationFilter
   }, "userId" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -4171,8 +6416,11 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
+    updatedAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4187,10 +6435,13 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"User"> | number
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
-    money?: StringWithAggregatesFilter<"User"> | string
+    money?: IntWithAggregatesFilter<"User"> | number
     rating?: IntWithAggregatesFilter<"User"> | number
+    wins?: IntWithAggregatesFilter<"User"> | number
+    draws?: IntWithAggregatesFilter<"User"> | number
+    loses?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type TeamWhereInput = {
@@ -4303,79 +6554,219 @@ export namespace Prisma {
     PlayerId?: IntWithAggregatesFilter<"Inventory"> | number
   }
 
+  export type MatchQueueWhereInput = {
+    AND?: MatchQueueWhereInput | MatchQueueWhereInput[]
+    OR?: MatchQueueWhereInput[]
+    NOT?: MatchQueueWhereInput | MatchQueueWhereInput[]
+    matchQueueId?: IntFilter<"MatchQueue"> | number
+    UserId?: IntFilter<"MatchQueue"> | number
+    User?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type MatchQueueOrderByWithRelationInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+    User?: UserOrderByWithRelationInput
+  }
+
+  export type MatchQueueWhereUniqueInput = Prisma.AtLeast<{
+    matchQueueId?: number
+    UserId?: number
+    AND?: MatchQueueWhereInput | MatchQueueWhereInput[]
+    OR?: MatchQueueWhereInput[]
+    NOT?: MatchQueueWhereInput | MatchQueueWhereInput[]
+    User?: XOR<UserRelationFilter, UserWhereInput>
+  }, "matchQueueId" | "UserId">
+
+  export type MatchQueueOrderByWithAggregationInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+    _count?: MatchQueueCountOrderByAggregateInput
+    _avg?: MatchQueueAvgOrderByAggregateInput
+    _max?: MatchQueueMaxOrderByAggregateInput
+    _min?: MatchQueueMinOrderByAggregateInput
+    _sum?: MatchQueueSumOrderByAggregateInput
+  }
+
+  export type MatchQueueScalarWhereWithAggregatesInput = {
+    AND?: MatchQueueScalarWhereWithAggregatesInput | MatchQueueScalarWhereWithAggregatesInput[]
+    OR?: MatchQueueScalarWhereWithAggregatesInput[]
+    NOT?: MatchQueueScalarWhereWithAggregatesInput | MatchQueueScalarWhereWithAggregatesInput[]
+    matchQueueId?: IntWithAggregatesFilter<"MatchQueue"> | number
+    UserId?: IntWithAggregatesFilter<"MatchQueue"> | number
+  }
+
+  export type MatchHistoryWhereInput = {
+    AND?: MatchHistoryWhereInput | MatchHistoryWhereInput[]
+    OR?: MatchHistoryWhereInput[]
+    NOT?: MatchHistoryWhereInput | MatchHistoryWhereInput[]
+    matchHistroyId?: IntFilter<"MatchHistory"> | number
+    myUserId?: IntFilter<"MatchHistory"> | number
+    opUserId?: IntFilter<"MatchHistory"> | number
+    score1?: IntFilter<"MatchHistory"> | number
+    score2?: IntFilter<"MatchHistory"> | number
+    createdAt?: DateTimeFilter<"MatchHistory"> | Date | string
+    User1?: XOR<UserRelationFilter, UserWhereInput>
+    User2?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type MatchHistoryOrderByWithRelationInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+    createdAt?: SortOrder
+    User1?: UserOrderByWithRelationInput
+    User2?: UserOrderByWithRelationInput
+  }
+
+  export type MatchHistoryWhereUniqueInput = Prisma.AtLeast<{
+    matchHistroyId?: number
+    AND?: MatchHistoryWhereInput | MatchHistoryWhereInput[]
+    OR?: MatchHistoryWhereInput[]
+    NOT?: MatchHistoryWhereInput | MatchHistoryWhereInput[]
+    myUserId?: IntFilter<"MatchHistory"> | number
+    opUserId?: IntFilter<"MatchHistory"> | number
+    score1?: IntFilter<"MatchHistory"> | number
+    score2?: IntFilter<"MatchHistory"> | number
+    createdAt?: DateTimeFilter<"MatchHistory"> | Date | string
+    User1?: XOR<UserRelationFilter, UserWhereInput>
+    User2?: XOR<UserRelationFilter, UserWhereInput>
+  }, "matchHistroyId">
+
+  export type MatchHistoryOrderByWithAggregationInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+    createdAt?: SortOrder
+    _count?: MatchHistoryCountOrderByAggregateInput
+    _avg?: MatchHistoryAvgOrderByAggregateInput
+    _max?: MatchHistoryMaxOrderByAggregateInput
+    _min?: MatchHistoryMinOrderByAggregateInput
+    _sum?: MatchHistorySumOrderByAggregateInput
+  }
+
+  export type MatchHistoryScalarWhereWithAggregatesInput = {
+    AND?: MatchHistoryScalarWhereWithAggregatesInput | MatchHistoryScalarWhereWithAggregatesInput[]
+    OR?: MatchHistoryScalarWhereWithAggregatesInput[]
+    NOT?: MatchHistoryScalarWhereWithAggregatesInput | MatchHistoryScalarWhereWithAggregatesInput[]
+    matchHistroyId?: IntWithAggregatesFilter<"MatchHistory"> | number
+    myUserId?: IntWithAggregatesFilter<"MatchHistory"> | number
+    opUserId?: IntWithAggregatesFilter<"MatchHistory"> | number
+    score1?: IntWithAggregatesFilter<"MatchHistory"> | number
+    score2?: IntWithAggregatesFilter<"MatchHistory"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"MatchHistory"> | Date | string
+  }
+
   export type UserCreateInput = {
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
     Inventory?: InventoryCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryCreateNestedManyWithoutUser2Input
   }
 
   export type UserUncheckedCreateInput = {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
     Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueUncheckedCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryUncheckedCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryUncheckedCreateNestedManyWithoutUser2Input
   }
 
   export type UserUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
     Inventory?: InventoryUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUpdateManyWithoutUser2NestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
     Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUncheckedUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUncheckedUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUncheckedUpdateManyWithoutUser2NestedInput
   }
 
   export type UserCreateManyInput = {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TeamCreateInput = {
@@ -4472,6 +6863,96 @@ export namespace Prisma {
     PlayerId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type MatchQueueCreateInput = {
+    User: UserCreateNestedOneWithoutMatchQueueInput
+  }
+
+  export type MatchQueueUncheckedCreateInput = {
+    matchQueueId?: number
+    UserId: number
+  }
+
+  export type MatchQueueUpdateInput = {
+    User?: UserUpdateOneRequiredWithoutMatchQueueNestedInput
+  }
+
+  export type MatchQueueUncheckedUpdateInput = {
+    matchQueueId?: IntFieldUpdateOperationsInput | number
+    UserId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MatchQueueCreateManyInput = {
+    matchQueueId?: number
+    UserId: number
+  }
+
+  export type MatchQueueUpdateManyMutationInput = {
+
+  }
+
+  export type MatchQueueUncheckedUpdateManyInput = {
+    matchQueueId?: IntFieldUpdateOperationsInput | number
+    UserId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MatchHistoryCreateInput = {
+    score1: number
+    score2: number
+    createdAt?: Date | string
+    User1: UserCreateNestedOneWithoutUser1Input
+    User2: UserCreateNestedOneWithoutUser2Input
+  }
+
+  export type MatchHistoryUncheckedCreateInput = {
+    matchHistroyId?: number
+    myUserId: number
+    opUserId: number
+    score1: number
+    score2: number
+    createdAt?: Date | string
+  }
+
+  export type MatchHistoryUpdateInput = {
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User1?: UserUpdateOneRequiredWithoutUser1NestedInput
+    User2?: UserUpdateOneRequiredWithoutUser2NestedInput
+  }
+
+  export type MatchHistoryUncheckedUpdateInput = {
+    matchHistroyId?: IntFieldUpdateOperationsInput | number
+    myUserId?: IntFieldUpdateOperationsInput | number
+    opUserId?: IntFieldUpdateOperationsInput | number
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchHistoryCreateManyInput = {
+    matchHistroyId?: number
+    myUserId: number
+    opUserId: number
+    score1: number
+    score2: number
+    createdAt?: Date | string
+  }
+
+  export type MatchHistoryUpdateManyMutationInput = {
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchHistoryUncheckedUpdateManyInput = {
+    matchHistroyId?: IntFieldUpdateOperationsInput | number
+    myUserId?: IntFieldUpdateOperationsInput | number
+    opUserId?: IntFieldUpdateOperationsInput | number
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -4508,6 +6989,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type TeamListRelationFilter = {
     every?: TeamWhereInput
     some?: TeamWhereInput
@@ -4520,11 +7012,36 @@ export namespace Prisma {
     none?: InventoryWhereInput
   }
 
+  export type MatchQueueListRelationFilter = {
+    every?: MatchQueueWhereInput
+    some?: MatchQueueWhereInput
+    none?: MatchQueueWhereInput
+  }
+
+  export type MatchHistoryListRelationFilter = {
+    every?: MatchHistoryWhereInput
+    some?: MatchHistoryWhereInput
+    none?: MatchHistoryWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type TeamOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type InventoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MatchQueueOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MatchHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -4534,13 +7051,20 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     userId?: SortOrder
+    money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -4549,6 +7073,9 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -4559,13 +7086,20 @@ export namespace Prisma {
     password?: SortOrder
     money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     userId?: SortOrder
+    money?: SortOrder
     rating?: SortOrder
+    wins?: SortOrder
+    draws?: SortOrder
+    loses?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -4613,6 +7147,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type UserRelationFilter = {
@@ -4695,6 +7243,74 @@ export namespace Prisma {
     PlayerId?: SortOrder
   }
 
+  export type MatchQueueCountOrderByAggregateInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+  }
+
+  export type MatchQueueAvgOrderByAggregateInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+  }
+
+  export type MatchQueueMaxOrderByAggregateInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+  }
+
+  export type MatchQueueMinOrderByAggregateInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+  }
+
+  export type MatchQueueSumOrderByAggregateInput = {
+    matchQueueId?: SortOrder
+    UserId?: SortOrder
+  }
+
+  export type MatchHistoryCountOrderByAggregateInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MatchHistoryAvgOrderByAggregateInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+  }
+
+  export type MatchHistoryMaxOrderByAggregateInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MatchHistoryMinOrderByAggregateInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MatchHistorySumOrderByAggregateInput = {
+    matchHistroyId?: SortOrder
+    myUserId?: SortOrder
+    opUserId?: SortOrder
+    score1?: SortOrder
+    score2?: SortOrder
+  }
+
   export type TeamCreateNestedManyWithoutUserInput = {
     create?: XOR<TeamCreateWithoutUserInput, TeamUncheckedCreateWithoutUserInput> | TeamCreateWithoutUserInput[] | TeamUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TeamCreateOrConnectWithoutUserInput | TeamCreateOrConnectWithoutUserInput[]
@@ -4707,6 +7323,27 @@ export namespace Prisma {
     connectOrCreate?: InventoryCreateOrConnectWithoutUserInput | InventoryCreateOrConnectWithoutUserInput[]
     createMany?: InventoryCreateManyUserInputEnvelope
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
+  }
+
+  export type MatchQueueCreateNestedManyWithoutUserInput = {
+    create?: XOR<MatchQueueCreateWithoutUserInput, MatchQueueUncheckedCreateWithoutUserInput> | MatchQueueCreateWithoutUserInput[] | MatchQueueUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MatchQueueCreateOrConnectWithoutUserInput | MatchQueueCreateOrConnectWithoutUserInput[]
+    createMany?: MatchQueueCreateManyUserInputEnvelope
+    connect?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+  }
+
+  export type MatchHistoryCreateNestedManyWithoutUser1Input = {
+    create?: XOR<MatchHistoryCreateWithoutUser1Input, MatchHistoryUncheckedCreateWithoutUser1Input> | MatchHistoryCreateWithoutUser1Input[] | MatchHistoryUncheckedCreateWithoutUser1Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser1Input | MatchHistoryCreateOrConnectWithoutUser1Input[]
+    createMany?: MatchHistoryCreateManyUser1InputEnvelope
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+  }
+
+  export type MatchHistoryCreateNestedManyWithoutUser2Input = {
+    create?: XOR<MatchHistoryCreateWithoutUser2Input, MatchHistoryUncheckedCreateWithoutUser2Input> | MatchHistoryCreateWithoutUser2Input[] | MatchHistoryUncheckedCreateWithoutUser2Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser2Input | MatchHistoryCreateOrConnectWithoutUser2Input[]
+    createMany?: MatchHistoryCreateManyUser2InputEnvelope
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
   }
 
   export type TeamUncheckedCreateNestedManyWithoutUserInput = {
@@ -4723,6 +7360,27 @@ export namespace Prisma {
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
   }
 
+  export type MatchQueueUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MatchQueueCreateWithoutUserInput, MatchQueueUncheckedCreateWithoutUserInput> | MatchQueueCreateWithoutUserInput[] | MatchQueueUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MatchQueueCreateOrConnectWithoutUserInput | MatchQueueCreateOrConnectWithoutUserInput[]
+    createMany?: MatchQueueCreateManyUserInputEnvelope
+    connect?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+  }
+
+  export type MatchHistoryUncheckedCreateNestedManyWithoutUser1Input = {
+    create?: XOR<MatchHistoryCreateWithoutUser1Input, MatchHistoryUncheckedCreateWithoutUser1Input> | MatchHistoryCreateWithoutUser1Input[] | MatchHistoryUncheckedCreateWithoutUser1Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser1Input | MatchHistoryCreateOrConnectWithoutUser1Input[]
+    createMany?: MatchHistoryCreateManyUser1InputEnvelope
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+  }
+
+  export type MatchHistoryUncheckedCreateNestedManyWithoutUser2Input = {
+    create?: XOR<MatchHistoryCreateWithoutUser2Input, MatchHistoryUncheckedCreateWithoutUser2Input> | MatchHistoryCreateWithoutUser2Input[] | MatchHistoryUncheckedCreateWithoutUser2Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser2Input | MatchHistoryCreateOrConnectWithoutUser2Input[]
+    createMany?: MatchHistoryCreateManyUser2InputEnvelope
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -4737,6 +7395,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type TeamUpdateManyWithoutUserNestedInput = {
@@ -4767,6 +7429,48 @@ export namespace Prisma {
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
   }
 
+  export type MatchQueueUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MatchQueueCreateWithoutUserInput, MatchQueueUncheckedCreateWithoutUserInput> | MatchQueueCreateWithoutUserInput[] | MatchQueueUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MatchQueueCreateOrConnectWithoutUserInput | MatchQueueCreateOrConnectWithoutUserInput[]
+    upsert?: MatchQueueUpsertWithWhereUniqueWithoutUserInput | MatchQueueUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MatchQueueCreateManyUserInputEnvelope
+    set?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    disconnect?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    delete?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    connect?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    update?: MatchQueueUpdateWithWhereUniqueWithoutUserInput | MatchQueueUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MatchQueueUpdateManyWithWhereWithoutUserInput | MatchQueueUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MatchQueueScalarWhereInput | MatchQueueScalarWhereInput[]
+  }
+
+  export type MatchHistoryUpdateManyWithoutUser1NestedInput = {
+    create?: XOR<MatchHistoryCreateWithoutUser1Input, MatchHistoryUncheckedCreateWithoutUser1Input> | MatchHistoryCreateWithoutUser1Input[] | MatchHistoryUncheckedCreateWithoutUser1Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser1Input | MatchHistoryCreateOrConnectWithoutUser1Input[]
+    upsert?: MatchHistoryUpsertWithWhereUniqueWithoutUser1Input | MatchHistoryUpsertWithWhereUniqueWithoutUser1Input[]
+    createMany?: MatchHistoryCreateManyUser1InputEnvelope
+    set?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    disconnect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    delete?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    update?: MatchHistoryUpdateWithWhereUniqueWithoutUser1Input | MatchHistoryUpdateWithWhereUniqueWithoutUser1Input[]
+    updateMany?: MatchHistoryUpdateManyWithWhereWithoutUser1Input | MatchHistoryUpdateManyWithWhereWithoutUser1Input[]
+    deleteMany?: MatchHistoryScalarWhereInput | MatchHistoryScalarWhereInput[]
+  }
+
+  export type MatchHistoryUpdateManyWithoutUser2NestedInput = {
+    create?: XOR<MatchHistoryCreateWithoutUser2Input, MatchHistoryUncheckedCreateWithoutUser2Input> | MatchHistoryCreateWithoutUser2Input[] | MatchHistoryUncheckedCreateWithoutUser2Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser2Input | MatchHistoryCreateOrConnectWithoutUser2Input[]
+    upsert?: MatchHistoryUpsertWithWhereUniqueWithoutUser2Input | MatchHistoryUpsertWithWhereUniqueWithoutUser2Input[]
+    createMany?: MatchHistoryCreateManyUser2InputEnvelope
+    set?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    disconnect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    delete?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    update?: MatchHistoryUpdateWithWhereUniqueWithoutUser2Input | MatchHistoryUpdateWithWhereUniqueWithoutUser2Input[]
+    updateMany?: MatchHistoryUpdateManyWithWhereWithoutUser2Input | MatchHistoryUpdateManyWithWhereWithoutUser2Input[]
+    deleteMany?: MatchHistoryScalarWhereInput | MatchHistoryScalarWhereInput[]
+  }
+
   export type TeamUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<TeamCreateWithoutUserInput, TeamUncheckedCreateWithoutUserInput> | TeamCreateWithoutUserInput[] | TeamUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TeamCreateOrConnectWithoutUserInput | TeamCreateOrConnectWithoutUserInput[]
@@ -4793,6 +7497,48 @@ export namespace Prisma {
     update?: InventoryUpdateWithWhereUniqueWithoutUserInput | InventoryUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: InventoryUpdateManyWithWhereWithoutUserInput | InventoryUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
+  }
+
+  export type MatchQueueUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MatchQueueCreateWithoutUserInput, MatchQueueUncheckedCreateWithoutUserInput> | MatchQueueCreateWithoutUserInput[] | MatchQueueUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MatchQueueCreateOrConnectWithoutUserInput | MatchQueueCreateOrConnectWithoutUserInput[]
+    upsert?: MatchQueueUpsertWithWhereUniqueWithoutUserInput | MatchQueueUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MatchQueueCreateManyUserInputEnvelope
+    set?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    disconnect?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    delete?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    connect?: MatchQueueWhereUniqueInput | MatchQueueWhereUniqueInput[]
+    update?: MatchQueueUpdateWithWhereUniqueWithoutUserInput | MatchQueueUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MatchQueueUpdateManyWithWhereWithoutUserInput | MatchQueueUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MatchQueueScalarWhereInput | MatchQueueScalarWhereInput[]
+  }
+
+  export type MatchHistoryUncheckedUpdateManyWithoutUser1NestedInput = {
+    create?: XOR<MatchHistoryCreateWithoutUser1Input, MatchHistoryUncheckedCreateWithoutUser1Input> | MatchHistoryCreateWithoutUser1Input[] | MatchHistoryUncheckedCreateWithoutUser1Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser1Input | MatchHistoryCreateOrConnectWithoutUser1Input[]
+    upsert?: MatchHistoryUpsertWithWhereUniqueWithoutUser1Input | MatchHistoryUpsertWithWhereUniqueWithoutUser1Input[]
+    createMany?: MatchHistoryCreateManyUser1InputEnvelope
+    set?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    disconnect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    delete?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    update?: MatchHistoryUpdateWithWhereUniqueWithoutUser1Input | MatchHistoryUpdateWithWhereUniqueWithoutUser1Input[]
+    updateMany?: MatchHistoryUpdateManyWithWhereWithoutUser1Input | MatchHistoryUpdateManyWithWhereWithoutUser1Input[]
+    deleteMany?: MatchHistoryScalarWhereInput | MatchHistoryScalarWhereInput[]
+  }
+
+  export type MatchHistoryUncheckedUpdateManyWithoutUser2NestedInput = {
+    create?: XOR<MatchHistoryCreateWithoutUser2Input, MatchHistoryUncheckedCreateWithoutUser2Input> | MatchHistoryCreateWithoutUser2Input[] | MatchHistoryUncheckedCreateWithoutUser2Input[]
+    connectOrCreate?: MatchHistoryCreateOrConnectWithoutUser2Input | MatchHistoryCreateOrConnectWithoutUser2Input[]
+    upsert?: MatchHistoryUpsertWithWhereUniqueWithoutUser2Input | MatchHistoryUpsertWithWhereUniqueWithoutUser2Input[]
+    createMany?: MatchHistoryCreateManyUser2InputEnvelope
+    set?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    disconnect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    delete?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    connect?: MatchHistoryWhereUniqueInput | MatchHistoryWhereUniqueInput[]
+    update?: MatchHistoryUpdateWithWhereUniqueWithoutUser2Input | MatchHistoryUpdateWithWhereUniqueWithoutUser2Input[]
+    updateMany?: MatchHistoryUpdateManyWithWhereWithoutUser2Input | MatchHistoryUpdateManyWithWhereWithoutUser2Input[]
+    deleteMany?: MatchHistoryScalarWhereInput | MatchHistoryScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutTeamInput = {
@@ -4879,6 +7625,48 @@ export namespace Prisma {
     deleteMany?: TeamScalarWhereInput | TeamScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutMatchQueueInput = {
+    create?: XOR<UserCreateWithoutMatchQueueInput, UserUncheckedCreateWithoutMatchQueueInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMatchQueueInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutMatchQueueNestedInput = {
+    create?: XOR<UserCreateWithoutMatchQueueInput, UserUncheckedCreateWithoutMatchQueueInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMatchQueueInput
+    upsert?: UserUpsertWithoutMatchQueueInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMatchQueueInput, UserUpdateWithoutMatchQueueInput>, UserUncheckedUpdateWithoutMatchQueueInput>
+  }
+
+  export type UserCreateNestedOneWithoutUser1Input = {
+    create?: XOR<UserCreateWithoutUser1Input, UserUncheckedCreateWithoutUser1Input>
+    connectOrCreate?: UserCreateOrConnectWithoutUser1Input
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUser2Input = {
+    create?: XOR<UserCreateWithoutUser2Input, UserUncheckedCreateWithoutUser2Input>
+    connectOrCreate?: UserCreateOrConnectWithoutUser2Input
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUser1NestedInput = {
+    create?: XOR<UserCreateWithoutUser1Input, UserUncheckedCreateWithoutUser1Input>
+    connectOrCreate?: UserCreateOrConnectWithoutUser1Input
+    upsert?: UserUpsertWithoutUser1Input
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser1Input, UserUpdateWithoutUser1Input>, UserUncheckedUpdateWithoutUser1Input>
+  }
+
+  export type UserUpdateOneRequiredWithoutUser2NestedInput = {
+    create?: XOR<UserCreateWithoutUser2Input, UserUncheckedCreateWithoutUser2Input>
+    connectOrCreate?: UserCreateOrConnectWithoutUser2Input
+    upsert?: UserUpsertWithoutUser2Input
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser2Input, UserUpdateWithoutUser2Input>, UserUncheckedUpdateWithoutUser2Input>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -4913,6 +7701,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -4973,6 +7772,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type TeamCreateWithoutUserInput = {
     Inventory: InventoryCreateNestedOneWithoutTeamInput
   }
@@ -5014,6 +7838,74 @@ export namespace Prisma {
 
   export type InventoryCreateManyUserInputEnvelope = {
     data: InventoryCreateManyUserInput | InventoryCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MatchQueueCreateWithoutUserInput = {
+
+  }
+
+  export type MatchQueueUncheckedCreateWithoutUserInput = {
+    matchQueueId?: number
+  }
+
+  export type MatchQueueCreateOrConnectWithoutUserInput = {
+    where: MatchQueueWhereUniqueInput
+    create: XOR<MatchQueueCreateWithoutUserInput, MatchQueueUncheckedCreateWithoutUserInput>
+  }
+
+  export type MatchQueueCreateManyUserInputEnvelope = {
+    data: MatchQueueCreateManyUserInput | MatchQueueCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MatchHistoryCreateWithoutUser1Input = {
+    score1: number
+    score2: number
+    createdAt?: Date | string
+    User2: UserCreateNestedOneWithoutUser2Input
+  }
+
+  export type MatchHistoryUncheckedCreateWithoutUser1Input = {
+    matchHistroyId?: number
+    opUserId: number
+    score1: number
+    score2: number
+    createdAt?: Date | string
+  }
+
+  export type MatchHistoryCreateOrConnectWithoutUser1Input = {
+    where: MatchHistoryWhereUniqueInput
+    create: XOR<MatchHistoryCreateWithoutUser1Input, MatchHistoryUncheckedCreateWithoutUser1Input>
+  }
+
+  export type MatchHistoryCreateManyUser1InputEnvelope = {
+    data: MatchHistoryCreateManyUser1Input | MatchHistoryCreateManyUser1Input[]
+    skipDuplicates?: boolean
+  }
+
+  export type MatchHistoryCreateWithoutUser2Input = {
+    score1: number
+    score2: number
+    createdAt?: Date | string
+    User1: UserCreateNestedOneWithoutUser1Input
+  }
+
+  export type MatchHistoryUncheckedCreateWithoutUser2Input = {
+    matchHistroyId?: number
+    myUserId: number
+    score1: number
+    score2: number
+    createdAt?: Date | string
+  }
+
+  export type MatchHistoryCreateOrConnectWithoutUser2Input = {
+    where: MatchHistoryWhereUniqueInput
+    create: XOR<MatchHistoryCreateWithoutUser2Input, MatchHistoryUncheckedCreateWithoutUser2Input>
+  }
+
+  export type MatchHistoryCreateManyUser2InputEnvelope = {
+    data: MatchHistoryCreateManyUser2Input | MatchHistoryCreateManyUser2Input[]
     skipDuplicates?: boolean
   }
 
@@ -5069,25 +7961,105 @@ export namespace Prisma {
     PlayerId?: IntFilter<"Inventory"> | number
   }
 
+  export type MatchQueueUpsertWithWhereUniqueWithoutUserInput = {
+    where: MatchQueueWhereUniqueInput
+    update: XOR<MatchQueueUpdateWithoutUserInput, MatchQueueUncheckedUpdateWithoutUserInput>
+    create: XOR<MatchQueueCreateWithoutUserInput, MatchQueueUncheckedCreateWithoutUserInput>
+  }
+
+  export type MatchQueueUpdateWithWhereUniqueWithoutUserInput = {
+    where: MatchQueueWhereUniqueInput
+    data: XOR<MatchQueueUpdateWithoutUserInput, MatchQueueUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MatchQueueUpdateManyWithWhereWithoutUserInput = {
+    where: MatchQueueScalarWhereInput
+    data: XOR<MatchQueueUpdateManyMutationInput, MatchQueueUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MatchQueueScalarWhereInput = {
+    AND?: MatchQueueScalarWhereInput | MatchQueueScalarWhereInput[]
+    OR?: MatchQueueScalarWhereInput[]
+    NOT?: MatchQueueScalarWhereInput | MatchQueueScalarWhereInput[]
+    matchQueueId?: IntFilter<"MatchQueue"> | number
+    UserId?: IntFilter<"MatchQueue"> | number
+  }
+
+  export type MatchHistoryUpsertWithWhereUniqueWithoutUser1Input = {
+    where: MatchHistoryWhereUniqueInput
+    update: XOR<MatchHistoryUpdateWithoutUser1Input, MatchHistoryUncheckedUpdateWithoutUser1Input>
+    create: XOR<MatchHistoryCreateWithoutUser1Input, MatchHistoryUncheckedCreateWithoutUser1Input>
+  }
+
+  export type MatchHistoryUpdateWithWhereUniqueWithoutUser1Input = {
+    where: MatchHistoryWhereUniqueInput
+    data: XOR<MatchHistoryUpdateWithoutUser1Input, MatchHistoryUncheckedUpdateWithoutUser1Input>
+  }
+
+  export type MatchHistoryUpdateManyWithWhereWithoutUser1Input = {
+    where: MatchHistoryScalarWhereInput
+    data: XOR<MatchHistoryUpdateManyMutationInput, MatchHistoryUncheckedUpdateManyWithoutUser1Input>
+  }
+
+  export type MatchHistoryScalarWhereInput = {
+    AND?: MatchHistoryScalarWhereInput | MatchHistoryScalarWhereInput[]
+    OR?: MatchHistoryScalarWhereInput[]
+    NOT?: MatchHistoryScalarWhereInput | MatchHistoryScalarWhereInput[]
+    matchHistroyId?: IntFilter<"MatchHistory"> | number
+    myUserId?: IntFilter<"MatchHistory"> | number
+    opUserId?: IntFilter<"MatchHistory"> | number
+    score1?: IntFilter<"MatchHistory"> | number
+    score2?: IntFilter<"MatchHistory"> | number
+    createdAt?: DateTimeFilter<"MatchHistory"> | Date | string
+  }
+
+  export type MatchHistoryUpsertWithWhereUniqueWithoutUser2Input = {
+    where: MatchHistoryWhereUniqueInput
+    update: XOR<MatchHistoryUpdateWithoutUser2Input, MatchHistoryUncheckedUpdateWithoutUser2Input>
+    create: XOR<MatchHistoryCreateWithoutUser2Input, MatchHistoryUncheckedCreateWithoutUser2Input>
+  }
+
+  export type MatchHistoryUpdateWithWhereUniqueWithoutUser2Input = {
+    where: MatchHistoryWhereUniqueInput
+    data: XOR<MatchHistoryUpdateWithoutUser2Input, MatchHistoryUncheckedUpdateWithoutUser2Input>
+  }
+
+  export type MatchHistoryUpdateManyWithWhereWithoutUser2Input = {
+    where: MatchHistoryScalarWhereInput
+    data: XOR<MatchHistoryUpdateManyMutationInput, MatchHistoryUncheckedUpdateManyWithoutUser2Input>
+  }
+
   export type UserCreateWithoutTeamInput = {
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Inventory?: InventoryCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryCreateNestedManyWithoutUser2Input
   }
 
   export type UserUncheckedCreateWithoutTeamInput = {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueUncheckedCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryUncheckedCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryUncheckedCreateNestedManyWithoutUser2Input
   }
 
   export type UserCreateOrConnectWithoutTeamInput = {
@@ -5129,22 +8101,34 @@ export namespace Prisma {
   export type UserUpdateWithoutTeamInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Inventory?: InventoryUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUpdateManyWithoutUser2NestedInput
   }
 
   export type UserUncheckedUpdateWithoutTeamInput = {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUncheckedUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUncheckedUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUncheckedUpdateManyWithoutUser2NestedInput
   }
 
   export type InventoryUpsertWithoutTeamInput = {
@@ -5176,22 +8160,34 @@ export namespace Prisma {
   export type UserCreateWithoutInventoryInput = {
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryCreateNestedManyWithoutUser2Input
   }
 
   export type UserUncheckedCreateWithoutInventoryInput = {
     userId?: number
     username: string
     password: string
-    money: string
+    money?: number
     rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
     createdAt?: Date | string
-    updatedAt?: Date | string
+    updatedAt?: Date | string | null
     Team?: TeamUncheckedCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueUncheckedCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryUncheckedCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryUncheckedCreateNestedManyWithoutUser2Input
   }
 
   export type UserCreateOrConnectWithoutInventoryInput = {
@@ -5232,22 +8228,34 @@ export namespace Prisma {
   export type UserUpdateWithoutInventoryInput = {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUpdateManyWithoutUser2NestedInput
   }
 
   export type UserUncheckedUpdateWithoutInventoryInput = {
     userId?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    money?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
     rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUncheckedUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUncheckedUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUncheckedUpdateManyWithoutUser2NestedInput
   }
 
   export type TeamUpsertWithWhereUniqueWithoutInventoryInput = {
@@ -5266,6 +8274,252 @@ export namespace Prisma {
     data: XOR<TeamUpdateManyMutationInput, TeamUncheckedUpdateManyWithoutInventoryInput>
   }
 
+  export type UserCreateWithoutMatchQueueInput = {
+    username: string
+    password: string
+    money?: number
+    rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    Team?: TeamCreateNestedManyWithoutUserInput
+    Inventory?: InventoryCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryCreateNestedManyWithoutUser2Input
+  }
+
+  export type UserUncheckedCreateWithoutMatchQueueInput = {
+    userId?: number
+    username: string
+    password: string
+    money?: number
+    rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    Team?: TeamUncheckedCreateNestedManyWithoutUserInput
+    Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryUncheckedCreateNestedManyWithoutUser1Input
+    User2?: MatchHistoryUncheckedCreateNestedManyWithoutUser2Input
+  }
+
+  export type UserCreateOrConnectWithoutMatchQueueInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMatchQueueInput, UserUncheckedCreateWithoutMatchQueueInput>
+  }
+
+  export type UserUpsertWithoutMatchQueueInput = {
+    update: XOR<UserUpdateWithoutMatchQueueInput, UserUncheckedUpdateWithoutMatchQueueInput>
+    create: XOR<UserCreateWithoutMatchQueueInput, UserUncheckedCreateWithoutMatchQueueInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMatchQueueInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMatchQueueInput, UserUncheckedUpdateWithoutMatchQueueInput>
+  }
+
+  export type UserUpdateWithoutMatchQueueInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Team?: TeamUpdateManyWithoutUserNestedInput
+    Inventory?: InventoryUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUpdateManyWithoutUser2NestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMatchQueueInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
+    Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUncheckedUpdateManyWithoutUser1NestedInput
+    User2?: MatchHistoryUncheckedUpdateManyWithoutUser2NestedInput
+  }
+
+  export type UserCreateWithoutUser1Input = {
+    username: string
+    password: string
+    money?: number
+    rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    Team?: TeamCreateNestedManyWithoutUserInput
+    Inventory?: InventoryCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueCreateNestedManyWithoutUserInput
+    User2?: MatchHistoryCreateNestedManyWithoutUser2Input
+  }
+
+  export type UserUncheckedCreateWithoutUser1Input = {
+    userId?: number
+    username: string
+    password: string
+    money?: number
+    rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    Team?: TeamUncheckedCreateNestedManyWithoutUserInput
+    Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueUncheckedCreateNestedManyWithoutUserInput
+    User2?: MatchHistoryUncheckedCreateNestedManyWithoutUser2Input
+  }
+
+  export type UserCreateOrConnectWithoutUser1Input = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser1Input, UserUncheckedCreateWithoutUser1Input>
+  }
+
+  export type UserCreateWithoutUser2Input = {
+    username: string
+    password: string
+    money?: number
+    rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    Team?: TeamCreateNestedManyWithoutUserInput
+    Inventory?: InventoryCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryCreateNestedManyWithoutUser1Input
+  }
+
+  export type UserUncheckedCreateWithoutUser2Input = {
+    userId?: number
+    username: string
+    password: string
+    money?: number
+    rating?: number
+    wins?: number
+    draws?: number
+    loses?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    Team?: TeamUncheckedCreateNestedManyWithoutUserInput
+    Inventory?: InventoryUncheckedCreateNestedManyWithoutUserInput
+    MatchQueue?: MatchQueueUncheckedCreateNestedManyWithoutUserInput
+    User1?: MatchHistoryUncheckedCreateNestedManyWithoutUser1Input
+  }
+
+  export type UserCreateOrConnectWithoutUser2Input = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser2Input, UserUncheckedCreateWithoutUser2Input>
+  }
+
+  export type UserUpsertWithoutUser1Input = {
+    update: XOR<UserUpdateWithoutUser1Input, UserUncheckedUpdateWithoutUser1Input>
+    create: XOR<UserCreateWithoutUser1Input, UserUncheckedCreateWithoutUser1Input>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUser1Input = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUser1Input, UserUncheckedUpdateWithoutUser1Input>
+  }
+
+  export type UserUpdateWithoutUser1Input = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Team?: TeamUpdateManyWithoutUserNestedInput
+    Inventory?: InventoryUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUpdateManyWithoutUserNestedInput
+    User2?: MatchHistoryUpdateManyWithoutUser2NestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser1Input = {
+    userId?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
+    Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUncheckedUpdateManyWithoutUserNestedInput
+    User2?: MatchHistoryUncheckedUpdateManyWithoutUser2NestedInput
+  }
+
+  export type UserUpsertWithoutUser2Input = {
+    update: XOR<UserUpdateWithoutUser2Input, UserUncheckedUpdateWithoutUser2Input>
+    create: XOR<UserCreateWithoutUser2Input, UserUncheckedCreateWithoutUser2Input>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUser2Input = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUser2Input, UserUncheckedUpdateWithoutUser2Input>
+  }
+
+  export type UserUpdateWithoutUser2Input = {
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Team?: TeamUpdateManyWithoutUserNestedInput
+    Inventory?: InventoryUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUpdateManyWithoutUser1NestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser2Input = {
+    userId?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    money?: IntFieldUpdateOperationsInput | number
+    rating?: IntFieldUpdateOperationsInput | number
+    wins?: IntFieldUpdateOperationsInput | number
+    draws?: IntFieldUpdateOperationsInput | number
+    loses?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Team?: TeamUncheckedUpdateManyWithoutUserNestedInput
+    Inventory?: InventoryUncheckedUpdateManyWithoutUserNestedInput
+    MatchQueue?: MatchQueueUncheckedUpdateManyWithoutUserNestedInput
+    User1?: MatchHistoryUncheckedUpdateManyWithoutUser1NestedInput
+  }
+
   export type TeamCreateManyUserInput = {
     teamId?: number
     InventoryId: number
@@ -5276,6 +8530,26 @@ export namespace Prisma {
     count: number
     level: number
     PlayerId: number
+  }
+
+  export type MatchQueueCreateManyUserInput = {
+    matchQueueId?: number
+  }
+
+  export type MatchHistoryCreateManyUser1Input = {
+    matchHistroyId?: number
+    opUserId: number
+    score1: number
+    score2: number
+    createdAt?: Date | string
+  }
+
+  export type MatchHistoryCreateManyUser2Input = {
+    matchHistroyId?: number
+    myUserId: number
+    score1: number
+    score2: number
+    createdAt?: Date | string
   }
 
   export type TeamUpdateWithoutUserInput = {
@@ -5312,6 +8586,64 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     level?: IntFieldUpdateOperationsInput | number
     PlayerId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MatchQueueUpdateWithoutUserInput = {
+
+  }
+
+  export type MatchQueueUncheckedUpdateWithoutUserInput = {
+    matchQueueId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MatchQueueUncheckedUpdateManyWithoutUserInput = {
+    matchQueueId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MatchHistoryUpdateWithoutUser1Input = {
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User2?: UserUpdateOneRequiredWithoutUser2NestedInput
+  }
+
+  export type MatchHistoryUncheckedUpdateWithoutUser1Input = {
+    matchHistroyId?: IntFieldUpdateOperationsInput | number
+    opUserId?: IntFieldUpdateOperationsInput | number
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchHistoryUncheckedUpdateManyWithoutUser1Input = {
+    matchHistroyId?: IntFieldUpdateOperationsInput | number
+    opUserId?: IntFieldUpdateOperationsInput | number
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchHistoryUpdateWithoutUser2Input = {
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User1?: UserUpdateOneRequiredWithoutUser1NestedInput
+  }
+
+  export type MatchHistoryUncheckedUpdateWithoutUser2Input = {
+    matchHistroyId?: IntFieldUpdateOperationsInput | number
+    myUserId?: IntFieldUpdateOperationsInput | number
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchHistoryUncheckedUpdateManyWithoutUser2Input = {
+    matchHistroyId?: IntFieldUpdateOperationsInput | number
+    myUserId?: IntFieldUpdateOperationsInput | number
+    score1?: IntFieldUpdateOperationsInput | number
+    score2?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TeamCreateManyInventoryInput = {
@@ -5358,6 +8690,14 @@ export namespace Prisma {
      * @deprecated Use InventoryDefaultArgs instead
      */
     export type InventoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = InventoryDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MatchQueueDefaultArgs instead
+     */
+    export type MatchQueueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MatchQueueDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MatchHistoryDefaultArgs instead
+     */
+    export type MatchHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MatchHistoryDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
