@@ -3,7 +3,7 @@ import dotenv from "dotenv/config";
 import dotenvExpand from "dotenv-expand";
 import logger from "./middlewares/logger.middleware.js";
 import errorHandler from "./middlewares/error-handler.middleware.js";
-import tierRouter from "./routes/tier.route.js";
+import tiersRouter from "./routes/tiers.route.js";
 import playersRouter from "./routes/players.route.js";
 import teamsRouter from "./routes/teams.route.js";
 import storesRouter from "./routes/stores.route.js";
@@ -11,6 +11,7 @@ import gamesRouter from "./routes/games.route.js";
 import usersRouter from "./routes/users.route.js";
 import rankRouter from "./routes/rankings.route.js";
 import inventoriesRouter from "./routes/inventories.route.js";
+import matchResultsRouter from "./routes/match-results.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -23,12 +24,13 @@ app.use(logger);
 app.use("/api", [
   playersRouter,
   teamsRouter,
-  tierRouter,
+  tiersRouter,
   gamesRouter,
   inventoriesRouter,
   storesRouter,
   usersRouter,
   rankRouter,
+  matchResultsRouter,
 ]);
 
 app.use(errorHandler);
