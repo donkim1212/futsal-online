@@ -94,6 +94,18 @@ const userValidatorJoi = {
     }
   },
 
+  userIdQueryValidationStrict: async function (req, res, next) {
+    try {
+      await userIdParamsSchema.validateAsync(req.query);
+      const parsed = parseInt(req.query.userId);
+      if (parsed == 0) throw new Error("userId is invalid.");
+      req.query.userId = parsed;
+      next();
+    } catch (err) {
+      return userValidationErrorHandler(err, res);
+    }
+  },
+
   userIdQueryValidationOptional: async function (req, res, next) {
     try {
       await userIdParamsSchema.validateAsync(req.query);
