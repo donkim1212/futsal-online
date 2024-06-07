@@ -23,6 +23,7 @@ app.use(logger);
 app.use("/api", [
   playersRouter,
   teamsRouter,
+  tierRouter,
   gamesRouter,
   inventoriesRouter,
   storesRouter,
