@@ -61,6 +61,7 @@ router.get(
         ON inv.player_id=pl.player_id
         WHERE inv.inventory_id=${inventoryId}
           AND inv.user_id=${req.body.user.userId}
+          AND count > 0
       `;
 
       if (inventory.length < 1)
