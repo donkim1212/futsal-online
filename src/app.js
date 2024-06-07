@@ -3,6 +3,7 @@ import dotenv from "dotenv/config";
 import dotenvExpand from "dotenv-expand";
 import logger from "./middlewares/logger.middleware.js";
 import errorHandler from "./middlewares/error-handler.middleware.js";
+import tierRouter from "./routes/tier.route.js";
 import playersRouter from "./routes/players.route.js";
 import teamsRouter from "./routes/teams.route.js";
 import storesRouter from "./routes/stores.route.js";
