@@ -119,7 +119,7 @@ router.patch(
 router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
   try {
     const { user, inventoryId } = req.body;
-    await ec.moneyChecker(user.userId, UPGRADE_COST);
+    const userWithMoney = await ec.moneyChecker(user.userId, UPGRADE_COST);
     const inventory = await ec.inventoryUserChecker(user.userId, inventoryId);
     const player = await ec.playerChecker(inventory.PlayerId);
     const successRate = await tierUtils.getTierUpgradeSuccessRate(
@@ -183,7 +183,7 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
           upgradedInventory,
         );
 
-        const updatedUser = await prisma.user.update({
+        await prisma.user.update({
           where: { userId: user.userId },
           data: {
             money: {
@@ -198,7 +198,7 @@ router.post("/stores/upgrade", ua.authStrict, async (req, res, next) => {
       return res.status(200).json({
         message: "강화 성공!",
         data: {
-          money: updatedUser.money,
+          money: userWithMoney.money - UPGRADE_COST,
           inventory: { ...upgradedInventory },
         },
       });
