@@ -43,7 +43,6 @@ router.get(
   async (req, res, next) => {
     try {
       const { userId } = req.query;
-      console.log(userId);
       const { pageNumber, loadCount } = req.body;
       const rank = userId
         ? await userRanking(userId)
